@@ -7,7 +7,6 @@ class Home extends MY_Controller {
 	function __construct() {
 		parent::__construct();
 		$this -> load -> library('users_lib');
-		$this -> load -> library('branch/branch_lib');
 		$this -> load -> library('pagination_lib');
 		$this -> load -> model('users_model');
 	}
@@ -25,7 +24,6 @@ class Home extends MY_Controller {
 			$newpass = $this -> input -> post('newpass', true);
 			$confpass = $this -> input -> post('confpass', true);
 			$group = (int) $this -> input -> post('group');
-			$branch = (int) $this -> input -> post('branch');
 			$status = (int) $this -> input -> post('status');
 			
 			if ($uemail && $group) {
@@ -47,7 +45,7 @@ class Home extends MY_Controller {
 						redirect(site_url('users/users_add'));
 					}
 					else {
-						if ($this -> users_model -> __insert_users($uemail, $confpass, $group, $branch, $status)) {
+						if ($this -> users_model -> __insert_users($uemail, $confpass, $group, 1, $status)) {
 							__set_error_msg(array('info' => 'Data berhasil ditambahkan.'));
 							redirect(site_url('users'));
 						}
@@ -65,7 +63,6 @@ class Home extends MY_Controller {
 		}
 		else {
 			$data['groups'] = $this -> users_lib -> __get_groups();
-			$data['branch'] = $this -> branch_lib -> __get_branch();
 			$this->load->view('users_add', $data);
 		}
 	}
@@ -78,7 +75,6 @@ class Home extends MY_Controller {
 			$confpass = $this -> input -> post('confpass', true);
 			$group = (int) $this -> input -> post('group');
 			$id = (int) $this -> input -> post('id');
-			$branch = (int) $this -> input -> post('branch');
 			$status = (int) $this -> input -> post('status');
 			
 			if ($uemail) {
@@ -89,7 +85,7 @@ class Home extends MY_Controller {
 					}
 					else
 						$this -> settings_model -> __update_password($newpass, $id);
-					$this -> users_model -> __update_users($uemail, $id, $group, $branch, $status);
+					$this -> users_model -> __update_users($uemail, $id, $group, 1, $status);
 					__set_error_msg(array('info' => 'Data berhasil di ubah.'));
 					redirect(site_url('users'));
 				}
@@ -98,7 +94,7 @@ class Home extends MY_Controller {
 					redirect(site_url('users/users_update/' . $id));
 				}
 				else {
-					$this -> users_model -> __update_users($uemail, $id, $group, $branch, $status);
+					$this -> users_model -> __update_users($uemail, $id, $group, 1, $status);
 					__set_error_msg(array('info' => 'Data berhasil di ubah.'));
 					redirect(site_url('users'));
 				}
@@ -113,7 +109,6 @@ class Home extends MY_Controller {
 			$data['id'] = $id;
 			$data['users'] = $this -> users_model -> __get_detail_users($id);
 			$data['groups'] = $this -> users_lib -> __get_groups($data['users'][0] -> ugid);
-			$data['branch'] = $this -> branch_lib -> __get_branch($data['users'][0] -> ubid);
 			$this->load->view('users_update', $data);
 		}
 	}
