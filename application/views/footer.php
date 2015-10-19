@@ -103,6 +103,24 @@
 	});
 
 
+$(document).ready(function(){
+	if (/\/users/.test(window.location.href) === true) {
+		$('li.shuser > ul.sub').css({'display': 'block', 'overflow': 'hidden'});
+	}
+	else if (/\/menus|categories|raw_material|tables|categories_tables/.test(window.location.href) === true) {
+		$('li.shmaster > ul.sub').css({'display': 'block', 'overflow': 'hidden'});
+	}
+	else if (/\/inventory|wishlist|opname/.test(window.location.href) === true) {
+		$('li.shstock > ul.sub').css({'display': 'block', 'overflow': 'hidden'});
+	}
+	else if (/\/billing|wishlist/.test(window.location.href) === true) {
+		$('li.shorder > ul.sub').css({'display': 'block', 'overflow': 'hidden'});
+	}
+	else if (/\/report_transaction|report_stock|report_opname/.test(window.location.href) === true) {
+		$('li.shreport > ul.sub').css({'display': 'block', 'overflow': 'hidden'});
+	}
+});
+
 
   </script>
 

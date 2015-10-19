@@ -47,7 +47,7 @@
             </div>
 
             <!--logo start-->
-            <a href="<?php echo site_url(); ?>" class="logo">Nice <span class="lite">Admin</span></a>
+            <a href="<?php echo site_url(); ?>" class="logo">Restoran <span class="lite">Mama Suka</span></a>
             <!--logo end-->
 
             <div class="nav search-row" id="top_menu">

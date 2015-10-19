@@ -9,18 +9,21 @@
                           <span>Dashboard</span>
                       </a>
                   </li>
-				  <li class="sub-menu">
+				  <li class="sub-menu shmaster">
                       <a href="javascript:;" class="">
                           <i class="icon_document_alt"></i>
                           <span>Master</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="<?php echo site_url('menu'); ?>">Menu</a></li>                          
+                          <li><a class="" href="<?php echo site_url('menus'); ?>">Menus</a></li>
+                          <li><a class="" href="<?php echo site_url('categories'); ?>">Category Menu</a></li>
                           <li><a class="" href="<?php echo site_url('raw_material'); ?>">Raw Material</a></li>
+                          <li><a class="" href="<?php echo site_url('tables'); ?>">Tables</a></li>
+                          <li><a class="" href="<?php echo site_url('categories_tables'); ?>">Category Table</a></li>
                       </ul>
                   </li>
-				  <li class="sub-menu">
+				  <li class="sub-menu shstock">
                       <a href="javascript:;" class="">
                           <i class="icon_archive"></i>
                           <span>Inventory</span>
@@ -32,7 +35,7 @@
                           <li><a class="" href="<?php echo site_url('opname'); ?>">Opname</a></li>
                       </ul>
                   </li>
-				  <li class="sub-menu">
+				  <li class="sub-menu shorder">
                       <a href="javascript:;" class="">
                           <i class="icon_wallet_alt"></i>
                           <span>Sales Order</span>
@@ -43,7 +46,7 @@
                           <li><a class="" href="<?php echo site_url('wishlist'); ?>">Wishlist</a></li>
                       </ul>
                   </li>
-				  <li class="sub-menu">
+				  <li class="sub-menu shreport">
                       <a href="javascript:;" class="">
                           <i class="icon_table"></i>
                           <span>Report</span>
@@ -55,7 +58,7 @@
                           <li><a class="" href="<?php echo site_url('report_opname'); ?>">Opname</a></li>
                       </ul>
                   </li>
-				  <li class="sub-menu">
+				  <li class="sub-menu shuser">
                       <a href="javascript:;" class="">
                           <i class="icon_contacts"></i>
                           <span>Users</span>

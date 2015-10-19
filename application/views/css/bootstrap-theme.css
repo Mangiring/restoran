@@ -4370,7 +4370,8 @@ a.thumbnail:focus {
 .alert-success {
   background-color: #dff8e3;
   border-color: #caf4ca;
-  color: #4cd964;
+  color: #276B33;
+  font-weight:bold;
 }
 .alert-success hr {
   border-top-color: #b5efb5;
@@ -4393,6 +4394,7 @@ a.thumbnail:focus {
   background-color: #fff0b3;
   border-color: #ffdda3;
   color: #ffcc00;
+  font-weight:bold;
 }
 .alert-warning hr {
   border-top-color: #ffd48a;
@@ -4404,6 +4406,7 @@ a.thumbnail:focus {
   background-color: #ffe0e6;
   border-color: #ffd0e1;
   color: #ff2d55;
+  font-weight:bold;
 }
 .alert-danger hr {
   border-top-color: #ffb7d1;
