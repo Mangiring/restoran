@@ -16,11 +16,11 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="<?php echo site_url('menus'); ?>">Menus</a></li>
-                          <li><a class="" href="<?php echo site_url('categories'); ?>">Category Menu</a></li>
-                          <li><a class="" href="<?php echo site_url('raw_material'); ?>">Raw Material</a></li>
-                          <li><a class="" href="<?php echo site_url('tables'); ?>">Tables</a></li>
-                          <li><a class="" href="<?php echo site_url('categories_tables'); ?>">Category Table</a></li>
+                          <li><a class="" href="<?php echo site_url('menus'); ?>"><i class="icon_balance"></i>Menus</a></li>
+                          <li><a class="" href="<?php echo site_url('categories'); ?>"><i class="fa fa-tags"></i>Category Menu</a></li>
+                          <li><a class="" href="<?php echo site_url('raw_material'); ?>"><i class="icon_puzzle"></i>Raw Material</a></li>
+                          <li><a class="" href="<?php echo site_url('tables'); ?>"><i class="icon_genius"></i>Tables</a></li>
+                          <li><a class="" href="<?php echo site_url('categories_tables'); ?>"><i class="fa fa-tags"></i>Category Table</a></li>
                       </ul>
                   </li>
 				  <li class="sub-menu shstock">
@@ -30,9 +30,9 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="<?php echo site_url('inventory'); ?>">Inventory</a></li>                          
-                          <li><a class="" href="<?php echo site_url('wishlist'); ?>">Item Receiving</a></li>
-                          <li><a class="" href="<?php echo site_url('opname'); ?>">Opname</a></li>
+                          <li><a class="" href="<?php echo site_url('inventory'); ?>"><i class="icon_archive_alt"></i>Inventory</a></li>                          
+                          <li><a class="" href="<?php echo site_url('wishlist'); ?>"><i class="icon_cloud-download"></i>Item Receiving</a></li>
+                          <li><a class="" href="<?php echo site_url('opname'); ?>"><i class="icon_pushpin"></i>Opname</a></li>
                       </ul>
                   </li>
 				  <li class="sub-menu shorder">
@@ -42,8 +42,8 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="<?php echo site_url('billing'); ?>">Billing</a></li>                          
-                          <li><a class="" href="<?php echo site_url('wishlist'); ?>">Wishlist</a></li>
+                          <li><a class="" href="<?php echo site_url('billing'); ?>"><i class="icon_currency"></i>Billing</a></li>                          
+                          <li><a class="" href="<?php echo site_url('wishlist'); ?>"><i class="icon_cart"></i>Wishlist</a></li>
                       </ul>
                   </li>
 				  <li class="sub-menu shreport">
@@ -53,9 +53,9 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="<?php echo site_url('report_transaction'); ?>">Transaction</a></li>                          
-                          <li><a class="" href="<?php echo site_url('report_stock'); ?>">Stock</a></li>
-                          <li><a class="" href="<?php echo site_url('report_opname'); ?>">Opname</a></li>
+                          <li><a class="" href="<?php echo site_url('report_transaction'); ?>"><i class="icon_grid-3x3"></i>Transaction</a></li>                          
+                          <li><a class="" href="<?php echo site_url('report_stock'); ?>"><i class="icon_archive_alt"></i>Stock</a></li>
+                          <li><a class="" href="<?php echo site_url('report_opname'); ?>"><i class="icon_pushpin"></i>Opname</a></li>
                       </ul>
                   </li>
 				  <li class="sub-menu shuser">
@@ -65,8 +65,8 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="<?php echo site_url('users'); ?>">Users</a></li>                          
-                          <li><a class="" href="<?php echo site_url('users/users_group'); ?>">User Group</a></li>
+                          <li><a class="" href="<?php echo site_url('users'); ?>"><i class="fa fa-users"></i>Users</a></li>                          
+                          <li><a class="" href="<?php echo site_url('users/users_group'); ?>"><i class="icon_group"></i>User Group</a></li>
                       </ul>
                   </li>
               </ul>
