@@ -83,7 +83,7 @@ CREATE TABLE `categories_tab` (
   `cdesc` varchar(350) DEFAULT NULL,
   `cstatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`cid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,7 +92,7 @@ CREATE TABLE `categories_tab` (
 
 LOCK TABLES `categories_tab` WRITE;
 /*!40000 ALTER TABLE `categories_tab` DISABLE KEYS */;
-INSERT INTO `categories_tab` VALUES (1,1,'Makanan','Minuman',1),(2,1,'Minuman Baku','Minuman Baku',1),(3,2,'PT.GRAMEDIA ASRI MEDIA  CIBINONG CITY MALL1','wwwwwwwwwwwwww',1);
+INSERT INTO `categories_tab` VALUES (1,1,'Makanan','Minuman',1),(2,1,'Minuman Baku','Minuman Baku',1),(3,2,'Lantai I','Lantai I',1),(4,2,'Lantai II','Lantai II',1);
 /*!40000 ALTER TABLE `categories_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,13 +210,13 @@ DROP TABLE IF EXISTS `tables_tab`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tables_tab` (
-  `tid` int(10) NOT NULL,
+  `tid` int(10) NOT NULL AUTO_INCREMENT,
   `tcid` int(10) DEFAULT NULL,
   `tname` varchar(150) DEFAULT NULL,
   `tdesc` varchar(350) DEFAULT NULL,
   `tstatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`tid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -225,7 +225,7 @@ CREATE TABLE `tables_tab` (
 
 LOCK TABLES `tables_tab` WRITE;
 /*!40000 ALTER TABLE `tables_tab` DISABLE KEYS */;
-INSERT INTO `tables_tab` VALUES (0,3,'Gratcy Palma P Hutapea','aaaaaaaaaa',1);
+INSERT INTO `tables_tab` VALUES (1,3,'Table I','Table I',1),(2,3,'Table II','Table II',1),(3,3,'Table III','Table III',1),(4,3,'Table IV','Table IV',1),(5,4,'Table I','Table I',1),(6,4,'Table II','Table II',1);
 /*!40000 ALTER TABLE `tables_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -254,7 +254,7 @@ CREATE TABLE `users_tab` (
 
 LOCK TABLES `users_tab` WRITE;
 /*!40000 ALTER TABLE `users_tab` DISABLE KEYS */;
-INSERT INTO `users_tab` VALUES (1,1,1,'root@restoran.com','e89591ee9b8e7018511649a2146ae279','*1445190681',1),(2,1,1,'palma@restoran.com','e89591ee9b8e7018511649a2146ae279',NULL,1);
+INSERT INTO `users_tab` VALUES (1,1,1,'root@restoran.com','e89591ee9b8e7018511649a2146ae279','*1445224053',1),(2,1,1,'palma@restoran.com','e89591ee9b8e7018511649a2146ae279',NULL,1);
 /*!40000 ALTER TABLE `users_tab` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -267,4 +267,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-19  1:20:14
+-- Dump completed on 2015-10-19 12:39:34
