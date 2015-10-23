@@ -21,7 +21,7 @@
 	<script src="<?php echo site_url('application/views/js/jquery-ui-1.10.4.min.js'); ?>"></script>
     <script src="<?php echo site_url('application/views/js/jquery-1.8.3.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo site_url('application/views/js/jquery-ui-1.9.2.custom.min.js'); ?>"></script-->
-    <!-- bootstrap -->
+    <!-- bootstrap --> 
     <script src="<?php echo site_url('application/views/js/bootstrap.min.js'); ?>"></script>
     <!-- nice scroll -->
     <script src="<?php echo site_url('application/views/js/jquery.scrollTo.min.js'); ?>"></script>
