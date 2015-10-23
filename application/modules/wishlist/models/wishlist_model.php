@@ -16,7 +16,7 @@ class Wishlist_model extends CI_Model {
 	}
 	
 	function __get_wishlistx($wid) {
-		// echo $id;die;
+		//echo $id;die;
 		return "SELECT *,(select tname from tables_tab d where d.tid=a.wtid) as tname FROM wishlist_tab a,wishlist_detail_tab b, menus_tab c WHERE a.wid=b.wid and b.wmid=c.mid and (a.wstatus=1 OR a.wstatus=0) and a.wid='".$wid."' ORDER BY a.wid DESC";
 		
 		

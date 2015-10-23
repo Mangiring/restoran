@@ -64,12 +64,11 @@ class Home extends MY_Controller {
 	function wishlist_list2($id) {
 		if($_POST){
 		//print_r($_POST);
-		$wname = $_POST['wname'];
-		
+		$wname = $_POST['wname'];		
 		$discc = $_POST['discc'];
 		$wppn = $_POST['ppn'];
-		$t=0;
-		$jwdid=count($_POST['wdid']);	
+		$t=0; 
+		$jwdid= count($_POST['wdid']);	
 			$hargax=0;
 			if($jwdid>0){
 				for($j=0;$j<$jwdid;$j++){	

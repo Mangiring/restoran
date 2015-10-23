@@ -5,7 +5,7 @@
           <section class="wrapper">
 		  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="icon_genius"></i> Tables</h3>
+					<h3 class="page-header"><i class="icon_genius"></i> Billing</h3>
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="./">Home</a></li>
 						<li><i class="icon_genius"></i>Tables</li>
@@ -15,7 +15,7 @@
               <!-- page start-->
               <div class="row">
                   <div class="col-lg-12">
-	<?php echo __get_error_msg(); ?>
+	  <?php echo __get_error_msg();?>
 					<!--h3 class="box-title" style="margin-top:0;"><a href="<?php echo site_url('tables/tables_add'); ?>" class="btn btn-default"><i class="fa fa-plus"></i> Add Tables</a></h3-->
                       <section class="panel">
                           <header class="panel-heading">
@@ -51,10 +51,15 @@
 		  ?>
 		  <?php if ( $v -> cid == 3){ 
 		  
+		  ?>
+                                        
+     
+          
+		  <?php  
 		  $b= $d%4;
 		  if( $v -> tstatus=='3') { $btnx="btn btn-primaryx";}else{$btnx="btn btn-primaryz";}
 		  ?>
-              <a class="<?=$btnx;?>"  href="<?php echo site_url('wishlist/home/wishlist_listx/' . $v -> tid); ?>"><?php echo $v -> tname;?></a>
+              <a class="<?=$btnx;?>"  href="<?php echo site_url('wishlist/home/billing_list/' . $v -> tid); ?>"><?php echo $v -> tname;?></a>
               <!--a class="btn btn-danger" href="<?php //echo site_url('tables/tables_delete/' . $v -> tid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-times"></i></a-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           
 										
@@ -84,7 +89,7 @@
 		  $b= $dd%4;
 		  if( $v -> tstatus=='3') { $btnx="btn btn-primaryx";}else{$btnx="btn btn-primaryz";}
 		  ?>
-             <a class="<?=$btnx;?>"  href="<?php echo site_url('wishlist/home/wishlist_listx/' . $v -> tid); ?>"><?php echo $v -> tname;?></a>
+             <a class="<?=$btnx;?>"  href="<?php echo site_url('wishlist/home/billing_list/' . $v -> tid); ?>"><?php echo $v -> tname;?></a>
               <!--a class="btn btn-danger" href="<?php //echo site_url('tables/tables_delete/' . $v -> tid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-times"></i></a-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           
 										
