@@ -1894,11 +1894,16 @@ fieldset[disabled] .btn-default.active {
   border-color: #007aff;
   width:100px;
 }
+.btn-primaryz {
+  color: #ffffff;
+  background-color: blue;
+  border-color: #007aff;
+  width:100px;
+}
 .btn-primary {
   color: #ffffff;
   background-color: #007aff;
-  border-color: #007aff;
-  width:100px;
+  border-color: #007aff;  
 }
 .btn-primary:hover,
 .btn-primary:focus,

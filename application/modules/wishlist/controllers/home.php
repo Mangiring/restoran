@@ -21,6 +21,16 @@ class Home extends MY_Controller {
 		$view['tables']=$this -> tables_model -> __get_tables_list();
 		//print_r($view);
 		$this->load->view('table_list', $view);
+	}
+
+
+	function billing() {
+		$pager = $this -> pagination_lib -> pagination($this -> wishlist_model -> __get_wishlist(),3,10,site_url('wishlist'));
+		$view['wishlist'] = $this -> pagination_lib -> paginate();
+		$view['pages'] = $this -> pagination_lib -> pages();
+		$view['tables']=$this -> tables_model -> __get_tables_list();
+		//print_r($view);
+		$this->load->view('table_list2', $view);
 	}	
 
 	function wishlist_listx($wtid) {
@@ -41,6 +51,68 @@ class Home extends MY_Controller {
 		//echo $wid;die;
 		redirect('wishlist/home/wishlist_list/'.$wid);	}
 	}
+	
+	
+	function billing_list($wtid) {
+	
+		$wid= $this -> wishlist_model ->__last_wishlist_by_wtid($wtid);
+		//echo $wid;die;
+		redirect('wishlist/home/wishlist_list2/'.$wid);	
+		
+	}	
+
+	function wishlist_list2($id) {
+		if($_POST){
+		//print_r($_POST);
+		$wname = $_POST['wname'];
+		
+		$discc = $_POST['discc'];
+		$wppn = $_POST['ppn'];
+		$t=0;
+		$jwdid=count($_POST['wdid']);	
+			$hargax=0;
+			if($jwdid>0){
+				for($j=0;$j<$jwdid;$j++){	
+						$wdid = $_POST['wdid'][$j];
+						$wqty = $_POST['qty'][$j];
+						$wqty = $_POST['qty'][$j];
+						$wharga = $_POST['harga'][$j];
+						$wdisc = $_POST['wdisc'][$j];
+						$t=$t+(($wharga*$wqty)-($wharga*$wqty*$wdisc/100));
+						
+						//$whargax=$wharga*$wqty;
+				
+				$dtx=array('wharga'=>$wharga,'wqty'=>$wqty,'wstatus'=>1);	
+				$this -> wishlist_model -> __update_wishlist_detail($wdid,$dtx);		
+						
+				}
+				$wtotal=$t;
+				$tall=$t-($t*$discc/100)-($t*$wppn/100);
+				
+				
+			}
+			
+			$dta=array('wname'=>$wname,'wtotal'=>$wtotal,'wppn'=>$wppn,'wdis'=>$discc,'wtotalall'=>$tall);
+				$this -> wishlist_model -> __update_wishlist($id,$dta);
+		}	
+		$pager = $this -> pagination_lib -> pagination($this -> wishlist_model -> __get_wishlistx($id),3,10,site_url('wishlist/home/wishlist_list2/'.$id));
+		$view['wishlist'] = $this -> pagination_lib -> paginate();
+		$view['pages'] = $this -> pagination_lib -> pages();
+		$view['id']=$id;
+		//print_r($view);die;
+		$this->load->view('billing', $view);
+	}	
+
+
+function billing2($id) {
+		$pager = $this -> pagination_lib -> pagination($this -> wishlist_model -> __get_wishlistx($id),3,10,site_url('wishlist/home/billing2/'.$id));
+		$view['wishlist'] = $this -> pagination_lib -> paginate();
+		$view['pages'] = $this -> pagination_lib -> pages();
+		$view['id']=$id;
+		//print_r($view);die;
+		$this->load->view('billing2', $view,FALSE);	
+	
+}
 	
 	function wishlist_list($id) {
 		if($_POST){
@@ -119,6 +191,61 @@ class Home extends MY_Controller {
 	}
 	
 	
+
+
+function billing_add($id) {
+		if ($_POST) {
+			$wname = $this -> input -> post('wname', TRUE);
+			$wdt=$this -> input -> post('wdate', TRUE);
+			$wdatex = explode('/',$wdt);
+			$wdate=$wdatex[2].'-'.$wdatex[1].'-'.$wdatex[0];
+			//$status = (int) $this -> input -> post('status');
+			
+			
+			$jumt=count($_POST['mid']);	
+			$hargax=0;
+			if($jumt>0){
+				//print_r($_POST);
+				// echo $jumt;die;
+				for($j=0;$j<$jumt;$j++){	
+					$mids = explode("-",$_POST['mid'][$j]);
+					$mid = $mids[0];
+					$harga = $mids[1];
+					$dis = $mids[2];
+					//$qtys = $_POST['qty'][$j];
+					$hargax=$harga+$hargax;
+					$arr=array('wdid'=>'','wid'=>$id,'wmid'=>$mid,'wharga'=>$harga,'wdisc'=>$dis,'wstatus'=>1);
+					//print_r($arr);//die;
+					$this -> wishlist_model -> __insert_wishlist_detail($arr);
+				}//die;
+				
+				$dtx=array('wtotal'=>$hargax,'wdisc'=>'','wtotalall'=>$hargax,'wdate'=>$wdate,'wstatus'=>1);	
+				$this -> wishlist_model -> __update_wishlist($id,$dtx);
+				
+			}	
+			
+			
+			?>
+				<script type="text/javascript">
+					window.parent.location.reload(true);
+				</script>
+			<?php 		
+
+		}
+		else {
+		$pager = $this -> pagination_lib -> pagination($this -> menus_model -> __get_menus(),3,10,site_url('menus'));
+		$view['menus'] = $this -> pagination_lib -> paginate();
+		$view['pages'] = $this -> pagination_lib -> pages();
+		$this->load->view('wishlist_add', $view,FALSE);
+		}
+	}
+	
+
+
+
+
+
+
 	
 	
 	function wishlist_update($id) {
