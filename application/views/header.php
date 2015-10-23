@@ -30,10 +30,22 @@
 	<link href="<?php echo site_url('application/views/css/jquery-ui-1.10.4.min.css'); ?>" rel="stylesheet">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
     <!--[if lt IE 9]>
-      <script src="<?php echo site_url('application/views/js/html5shiv.js'); ?>"></script>
-      <script src="<?php echo site_url('application/views/js/respond.min.js'); ?>"></script>
-      <script src="<?php echo site_url('application/views/js/lte-ie7.js'); ?>"></script>
+      <script src="<?php //echo site_url('application/views/js/html5shiv.js'); ?>"></script>
+      <script src="<?php //echo site_url('application/views/js/respond.min.js'); ?>"></script>
+      <script src="<?php //echo site_url('application/views/js/lte-ie7.js'); ?>"></script>
     <![endif]-->
+	
+	
+    <script src="<?php echo site_url('application/views/js/jquery.js'); ?>"></script>
+	<script src="<?php echo site_url('application/views/js/jquery-ui-1.10.4.min.js'); ?>"></script>
+    <script src="<?php echo site_url('application/views/js/jquery-1.8.3.min.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo site_url('application/views/js/jquery-ui-1.9.2.custom.min.js'); ?>"></script>	
+	
+	
+	
+	
+	
+	
   </head>
 
   <body>
