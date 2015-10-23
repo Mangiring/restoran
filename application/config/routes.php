@@ -66,6 +66,12 @@ $route['categories/categories_search'] = 'categories/home/categories_search';
 $route['categories/categories_search_result/(:any)'] = 'categories/home/categories_search_result/$1';
 $route['categories/get_suggestion'] = 'categories/home/get_suggestion';
 
+$route['peti_cash/?(:num)?'] = 'peti_cash/home/index/$1';
+$route['peti_cash/peti_cash_add'] = 'peti_cash/home/peti_cash_add';
+$route['peti_cash/peti_cash_update/?(:num)?'] = 'peti_cash/home/peti_cash_update/$1';
+$route['peti_cash/peti_cash_delete/(:num)'] = 'peti_cash/home/peti_cash_delete/$1';
+
+$route['report_peti_cash/?(:num)?'] = 'report_peti_cash/home/index/$1';
 
 $route['wishlist/?(:num)?'] = 'wishlist/home/index/$1';
 $route['wishlist/wishlist_add/?(:num)?'] = 'wishlist/home/wishlist_add/$1';

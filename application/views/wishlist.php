@@ -32,10 +32,10 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
           <section class="wrapper">
 		  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="icon_genius"></i> Wish List</h3>
+					<h3 class="page-header"><i class="icon_cart"></i> Wish List</h3>
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="./">Home</a></li>
-						<li><i class="icon_genius"></i>Tables</li>
+						<li><i class="icon_cart"></i>Tables</li>
 					</ol>
 				</div>
 			</div>
@@ -78,9 +78,9 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
                                 <tr>
           <th>Meja</th><th><?php echo $tname; ?></th></tr>
 		  <tr><th>Nama</th><th>
-		  <input type=text name="wname" value="<?php echo $wname; ?>" ></th></tr>
+		  <input type=text name="wname" class="form-control" value="<?php echo $wname; ?>" ></th></tr>
           <tr><th>Person</th><th>
-		  <input type=text name="person" value="<?php echo $person; ?>" ></th></tr>
+		  <input type=text class="form-control" name="person" value="<?php echo $person; ?>" ></th></tr>
           <th>Status</th><th><?php echo __get_status($wstatus,1); ?></th></tr>
                                 </tr>
 								
@@ -114,7 +114,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		  <td><input type=hidden name="wdid[]" value="<?php echo $v -> wdid; ?>" >
 		  <input type=hidden name="harga[]" value="<?php echo $v -> wharga; ?>" >
 		  <?php echo $v -> mname; ?></td>
-		  <td><select name="qty[]">
+		  <td><select name="qty[]" class="form-control">
 		  <option><?php echo $v -> wqty;?></option>
 		  <?php for($i=1;$i<30;$i++){ ?>
 		  <option><?=$i;?></option>
@@ -135,7 +135,10 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
         <?php endforeach; ?>
 		
                               </tbody>
-		<tr><td><input type=submit ></td><td></td><td></td><td><?=$t;?></td></tr>
+		<tr><td>
+                                        <button type="submit" class="btn btn-primary"> <i class="fa fa-save"></i> Submit</button>
+										<button class="btn btn-default" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
+		</td><td></td><td></td><td><?=$t;?></td></tr>
                             </table>							
 							
 			</form>				

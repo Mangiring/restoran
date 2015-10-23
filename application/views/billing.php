@@ -123,7 +123,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		  <td><input type=hidden name="wdid[]" value="<?php echo $v -> wdid; ?>" >
 		  <input type=hidden name="harga[]" value="<?php echo $v -> wharga; ?>" >
 		  <?php echo $v -> mname; ?></td>
-		  <td><select name="qty[]">
+		  <td><select name="qty[]" class="form-control">
 		  <option><?php echo $v -> wqty;?></option>
 		  <?php for($i=1;$i<30;$i++){ ?>
 		  <option><?=$i;?></option>
@@ -157,10 +157,10 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 			<tr><td>Before Tax</td><td></td><td></td><td></td><td><?=$tt;?></td></tr>					  
 							  
 							  
-			<tr><td>Discount</td><td><input type=text name=discc size=4 value="<?=$v -> wdis;?>" >%</td><td></td><td></td><td><?=$tdis;?></td></tr>					  
-		<tr><td>PPN</td><td><input type=text name=ppn size=4 value="<?=$v -> wppn;?>" >%</td><td></td><td></td><td><?=$tppn;?></td></tr>					  
-		<tr><td><input type=submit class="btn btn-primaryx" value=save >
-		<a id="iframex" class="btn btn-primaryz" target=blank href="<?php echo site_url('wishlist/home/billing2/' . $v -> wid); ?>">Print </a>
+			<tr><td>Discount</td><td><input class="form-control" type=number name=discc size=4 value="<?=$v -> wdis;?>" ><p>%</p></td><td></td><td></td><td><?=$tdis;?></td></tr>					  
+		<tr><td>PPN</td><td style="width:200px"><input class="form-control" type=number name=ppn size=4 value="<?=$v -> wppn;?>" ><p>%</p></td><td></td><td></td><td><?=$tppn;?></td></tr>					  
+		<tr><td><input type=submit class="btn btn-danger" value=save >
+		<a id="iframex" class="btn btn-primary" target=blank href="<?php echo site_url('wishlist/home/billing2/' . $v -> wid); ?>">Print </a>
 		</td><td></td><td></td><td></td><td><?=$v -> wtotalall;?></td></tr>
                             </table>							
 							
