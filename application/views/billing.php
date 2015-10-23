@@ -63,6 +63,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 									  $wstatus=$v -> wstatus;
 									  $wtid=$v -> wtid;
 									  $tname=$v -> tname;
+									  $person=$v -> person;
 								  }
 							$wcount= count($wishlist);
 							if($wcount==0){
@@ -70,13 +71,15 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 									  $wstatus="";
 									  $wtid="";
 									  $tname="";
+									  $person="";
 								
 							}
 							//if($wcount>0){  
 						?>
                                 <tr>
           <th>&nbsp;&nbsp;</th><th>Meja</th><th><?php echo $tname; ?></th><th></th></tr>
-		  <th>&nbsp;&nbsp;</th><th>Nama</th><th><?php echo $wname; ?>
+		  <tr><th>&nbsp;&nbsp;</th><th>Nama</th><th><?php echo $wname; ?>
+		  <tr><th>&nbsp;&nbsp;</th><th>Person</th><th><?php echo $person; ?>
 		  <input type=hidden name="wname" value="<?php echo $wname; ?>" ></th><th></th></tr>
          
           <th>&nbsp;&nbsp;</th><th>Status</th><th><?php echo __get_status($wstatus,1); ?></th><th></th></tr>

@@ -10,6 +10,7 @@ class Home extends MY_Controller {
 		$this -> load -> model('wishlist_model');
 		$this -> load -> model('tables/tables_model');
 		$this -> load -> model('menus/menus_model');
+		$this -> load -> model('categories_tables/categories_tables_model');
 	}
 
 
@@ -19,7 +20,8 @@ class Home extends MY_Controller {
 		$view['wishlist'] = $this -> pagination_lib -> paginate();
 		$view['pages'] = $this -> pagination_lib -> pages();
 		$view['tables']=$this -> tables_model -> __get_tables_list();
-		//print_r($view);
+		$view['cat']=$this -> categories_tables_model -> __get_categories_list();
+		//print_r($view['cat']);
 		$this->load->view('table_list', $view);
 	}
 
@@ -29,6 +31,7 @@ class Home extends MY_Controller {
 		$view['wishlist'] = $this -> pagination_lib -> paginate();
 		$view['pages'] = $this -> pagination_lib -> pages();
 		$view['tables']=$this -> tables_model -> __get_tables_list();
+		$view['cat']=$this -> categories_tables_model -> __get_categories_list();
 		//print_r($view);
 		$this->load->view('table_list2', $view);
 	}	
@@ -39,7 +42,7 @@ class Home extends MY_Controller {
 			$arr=array('tstatus'=>3);
 			$this -> tables_model -> __update_tables($wtid, $arr);
 			$wdate=date('Y-m-d');
-			$dt=array('wid'=>'','wname'=>'','wtid'=>$wtid,'wtotal'=>'','wdisc'=>'',
+			$dt=array('wid'=>'','wname'=>'','wtid'=>$wtid,'wtotal'=>'','wdis'=>'',
 			'wtotalall'=>'','wdate'=>$wdate,'wstatus'=>1);	
 			
 			if($this -> wishlist_model ->__insert_wishlist($dt)){
@@ -64,7 +67,8 @@ class Home extends MY_Controller {
 	function wishlist_list2($id) {
 		if($_POST){
 		//print_r($_POST);
-		$wname = $_POST['wname'];		
+		$wname = $_POST['wname'];	
+		$person = $_POST['person'];
 		$discc = $_POST['discc'];
 		$wppn = $_POST['ppn'];
 		$t=0; 
@@ -108,7 +112,12 @@ function billing2($id) {
 		$view['wishlist'] = $this -> pagination_lib -> paginate();
 		$view['pages'] = $this -> pagination_lib -> pages();
 		$view['id']=$id;
-		//print_r($view);die;
+		//print_r($view['wishlist'][0]->wtid);die;
+		$wtid=$view['wishlist'][0]->wtid;
+		$arr=array('tstatus'=>1);
+		$this -> tables_model -> __update_tables($wtid, $arr);
+		$dta=array('wstatus'=>3);
+		$this -> wishlist_model -> __update_wishlist($id,$dta);
 		$this->load->view('billing2', $view,FALSE);	
 	
 }
@@ -117,6 +126,7 @@ function billing2($id) {
 		if($_POST){
 		//print_r($_POST);
 		$wname = $_POST['wname'];
+		$person = $_POST['person'];
 		$jwdid=count($_POST['wdid']);	
 			$hargax=0;
 			if($jwdid>0){
@@ -125,7 +135,7 @@ function billing2($id) {
 						$wqty = $_POST['qty'][$j];
 						$wharga = $_POST['harga'][$j];
 						//$whargax=$wharga*$wqty;
-				$dta=array('wname'=>$wname);
+				$dta=array('wname'=>$wname,'person'=>$person);
 				$this -> wishlist_model -> __update_wishlist($id,$dta);
 				$dtx=array('wharga'=>$wharga,'wqty'=>$wqty,'wstatus'=>1);	
 				$this -> wishlist_model -> __update_wishlist_detail($wdid,$dtx);		
@@ -168,7 +178,7 @@ function billing2($id) {
 					$this -> wishlist_model -> __insert_wishlist_detail($arr);
 				}//die;
 				
-				$dtx=array('wtotal'=>$hargax,'wdisc'=>'','wtotalall'=>$hargax,'wdate'=>$wdate,'wstatus'=>1);	
+				$dtx=array('wtotal'=>$hargax,'wdis'=>'','wtotalall'=>$hargax,'wdate'=>$wdate,'wstatus'=>1);	
 				$this -> wishlist_model -> __update_wishlist($id,$dtx);
 				
 			}	

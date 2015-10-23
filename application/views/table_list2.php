@@ -37,9 +37,11 @@
                               <tbody>
 							  
 							  
-							  
+	<?php 
+		foreach($cat as $kk => $vv){	
+	?>					  
 	 <tr>
-          <td colspan=4 >LANTAI 1</td>	
+          <td colspan=4 ><?=$vv->cname;?></td>	
 		  <td>&nbsp;</td>
 	</tr>							  
 							  
@@ -49,7 +51,7 @@
 		  $d=0;
 		  foreach($tables as $k => $v) :
 		  ?>
-		  <?php if ( $v -> cid == 3){ 
+		  <?php if ( $v -> cid == $vv->cid){ 
 		  
 		  ?>
                                         
@@ -71,42 +73,9 @@
 		  }?>						
         <?php endforeach; ?>
 		</td></tr>
-	<tr>
-          <td colspan=4 >LANTAI 2</td>	
-		  <td>&nbsp;</td>
-	</tr>		
+		<?php } ?>
 		
-		<tr><td>
-		 <?php
-		  $dd=0;
-		  foreach($tables as $k => $v) :
-		  ?>
-		  <?php if ( $v -> cid == 4){ 
-		  
-		  ?>
-                                        
-     
-          
-		  <?php  
-		  $b= $dd%4;
-		  if( $v -> tstatus=='3') { $btnx="btn btn-primaryx";}else{$btnx="btn btn-primaryz";}
-		  ?>
-             <a class="<?=$btnx;?>"  href="<?php echo site_url('wishlist/home/billing_list/' . $v -> tid); ?>"><?php echo $v -> tname;?></a>
-              <!--a class="btn btn-danger" href="<?php //echo site_url('tables/tables_delete/' . $v -> tid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-times"></i></a-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          
-										
-		  <?php 
-		  if($b==3){echo "<br><br>";}
-		  $dd=$dd+1;
-		  }?>						
-        <?php endforeach; ?>		
-		</td></tr>
-		
-		
-		
-		
-		
-		
+	
 		
 		
                               </tbody>

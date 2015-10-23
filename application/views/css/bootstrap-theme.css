@@ -1890,8 +1890,8 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-primaryx {
   color: #ffffff;
-  background-color: green;
-  border-color: #007aff;
+  background-color: #ff2d55;
+  border-color: #ff2d55;
   width:100px;
 }
 .btn-primaryz {
