@@ -5,10 +5,10 @@
           <section class="wrapper">
 		  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="icon_cart"></i> Billing</h3>
+					<h3 class="page-header"><i class="icon_currency"></i> Billing</h3>
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="./">Home</a></li>
-						<li><i class="icon_cart"></i>Tables</li>
+						<li><i class="icon_currency"></i>Billing</li>
 					</ol>
 				</div>
 			</div>
@@ -67,12 +67,6 @@
                               </tbody>
                             </table>
                           </div>
-                                <div class="box-footer clearfix">
-                                    <ul class="pagination pagination-sm no-margin pull-right">
-                                        <?php echo $pages; ?>
-                                    </ul>
-                                </div>
-
                       </section>
                   </div>
               </div>

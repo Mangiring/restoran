@@ -33,10 +33,10 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
           <section class="wrapper">
 		  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="icon_genius"></i> Billing</h3>
+					<h3 class="page-header"><i class="icon_currency"></i> Billing</h3>
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="./">Home</a></li>
-						<li><i class="icon_genius"></i>Tables</li>
+						<li><i class="icon_currency"></i>Billing</li>
 					</ol>
 				</div>
 			</div>
@@ -122,7 +122,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		  <?php } ?>
 		  <option>0</option>
 		  </select></td>
-		<td><?php echo $v -> wharga;?></td>
+		<td><?php echo __get_rupiah($v -> wharga,1);?></td>
 		<td>
 		<input type="hidden" name="wdisc[]" value="<?php echo $v -> wdisc;?>">
 		<?php echo $v -> wdisc;
@@ -136,7 +136,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		?> %
 		
 		</td>
-		<td><?=$total;?></td>
+		<td><?php echo __get_rupiah($total,1);?></td>
           <!--td><?php echo __get_status($v -> wstatus,1); ?></td-->
 		  <td>
               &nbsp;
@@ -145,26 +145,20 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
         <?php endforeach; ?>
 		
                               </tbody>
-			<tr><td>Before Tax</td><td></td><td></td><td></td><td><?=$tt;?></td></tr>					  
+			<tr><td>Before Tax</td><td></td><td></td><td></td><td><?php echo __get_rupiah($tt,1);?></td></tr>					  
 							  
 							  
-			<tr><td>Discount</td><td><input class="form-control" type="number" name="discc"value="<?=$v -> wdis;?>" ><p>%</p></td><td></td><td></td><td><?=$tdis;?></td></tr>					  
-		<tr><td>PPN</td><td style="width:200px"><input class="form-control" type="number" name="ppn" value="<?=$v -> wppn;?>" ><p>%</p></td><td></td><td></td><td><?=$tppn;?></td></tr>					  
-		<tr><td><input type=submit class="btn btn-danger" value=save >
+			<tr><td>Discount</td><td><input class="form-control" type="number" name="discc"value="<?=$v -> wdis;?>" ><p>%</p></td><td></td><td></td><td><?php echo __get_rupiah($tdis,1);?></td></tr>					  
+		<tr><td>PPN</td><td style="width:200px"><input class="form-control" type="number" name="ppn" value="<?=$v -> wppn;?>" ><p>%</p></td><td></td><td></td><td><?php echo __get_rupiah($tppn,1);?></td></tr>					  
+		<tr><td><input type=submit class="btn btn-danger" value="Save">
 		<a id="iframex" class="btn btn-primary" target=blank href="<?php echo site_url('wishlist/home/billing2/' . $v -> wid); ?>">Print </a>
-		<a id="iframex" class="btn btn-danger" target=blank href="<?php echo site_url('wishlist/home/billing_approve/' . $v -> wid); ?>">Approve </a>
-		</td><td></td><td></td><td></td><td><?=$v -> wtotalall;?></td></tr>
+		<a id="iframex" class="btn btn-danger" href="<?php echo site_url('wishlist/home/billing_approve/' . $v -> wid); ?>">Approve </a>
+		</td><td></td><td></td><td></td><td><?php echo __get_rupiah($v -> wtotalall,1);?></td></tr>
                             </table>							
 							
 			</form>				
 							
                           </div>
-                                <div class="box-footer clearfix">
-                                    <ul class="pagination pagination-sm no-margin pull-right">
-                                        <?php echo $pages; ?>
-                                    </ul>
-                                </div>
-
                       </section>
                   </div>
               </div>

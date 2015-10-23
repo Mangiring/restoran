@@ -142,8 +142,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		  <input type=hidden name="harga[]" value="<?php echo $v -> wharga; ?>" >
 		  <?php echo $v -> mname; ?></td>
 		  <td><?php echo $v -> wqty;?></td>
-        <!--td><?php //echo $v -> wqty; ?></td-->
-		<td><?php echo $v -> wharga;?></td>
+		<td><?php echo __get_rupiah($v -> wharga,1);?></td>
 		<td>
 		
 		<?php echo $v -> wdisc;
@@ -156,34 +155,28 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		?> %
 		
 		</td>
-		<td><?=$total;?></td>
+		<td><?php echo __get_rupiah($total,1);?></td>
           <!--td><?php echo __get_status($v -> wstatus,1); ?></td-->
 		  
 										</tr>
         <?php endforeach; ?>
 		
                               </tbody>
-		<tr><td>Before Tax </td><td></td><td></td><td></td><td><?=$v -> wtotal;?></td></tr>		<?php 
+		<tr><td>Before Tax </td><td></td><td></td><td></td><td><?php echo __get_rupiah($v -> wtotal,1);?></td></tr>		<?php 
 		$tppn=($v -> wtotal*$v -> wppn/100);
 		$tdis=($v -> wtotal*$v -> wdis/100);
 		?>						  
-			<tr><td>Discount</td><td><?=$v -> wdis;?> %</td><td></td><td></td><td><?=$tdis;?></td></tr>					  
-		<tr><td>PPN</td><td><?=$v -> wppn;?>%</td>
+			<tr><td>Discount</td><td><?=$v -> wdis;?> %</td><td></td><td></td><td><?php echo __get_rupiah($tdis,1);?></td></tr>					  
+		<tr><td>PPN</td><td><?php echo __get_rupiah($v -> wppn,1);?>%</td>
 
 		
-		<td></td><td></td><td><?=$tppn;?></td></tr>					  
-		<tr><td><!--input type=submit --></td><td></td><td></td><td></td><td><?=$v -> wtotalall;?></td></tr>
+		<td></td><td></td><td><?php echo __get_rupiah($tppn,1);?></td></tr>					  
+		<tr><td><!--input type=submit --></td><td></td><td></td><td></td><td><?php echo __get_rupiah($v -> wtotalall,1);?></td></tr>
                             </table>							
 							
 			</form>				
 							
                           </div>
-                                <div class="box-footer clearfix">
-                                    <ul class="pagination pagination-sm no-margin pull-right">
-                                        <?php echo $pages; ?>
-                                    </ul>
-                                </div>
-
                       </section>
                   </div>
               </div>

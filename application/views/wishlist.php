@@ -32,10 +32,10 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
           <section class="wrapper">
 		  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="icon_cart"></i> Wish List</h3>
+					<h3 class="page-header"><i class="icon_cart"></i> Wishlist</h3>
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="./">Home</a></li>
-						<li><i class="icon_cart"></i>Tables</li>
+						<li><i class="icon_cart"></i>Wishlist</li>
 					</ol>
 				</div>
 			</div>
@@ -46,7 +46,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 					<h3 class="box-title" style="margin-top:0;"><a id="iframe" href="<?php echo site_url('wishlist/home/wishlist_add/'.$id); ?>" class="btn btn-default"><i class="fa fa-plus"></i> Add Menu</a></h3>
                       <section class="panel">
                           <header class="panel-heading">
-                              Wish List Menu
+                              Wishlist Menu
                           </header>
 						  <!--p><a id='iframe' href="../../../application/views/jquery.min.js">Outside Webpage (Iframe)</a></p-->
 						  	<!--p><a id='iframe' href="application/views/jquery.min.js">Outside Webpage (Iframe)</a></p>
@@ -122,11 +122,11 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		  <option>0</option>
 		  </select></td>
         <!--td><?php //echo $v -> wqty; ?></td-->
-		<td><?php echo $v -> wharga;
+		<td><?php echo __get_rupiah($v -> wharga,1);
 		$total=$v -> wqty * $v -> wharga;
 		$t=$total+$t;
 		?></td>
-		<td><?=$total;?></td>
+		<td><?php echo __get_rupiah($total,1); ?></td>
           <td><?php echo __get_status($v -> wstatus,1); ?></td>
 		  <td>
               &nbsp;
@@ -144,12 +144,6 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 			</form>				
 							
                           </div>
-                                <div class="box-footer clearfix">
-                                    <ul class="pagination pagination-sm no-margin pull-right">
-                                        <?php echo $pages; ?>
-                                    </ul>
-                                </div>
-
                       </section>
                   </div>
               </div>

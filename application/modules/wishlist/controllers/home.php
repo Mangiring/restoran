@@ -116,8 +116,7 @@ class Home extends MY_Controller {
 		$dta=array('wstatus'=>3);
 		$this -> wishlist_model -> __update_wishlist($id,$dta);
 		__set_error_msg(array('error' => 'Billing sudah di bayar'));
-		redirect(site_url('wishlist'));
-
+		redirect(site_url('wishlist/home/billing'));
 	}	
 	
 	
