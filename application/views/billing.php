@@ -49,15 +49,13 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
                           <header class="panel-heading">
                               Billing
                           </header>
-						  <!--p><a id='iframe' href="../../../application/views/jquery.min.js">Outside Webpage (Iframe)</a></p-->
-						  	<!--p><a id='iframe' href="application/views/jquery.min.js">Outside Webpage (Iframe)</a></p>
-							<p><a id='iframe' href="application/views/jquery.min.js">Outside Webpage (Iframe2)</a></p-->
+
                           <div class="table-responsive">
-						  <form method=POST>
+						  <form method="POST">
                             <table  border=0 width=50%  >
                               <thead>
 						<?php			
-//print_r($wishlist);						
+			
 								  foreach($wishlist as $k => $v) {
 									  $wname=$v -> wname;
 									  $wstatus=$v -> wstatus;
@@ -107,14 +105,8 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
                               <tbody>
 								  
 		  <?php
-		  if(!isset($_POST['ppn'])){ $_POST['ppn']=0;}
-		  if(!isset($_POST['discc'])){ $_POST['discc']=0;}
 		  $t=0;
 		  $tt=0;
-		  //echo $_POST['discc'];
-		  //die;
-		  $discc=$_POST['discc'];
-		  $ppn=$_POST['ppn'];
 		  foreach($wishlist as $k => $v) :
 		  ?>
 		
@@ -130,15 +122,14 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		  <?php } ?>
 		  <option>0</option>
 		  </select></td>
-        <!--td><?php //echo $v -> wqty; ?></td-->
 		<td><?php echo $v -> wharga;?></td>
 		<td>
-		<input type=hidden name=wdisc[] value="<?=$v -> wdisc;?>">
+		<input type="hidden" name="wdisc[]" value="<?php echo $v -> wdisc;?>">
 		<?php echo $v -> wdisc;
 		$total=($v -> wqty * $v -> wharga) - (($v -> wqty) * ($v -> wharga) * ($v -> wdisc) /100) ;
 		$tt=$tt+$total;
-		$tdis=$tt * $discc /100;
-		$tppn=$tt * $ppn /100;
+		$tdis=$tt * $v->wdis /100;
+		$tppn=$tt * $v->wppn /100;
 		$totaldis=$tt-($tdis) - ($tppn);
 		
 		$t=$totaldis+$t;
@@ -157,10 +148,11 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 			<tr><td>Before Tax</td><td></td><td></td><td></td><td><?=$tt;?></td></tr>					  
 							  
 							  
-			<tr><td>Discount</td><td><input class="form-control" type=number name=discc size=4 value="<?=$v -> wdis;?>" ><p>%</p></td><td></td><td></td><td><?=$tdis;?></td></tr>					  
-		<tr><td>PPN</td><td style="width:200px"><input class="form-control" type=number name=ppn size=4 value="<?=$v -> wppn;?>" ><p>%</p></td><td></td><td></td><td><?=$tppn;?></td></tr>					  
+			<tr><td>Discount</td><td><input class="form-control" type="number" name="discc"value="<?=$v -> wdis;?>" ><p>%</p></td><td></td><td></td><td><?=$tdis;?></td></tr>					  
+		<tr><td>PPN</td><td style="width:200px"><input class="form-control" type="number" name="ppn" value="<?=$v -> wppn;?>" ><p>%</p></td><td></td><td></td><td><?=$tppn;?></td></tr>					  
 		<tr><td><input type=submit class="btn btn-danger" value=save >
 		<a id="iframex" class="btn btn-primary" target=blank href="<?php echo site_url('wishlist/home/billing2/' . $v -> wid); ?>">Print </a>
+		<a id="iframex" class="btn btn-danger" target=blank href="<?php echo site_url('wishlist/home/billing_approve/' . $v -> wid); ?>">Approve </a>
 		</td><td></td><td></td><td></td><td><?=$v -> wtotalall;?></td></tr>
                             </table>							
 							

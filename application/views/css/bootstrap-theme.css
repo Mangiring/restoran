@@ -1888,16 +1888,16 @@ fieldset[disabled] .btn-default.active {
   background-color: #ffffff;
   border-color: #c7c7cc;
 }
-.btn-primaryx {
+.btn-dangerx {
   color: #ffffff;
   background-color: #ff2d55;
   border-color: #ff2d55;
   width:100px;
 }
-.btn-primaryz {
+.btn-primaryx {
   color: #ffffff;
-  background-color: blue;
-  border-color: #007aff;
+  background-color: #007aff;
+  border-color: #007aff; 
   width:100px;
 }
 .btn-primary {

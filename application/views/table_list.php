@@ -16,20 +16,14 @@
               <div class="row">
                   <div class="col-lg-12">
 	<?php echo __get_error_msg(); ?>
-					<!--h3 class="box-title" style="margin-top:0;"><a href="<?php echo site_url('tables/tables_add'); ?>" class="btn btn-default"><i class="fa fa-plus"></i> Add Tables</a></h3-->
+					
                       <section class="panel">
 						  
-						  	<!--p><a id='iframe' href="application/views/jquery.min.js">Outside Webpage (Iframe)</a></p>
-							<p><a id='iframe' href="application/views/jquery.min.js">Outside Webpage (Iframe2)</a></p-->
+						  	
                           <div class="table-responsive">
                             <table class="table">
                               <thead>
-                                <!--tr>
-          <th>Name</th>
-		  <th>Lantai</th>
-          <th>Description</th>
-          <th>Status</th>
-                                </tr-->
+                                
                               </thead>
                               <tbody>
 							  
@@ -50,10 +44,10 @@
 		  <?php if ( $v -> cid == $vv->cid){ 
 		  
 		  $b= $d%4;
-		  if( $v -> tstatus=='3') { $btnx="btn btn-danger";}else{$btnx="btn btn-primary";}
+		  if( $v -> tstatus=='3') { $btnx="btn btn-dangerx";}else{$btnx="btn btn-primaryx";}
 		  ?>
               <a class="<?=$btnx;?>"  href="<?php echo site_url('wishlist/home/wishlist_listx/' . $v -> tid); ?>"><?php echo $v -> tname;?></a>
-              <!--a class="btn btn-danger" href="<?php //echo site_url('tables/tables_delete/' . $v -> tid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-times"></i></a-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           
 										
 		  <?php 
@@ -63,38 +57,9 @@
         <?php endforeach; ?>
 		</td></tr>
 		
-<?php } ?>	
+<?php } ?>			
 		
-		
-	<!--tr>
-          <td colspan=4 >LANTAI 2</td>	
-		  <td>&nbsp;</td>
-	</tr>		
-		
-		<tr><td>
-		 <?php
-		  $dd=0;
-		  foreach($tables as $k => $v) :
-		  ?>
-		  <?php if ( $v -> cid == 4){ 
-		  
-		  ?>
-                                        
-     
-          
-		  <?php  
-		  $b= $dd%4;
-		  if( $v -> tstatus=='3') { $btnx="btn btn-primaryx";}else{$btnx="btn btn-primaryz";}
-		  ?>
-             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          
-										
-		  <?php 
-		  if($b==3){echo "<br><br>";}
-		  $dd=$dd+1;
-		  }?>						
-        <?php endforeach; ?>		
-		</td></tr-->
+
                               </tbody>
                             </table>
                           </div>

@@ -56,11 +56,11 @@ class Home extends MY_Controller {
 
 	function wishlist_list2($id) {
 		if($_POST){
-		$wname = $_POST['wname'];	
-		$person = $_POST['person'];
+		//$wname = $_POST['wname'];	
+		//$person = $_POST['person'];
 		$discc = $_POST['discc'];
 		$wppn = $_POST['ppn'];
-		$t=0; 
+		$t=0;
 		$jwdid= count($_POST['wdid']);	
 			$hargax=0;
 			if($jwdid>0){
@@ -80,8 +80,12 @@ class Home extends MY_Controller {
 				$tall=$t-($t*$discc/100)-($t*$wppn/100);
 			}
 			
-			$dta=array('wname'=>$wname,'wtotal'=>$wtotal,'wppn'=>$wppn,'wdis'=>$discc,'wtotalall'=>$tall);
-				$this -> wishlist_model -> __update_wishlist($id,$dta);
+			$dta=array('wtotal'=>$wtotal,'wppn'=>$wppn,'wdis'=>$discc,'wtotalall'=>$tall);
+				if($this -> wishlist_model -> __update_wishlist($id,$dta)){
+				__set_error_msg(array('error' => 'Data berhasil di simpan'));
+				redirect(site_url('wishlist/home/wishlist_list2/'.$id));
+					
+				}
 		}	
 		$pager = $this -> pagination_lib -> pagination($this -> wishlist_model -> __get_wishlistx($id),3,10,site_url('wishlist/home/wishlist_list2/'.$id));
 		$view['wishlist'] = $this -> pagination_lib -> paginate();
@@ -96,20 +100,41 @@ class Home extends MY_Controller {
 		$view['wishlist'] = $this -> pagination_lib -> paginate();
 		$view['pages'] = $this -> pagination_lib -> pages();
 		$view['id']=$id;
+		$wtid=$view['wishlist'][0]->wtid;		
+		$this->load->view('billing2', $view,FALSE);
+	}
+	
+	
+	function billing_approve($id) {
+		$pager = $this -> pagination_lib -> pagination($this -> wishlist_model -> __get_wishlistx($id),3,10,site_url('wishlist/home/billing2/'.$id));
+		$view['wishlist'] = $this -> pagination_lib -> paginate();
+		$view['pages'] = $this -> pagination_lib -> pages();
+		$view['id']=$id;
 		$wtid=$view['wishlist'][0]->wtid;
 		$arr=array('tstatus'=>1);
 		$this -> tables_model -> __update_tables($wtid, $arr);
 		$dta=array('wstatus'=>3);
 		$this -> wishlist_model -> __update_wishlist($id,$dta);
-		$this->load->view('billing2', $view,FALSE);
-	}
+		__set_error_msg(array('error' => 'Billing sudah di bayar'));
+		redirect(site_url('wishlist'));
+
+	}	
+	
 	
 	function wishlist_list($id) {
 		if($_POST) {
-			$wname = $_POST['wname'];
-			$person = $_POST['person'];
-			$jwdid=count($_POST['wdid']);	
+			$wname = $this -> input -> post('wname', TRUE);
+			$person = $this -> input -> post('person', TRUE);
+			$jwdid=count($this -> input -> post('wdid', TRUE));	
 			$hargax=0;
+			
+			if (!$wname || !$person) {
+				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
+				redirect(site_url('wishlist' . '/home/' . __FUNCTION__.'/'.$id));
+			}			
+			
+			
+			
 			if($jwdid>0) {
 				for($j=0;$j<$jwdid;$j++) {
 					$wdid = $_POST['wdid'][$j];
@@ -120,6 +145,8 @@ class Home extends MY_Controller {
 					$dtx=array('wharga'=>$wharga,'wqty'=>$wqty,'wstatus'=>1);	
 					$this -> wishlist_model -> __update_wishlist_detail($wdid,$dtx);
 				}
+				__set_error_msg(array('error' => 'Data berhasil di simpan'));
+				redirect(site_url('wishlist'));
 			}
 		}	
 		$pager = $this -> pagination_lib -> pagination($this -> wishlist_model -> __get_wishlistx($id),3,10,site_url('wishlist/home/wishlist_list/'.$id));
@@ -136,8 +163,7 @@ class Home extends MY_Controller {
 			$wdt=$this -> input -> post('wdate', TRUE);
 			$wdatex = explode('/',$wdt);
 			$wdate=$wdatex[2].'-'.$wdatex[1].'-'.$wdatex[0];
-			
-			
+		
 			$jumt=count($_POST['mid']);	
 			$hargax=0;
 			if($jumt>0){
