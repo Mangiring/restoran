@@ -66,6 +66,10 @@ $route['categories/categories_search'] = 'categories/home/categories_search';
 $route['categories/categories_search_result/(:any)'] = 'categories/home/categories_search_result/$1';
 $route['categories/get_suggestion'] = 'categories/home/get_suggestion';
 
+
+$route['wishlist/?(:num)?'] = 'wishlist/home/index/$1';
+$route['wishlist/wishlist_add/?(:num)?'] = 'wishlist/home/wishlist_add/$1';
+$route['wishlist/wishlist/wishlist_list/?(:num)?'] = 'wishlist/home/wishlist_list/$1';
 $route['categories_tables/?(:num)?'] = 'categories_tables/home/index/$1';
 $route['categories_tables/categories_tables_add'] = 'categories_tables/home/categories_tables_add';
 $route['categories_tables/categories_tables_update/?(:num)?'] = 'categories_tables/home/categories_tables_update/$1';

@@ -97,6 +97,12 @@ class Home extends MY_Controller {
 		}
 	}
 	
+	
+	
+
+	
+	
+	
 	function get_suggestion() {
 		header('Content-type: application/javascript');
 		$hint = array();
