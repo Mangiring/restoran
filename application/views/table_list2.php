@@ -57,9 +57,11 @@
           
 		  <?php  
 		  $b= $d%4;
-		  if( $v -> tstatus=='3') { $btnx="btn btn-primaryx";}else{$btnx="btn btn-primaryz";}
+		  if( $v -> tstatus=='3') { $btnx="btn btn-primaryx"; 
+		  $link=site_url('wishlist/home/billing_list/' . $v -> tid);
+		  }else{$btnx="btn btn-primaryz";$link="";}
 		  ?>
-              <a class="<?=$btnx;?>"  href="<?php echo site_url('wishlist/home/billing_list/' . $v -> tid); ?>"><?php echo $v -> tname;?></a>
+              <a class="<?=$btnx;?>"  href="<?php echo $link; ?>"><?php echo $v -> tname;?></a>
               <!--a class="btn btn-danger" href="<?php //echo site_url('tables/tables_delete/' . $v -> tid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-times"></i></a-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           
 										
