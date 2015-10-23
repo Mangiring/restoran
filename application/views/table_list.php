@@ -19,7 +19,7 @@
 					<h3 class="box-title" style="margin-top:0;"><a href="<?php echo site_url('tables/tables_add'); ?>" class="btn btn-default"><i class="fa fa-plus"></i> Add Tables</a></h3>
                       <section class="panel">
                           <header class="panel-heading">
-                              List Table
+                              
                           </header>
 						  
 						  	<!--p><a id='iframe' href="application/views/jquery.min.js">Outside Webpage (Iframe)</a></p>
@@ -27,12 +27,12 @@
                           <div class="table-responsive">
                             <table class="table">
                               <thead>
-                                <tr>
+                                <!--tr>
           <th>Name</th>
 		  <th>Lantai</th>
           <th>Description</th>
           <th>Status</th>
-                                </tr>
+                                </tr-->
                               </thead>
                               <tbody>
 							  
