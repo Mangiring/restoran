@@ -1,7 +1,7 @@
 <link rel="stylesheet" 
 href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>" />
-		<script src="<?php echo site_url('application/views/jquery.min.js'); ?>"></script>
-		<script src="<?php echo site_url('application/views/jquery.colorbox.js'); ?>"></script>
+		<script src="<?php echo site_url('application/views/assets/colorbox/jquery.min.js'); ?>"></script>
+		<script src="<?php echo site_url('application/views/assets/colorbox/jquery.colorbox.js'); ?>"></script>
 		<script>
 			$(document).ready(function(){
 
