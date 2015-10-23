@@ -42,7 +42,7 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="<?php echo site_url('billing'); ?>"><i class="icon_currency"></i>Billing</a></li>                          
+                          <li><a class="" href="<?php echo site_url('wishlist/home/billing'); ?>"><i class="icon_currency"></i>Billing</a></li>                          
                           <li><a class="" href="<?php echo site_url('wishlist'); ?>"><i class="icon_cart"></i>Wishlist</a></li>
                       </ul>
                   </li>
