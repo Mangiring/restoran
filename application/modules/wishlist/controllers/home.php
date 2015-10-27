@@ -77,7 +77,7 @@ class Home extends MY_Controller {
 						
 				}
 				$wtotal=$t;
-				$tall=$t-($t*$discc/100)-($t*$wppn/100);
+				$tall=$t-($t*$discc/100)+($t*$wppn/100);
 			}
 			
 			$dta=array('wtotal'=>$wtotal,'wppn'=>$wppn,'wdis'=>$discc,'wtotalall'=>$tall);

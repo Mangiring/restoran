@@ -130,7 +130,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		$tt=$tt+$total;
 		$tdis=$tt * $v->wdis /100;
 		$tppn=$tt * $v->wppn /100;
-		$totaldis=$tt-($tdis) - ($tppn);
+		$totaldis=$tt-($tdis) + ($tppn);
 		
 		$t=$totaldis+$t;
 		?> %
