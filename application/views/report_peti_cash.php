@@ -1,3 +1,6 @@
+
+    <link href="<?php echo site_url('application/views/css/daterangepicker-bs3.css'); ?>" rel="stylesheet" />   
+    <script src="<?php echo site_url('application/views/js/daterangepicker.js'); ?>"></script>
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
@@ -18,7 +21,7 @@
                   <div class="col-lg-12">
 					<h3 class="box-title" style="margin-top:0;width:30%;">Sort Date
 					<br />
-					<input name="sort" class="monthYearPicker form-control" style="float:left;width:180px;margin-right:5px;" placeholder="Sort Date" />&nbsp;
+					<input name="sort" id="datesort" class="form-control" style="float:left;width:180px;margin-right:5px;" placeholder="Sort Date" />&nbsp;
 					<button type="submit" class="btn btn-primary" style="float:left"> <i class="icon_document"></i></button>
 					</h3>
 					<br />
@@ -26,7 +29,7 @@
 	<?php echo __get_error_msg(); ?>
                       <section class="panel">
                           <header class="panel-heading">
-                              List Transaction - <?php echo __get_month($bulan-2); ?> <?php echo $tahun; ?>
+                              List Transaction - <?php echo __get_date(strtotime($from),1); ?> <?php echo __get_date(strtotime($to),1); ?>
                           </header>
                           <div class="table-responsive">
                             <table class="table">
@@ -84,22 +87,7 @@ if($tgl <> $date){
               </div>
 
 <script type='text/javascript'>//<![CDATA[
-$(window).load(function(){
-$(function() {
-	$('.monthYearPicker').datepicker({
-		changeMonth: true,
-		changeYear: true,
-		showButtonPanel: true,
-		dateFormat: 'mm/yy'
-	}).focus(function() {
-		var thisCalendar = $(this);
-		$('.ui-datepicker-calendar').detach();
-		$('.ui-datepicker-close').click(function() {
-var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-thisCalendar.datepicker('setDate', new Date(year, month, 1));
-		});
-	});
-});
+$(function(){
+	$('#datesort').daterangepicker();
 });
 </script>

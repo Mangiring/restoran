@@ -10,22 +10,23 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
-		$bulan = date('m');
-		$tahun = date('Y');
+		$from = date('Y-m-d', strtotime('-1 month'));
+		$to = date('Y-m-d');
+		
 		if ($_POST) {
 			$sort = $this -> input -> post('sort');
 			if ($sort) {
 				$sort = explode('/',$sort);
-				$bulan = $sort[0];
-				$tahun = $sort[1];
+				$from = date('Y-m-d',strtotime($sort[0]));
+				$to = date('Y-m-d',strtotime($sort[1]));
 			}
 		}
-		$view['peti_cash'] = $this -> report_peti_cash_model -> __get_peti_cash($bulan,$tahun);
-		$view['kasbesar'] = $this -> report_peti_cash_model -> get_kas_besar($bulan,$tahun);
-		$view['kaskecil'] = $this -> report_peti_cash_model -> get_kas_kecil($bulan,$tahun);
-		$view['operasional'] = $this -> report_peti_cash_model -> get_biaya_semua($bulan,$tahun);
-		$view['bulan'] = $bulan;
-		$view['tahun'] = $tahun;
+		$view['peti_cash'] = $this -> report_peti_cash_model -> __get_peti_cash($from,$to);
+		$view['kasbesar'] = $this -> report_peti_cash_model -> get_kas_besar($from,$to);
+		$view['kaskecil'] = $this -> report_peti_cash_model -> get_kas_kecil($from,$to);
+		$view['operasional'] = $this -> report_peti_cash_model -> get_biaya_semua($from,$to);
+		$view['from'] = $from;
+		$view['to'] = $to;
 		$this->load->view('report_peti_cash', $view);
 	}
 }
