@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="<?php echo site_url('application/views/img/favicon.png'); ?>">
+    <link rel="shortcut icon" href="<?php echo site_url('application/views/img/favicon.ico'); ?>">
     <title>Restoran Sehat Bersama</title>
     <!-- Bootstrap CSS -->    
     <link href="<?php echo site_url('application/views/css/bootstrap.min.css'); ?>" rel="stylesheet">
