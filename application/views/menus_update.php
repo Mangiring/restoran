@@ -36,6 +36,12 @@
                                       </div>
                                   </div>
                                   <div class="form-group">
+                                      <label class="col-lg-2 control-label">Harga</label>
+                                      <div class="col-lg-10">
+                                          <input type="text" onkeyup="formatharga(this.value,this)" name="price" class="form-control" value="<?php echo __get_rupiah($detail[0] -> mharga,2); ?>">
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
                                       <label class="col-lg-2 control-label">Discount</label>
                                       <div class="col-lg-1">
                                           <input type="number" name="disc" class="form-control" value="<?php echo $detail[0] -> mdisc; ?>">

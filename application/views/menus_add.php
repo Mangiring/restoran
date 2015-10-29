@@ -35,6 +35,12 @@
                                       </div>
                                   </div>
                                   <div class="form-group">
+                                      <label class="col-lg-2 control-label">Harga</label>
+                                      <div class="col-lg-10">
+                                          <input type="text" onkeyup="formatharga(this.value,this)" value="0" name="price" class="form-control">
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
                                       <label class="col-lg-2 control-label">Discount</label>
                                       <div class="col-lg-1">
                                           <input type="number" name="disc" class="form-control">

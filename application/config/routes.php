@@ -72,6 +72,7 @@ $route['peti_cash/peti_cash_update/?(:num)?'] = 'peti_cash/home/peti_cash_update
 $route['peti_cash/peti_cash_delete/(:num)'] = 'peti_cash/home/peti_cash_delete/$1';
 
 $route['report_peti_cash/?(:num)?'] = 'report_peti_cash/home/index/$1';
+$route['report_transaction/?(:num)?'] = 'report_transaction/home/index/$1';
 
 $route['wishlist/?(:num)?'] = 'wishlist/home/index/$1';
 $route['wishlist/wishlist_add/?(:num)?'] = 'wishlist/home/wishlist_add/$1';

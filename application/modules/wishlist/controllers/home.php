@@ -159,12 +159,9 @@ class Home extends MY_Controller {
 	function wishlist_add($id) {
 		if ($_POST) {
 			$wname = $this -> input -> post('wname', TRUE);
-			$wdt=$this -> input -> post('wdate', TRUE);
-			$wdatex = explode('/',$wdt);
-			$wdate=$wdatex[2].'-'.$wdatex[1].'-'.$wdatex[0];
-		
 			$jumt=count($_POST['mid']);	
 			$hargax=0;
+			
 			if($jumt>0){
 				for($j=0;$j<$jumt;$j++){	
 					$mids = explode("-",$_POST['mid'][$j]);
@@ -176,7 +173,7 @@ class Home extends MY_Controller {
 					$this -> wishlist_model -> __insert_wishlist_detail($arr);
 				}
 				
-				$dtx=array('wtotal'=>$hargax,'wdis'=>'','wtotalall'=>$hargax,'wdate'=>$wdate,'wstatus'=>1);	
+				$dtx=array('wtotal'=>$hargax,'wdis'=>'','wtotalall'=>$hargax,'wdate'=>date('Y-m-d H:i:s'),'wstatus'=>1);	
 				$this -> wishlist_model -> __update_wishlist($id,$dtx);
 				
 			}	
@@ -190,10 +187,10 @@ class Home extends MY_Controller {
 
 		}
 		else {
-		$pager = $this -> pagination_lib -> pagination($this -> menus_model -> __get_menus(),3,10,site_url('menus'));
-		$view['menus'] = $this -> pagination_lib -> paginate();
-		$view['pages'] = $this -> pagination_lib -> pages();
-		$this->load->view('wishlist_add', $view,FALSE);
+			$pager = $this -> pagination_lib -> pagination($this -> menus_model -> __get_menus(),3,50,site_url('menus'));
+			$view['menus'] = $this -> pagination_lib -> paginate();
+			$view['pages'] = $this -> pagination_lib -> pages();
+			$this->load->view('wishlist_add', $view,FALSE);
 		}
 	}
 

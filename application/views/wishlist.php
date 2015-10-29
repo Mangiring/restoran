@@ -80,7 +80,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		  <tr><th>Nama</th><th>
 		  <input type=text name="wname" class="form-control" value="<?php echo $wname; ?>" ></th></tr>
           <tr><th>Person</th><th>
-		  <input type=text class="form-control" name="person" value="<?php echo $person; ?>" ></th></tr>
+		  <input type=number class="form-control" name="person" value="<?php echo $person; ?>" ></th></tr>
           <th>Status</th><th><?php echo __get_status($wstatus,1); ?></th></tr>
                                 </tr>
 								

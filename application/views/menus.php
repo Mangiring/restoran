@@ -25,6 +25,7 @@
                                 <tr>
           <th>Category</th>
           <th>Name</th>
+          <th>Harga</th>
           <th>Discount</th>
           <th>Description</th>
           <th>Status</th>
@@ -38,6 +39,7 @@
                                         <tr>
           <td><?php echo $v -> cname; ?></td>
           <td><?php echo $v -> mname; ?></td>
+          <td><?php echo __get_rupiah($v -> mharga,1); ?></td>
           <td><?php echo $v -> mdisc; ?>%</td>
           <td><?php echo substr($v -> mdesc,0,150); ?></td>
           <td><?php echo __get_status($v -> mstatus,1); ?></td>

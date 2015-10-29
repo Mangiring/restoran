@@ -24,14 +24,15 @@ class Home extends MY_Controller {
 			$cid = $this -> input -> post('cid', TRUE);
 			$desc = $this -> input -> post('desc', TRUE);
 			$disc = $this -> input -> post('disc', TRUE);
+			$price = str_replace(',','',$this -> input -> post('price', TRUE));
 			$status = (int) $this -> input -> post('status');
 			
-			if (!$name || !$desc) {
+			if (!$name || !$desc || !$price) {
 				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 				redirect(site_url('menus' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('mcid' => $cid, 'mname' => $name, 'mdesc' => $desc, 'mdisc' => $disc, 'mstatus' => $status);
+				$arr = array('mcid' => $cid, 'mname' => $name, 'mdesc' => $desc, 'mdisc' => $disc, 'mharga' => $price, 'mstatus' => $status);
 				if ($this -> menus_model -> __insert_menus($arr)) {
 					$arr = $this -> menus_model -> __get_suggestion();
 					$this -> memcachedlib -> __regenerate_cache('__menus_suggestion', $arr, $_SERVER['REQUEST_TIME']+60*60*24*100);
@@ -56,16 +57,17 @@ class Home extends MY_Controller {
 			$cid = $this -> input -> post('cid', TRUE);
 			$desc = $this -> input -> post('desc', TRUE);
 			$disc = $this -> input -> post('disc', TRUE);
+			$price = str_replace(',','',$this -> input -> post('price', TRUE));
 			$status = (int) $this -> input -> post('status');
 			$id = (int) $this -> input -> post('id');
 			
 			if ($id) {
-				if (!$name || !$desc) {
+				if (!$name || !$desc || !$price) {
 					__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 					redirect(site_url('menus' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('mcid' => $cid, 'mname' => $name, 'mdesc' => $desc, 'mdisc' => $disc, 'mstatus' => $status);
+					$arr = array('mcid' => $cid, 'mname' => $name, 'mdesc' => $desc, 'mdisc' => $disc, 'mharga' => $price, 'mstatus' => $status);
 					if ($this -> menus_model -> __update_menus($id, $arr)) {	
 						$arr = $this -> menus_model -> __get_suggestion();
 						$this -> memcachedlib -> __regenerate_cache('__menus_suggestion', $arr, $_SERVER['REQUEST_TIME']+60*60*24*100);

@@ -17,7 +17,7 @@ class Home extends MY_Controller {
 			if ($sort) {
 				$sort = explode('/',$sort);
 				$bulan = $sort[0];
-				$tahun = $sort[0];
+				$tahun = $sort[1];
 			}
 		}
 		$view['peti_cash'] = $this -> report_peti_cash_model -> __get_peti_cash($bulan,$tahun);
