@@ -6,10 +6,10 @@
           <section class="wrapper">
 		  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="icon_calculator_alt"></i> Report Peti Cash</h3>
+					<h3 class="page-header"><i class="icon_pushpin"></i> Report Opname</h3>
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="./">Home</a></li>
-						<li><i class="icon_calculator_alt"></i>Report Peti Cash</li>
+						<li><i class="icon_pushpin"></i>Report Opname</li>
 					</ol>
 				</div>
 			</div>
@@ -29,7 +29,7 @@
 	<?php echo __get_error_msg(); ?>
                       <section class="panel">
                           <header class="panel-heading">
-                              List Transaction - <?php echo __get_date(strtotime($from),1); ?> <?php echo __get_date(strtotime($to),1); ?>
+                              List Opname - <?php echo __get_date(strtotime($from),1); ?> <?php echo __get_date(strtotime($to),1); ?>
                           </header>
                           <div class="table-responsive">
                             <table class="table">
@@ -37,50 +37,42 @@
                                 <tr>
           <th>Date</th>
           <th>Time</th>
+          <th>Raw Material</th>
+          <th>Stock Begining</th>
+          <th>Stock In</th>
+          <th>Stock Out</th>
+          <th>Stock Final</th>
+          <th>Adjust (-)</th>
+          <th>Adjust (+)</th>
           <th>Description</th>
-          <th>Debit</th>
-          <th>Credit</th>
-          <th>Balance</th>
                                 </tr>
                               </thead>
                               <tbody>
 		  <?php
-$tgl = '';
-		  foreach($peti_cash as $k => $v) :
+		  $tgl = '';
+		  foreach($report_opname as $k => $v) :
 		  ?>
                                         <tr>
 <td>
 <?php
-$date = date('Y-m-d',$v -> pdate);
+$date = date('Y-m-d',$v -> odate);
 if($tgl <> $date){
 	$tgl = $date;
 	echo __get_date(strtotime($tgl),1);
 }
 ?></td>
-          <td><?php echo date('H:i',$v -> pdate); ?></td>
-          <td><?php echo $v -> pdesc; ?></td>
-			<?php if ($v -> ptype == 1) : ?>
-			<td><?php echo __get_rupiah($v -> pnominal,1); ?></td>
-			<td>-</td>
-			<?php else : ?>
-			<td>-</td>
-			<td><?php echo __get_rupiah($v -> pnominal,1); ?></td>
-			<?php endif; ?>
-          <td><?php echo __get_rupiah($v -> psaldo,1); ?></td>
+          <td><?php echo date('H:i',$v -> odate); ?></td>
+          <td><?php echo $v -> rname; ?></td>
+          <td><?php echo $v -> ostockbegining; ?></td>
+          <td><?php echo $v -> ostockin; ?></td>
+          <td><?php echo $v -> ostockout; ?></td>
+          <td><?php echo $v -> ostock; ?></td>
+          <td><?php echo $v -> oadjustmin; ?></td>
+          <td><?php echo $v -> oadjustplus; ?></td>
+          <td><?php echo $v -> odesc; ?></td>
 										</tr>
         <?php endforeach; ?>
                               </tbody>
-                              <tfoot>
-                              <tr>
-                              <td></td><td></td><td><b>Kas Besar:</b></td><td></td><td><b><?php echo __get_rupiah($kasbesar[0] -> total,1);?></b></td>
-                              </tr>
-                              <tr>
-                              <td></td><td></td><td><b>Kas Kecil:</b></td><td></td><td><b><?php echo __get_rupiah($kaskecil[0] -> total,1);?></b></td>
-                              </tr>
-                              <tr>
-                              <td></td><td></td><td><b>Biaya Operasional:</b></td><td></td><td><b><?php echo __get_rupiah($operasional[0] -> total,1);?></b></td>
-                              </tr>
-                              </tfoot>
                             </table>
                           </div>
                       </section>

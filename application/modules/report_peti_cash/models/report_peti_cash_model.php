@@ -8,6 +8,7 @@ class Report_peti_cash_model extends CI_Model {
 		$this -> db -> select("* FROM peticash_tab WHERE pstatus=1 AND DATE(FROM_UNIXTIME( pdate,  '%Y-%m-%d' ))>='".$from."' AND DATE(FROM_UNIXTIME( pdate,  '%Y-%m-%d' ))<='".$to."' ORDER BY pid DESC", FALSE);
 		return $this -> db -> get() -> result();
 	}
+	
 	function get_kas_besar($from,$to) {
 		$this -> db -> select("sum(pnominal) as total from peticash_tab where pstatus=1 AND ptype=1 and DATE(FROM_UNIXTIME( pdate,  '%Y-%m-%d' ))>='".$from."' and DATE(FROM_UNIXTIME( pdate,  '%Y-%m-%d' ))<='".$to."'", FALSE);
 		return $this -> db -> get() -> result();

@@ -73,6 +73,7 @@ $route['peti_cash/peti_cash_delete/(:num)'] = 'peti_cash/home/peti_cash_delete/$
 
 $route['report_peti_cash/?(:num)?'] = 'report_peti_cash/home/index/$1';
 $route['report_transaction/?(:num)?'] = 'report_transaction/home/index/$1';
+$route['report_opname/?(:num)?'] = 'report_opname/home/index/$1';
 
 $route['wishlist/?(:num)?'] = 'wishlist/home/index/$1';
 $route['wishlist/wishlist_add/?(:num)?'] = 'wishlist/home/wishlist_add/$1';
@@ -100,6 +101,10 @@ $route['raw_material/raw_material_delete/(:num)'] = 'raw_material/home/raw_mater
 $route['raw_material/get_suggestion'] = 'raw_material/home/get_suggestion';
 $route['raw_material/raw_material_search'] = 'raw_material/home/raw_material_search';
 $route['raw_material/raw_material_search_result/(:any)'] = 'raw_material/home/raw_material_search_result/$1';
+
+$route['inventory/?(:num)?'] = 'inventory/home/index/$1';
+$route['opname/?(:num)?'] = 'opname/home/index/$1';
+$route['opname/opname_adjust/?(:num)?'] = 'opname/home/opname_adjust/$1';
 
 $route['tables/?(:num)?'] = 'tables/home/index/$1';
 $route['tables/tables_add'] = 'tables/home/tables_add';

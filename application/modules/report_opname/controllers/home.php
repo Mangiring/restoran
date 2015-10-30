@@ -6,7 +6,8 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Home extends MY_Controller {
 	function __construct() {
 		parent::__construct();
-		$this -> load -> model('report_peti_cash_model');
+		$this -> load -> library('pagination_lib');
+		$this -> load -> model('reportopname_model');
 	}
 
 	function index() {
@@ -22,12 +23,9 @@ class Home extends MY_Controller {
 			}
 		}
 		
-		$view['peti_cash'] = $this -> report_peti_cash_model -> __get_peti_cash($from,$to);
-		$view['kasbesar'] = $this -> report_peti_cash_model -> get_kas_besar($from,$to);
-		$view['kaskecil'] = $this -> report_peti_cash_model -> get_kas_kecil($from,$to);
-		$view['operasional'] = $this -> report_peti_cash_model -> get_biaya_semua($from,$to);
+		$view['report_opname'] = $this -> reportopname_model -> __get_reportopname($from,$to);
 		$view['from'] = $from;
 		$view['to'] = $to;
-		$this->load->view('report_peti_cash', $view);
+		$this->load->view('report_opname', $view);
 	}
 }

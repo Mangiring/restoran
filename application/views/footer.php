@@ -110,13 +110,13 @@ $(document).ready(function(){
 	else if (/\/menus|categories|raw_material|tables|categories_tables/.test(window.location.href) === true) {
 		$('li.shmaster > ul.sub').css({'display': 'block', 'overflow': 'hidden'});
 	}
-	else if (/\/inventory|receiving|opname/.test(window.location.href) === true) {
+	else if (/\/(inventory|receiving|opname)/.test(window.location.href) === true) {
 		$('li.shstock > ul.sub').css({'display': 'block', 'overflow': 'hidden'});
 	}
 	else if (/\/wishlist/.test(window.location.href) === true) {
 		$('li.shorder > ul.sub').css({'display': 'block', 'overflow': 'hidden'});
 	}
-	else if (/\/report_transaction|report_stock|report_opname|report_peti_cash/.test(window.location.href) === true) {
+	else if (/\/report_transaction|report_opname|report_peti_cash/.test(window.location.href) === true) {
 		$('li.shreport > ul.sub').css({'display': 'block', 'overflow': 'hidden'});
 	}
 });

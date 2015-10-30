@@ -1894,6 +1894,7 @@ fieldset[disabled] .btn-default.active {
   border-color: #ff2d55;
   width:100px;
   padding:10px;
+  font-size:16px!important;
 }
 .btn-primaryx {
   color: #ffffff;
@@ -1901,6 +1902,7 @@ fieldset[disabled] .btn-default.active {
   border-color: #007aff; 
   width:100px;
   padding:10px;
+  font-size:16px!important;
 }
 .btn-primary {
   color: #ffffff;

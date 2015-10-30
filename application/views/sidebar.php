@@ -59,8 +59,7 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="<?php echo site_url('report_transaction'); ?>"><i class="icon_grid-3x3"></i>Transaction</a></li>                          
-                          <li><a class="" href="<?php echo site_url('report_stock'); ?>"><i class="icon_archive_alt"></i>Stock</a></li>
+                          <li><a class="" href="<?php echo site_url('report_transaction'); ?>"><i class="icon_grid-3x3"></i>Transaction</a></li>
                           <li><a class="" href="<?php echo site_url('report_opname'); ?>"><i class="icon_pushpin"></i>Opname</a></li>
                           <li><a class="" href="<?php echo site_url('report_peti_cash'); ?>"><i class="icon_calculator_alt"></i>Peti Cash</a></li>
                       </ul>
