@@ -52,7 +52,8 @@
 		  $b= $d%4;
 		  if( $v -> tstatus=='3') { $btnx="btn btn-dangerx"; $st="Ada";
 		  $link=site_url('wishlist/home/billing_list/' . $v -> tid);
-		  }else{$btnx="btn btn-primaryx";$link=""; $st="Kosong"; $v -> wname="-";}
+		  }else{$btnx="btn btn-primaryx";$link=""; $st="Kosong"; $v -> wname="-";
+		  $v -> person="-";}
 		  ?>
              <tr><td><?=$v -> wname;?></td><td><?=$v -> person;?></td><td><?=$st;?></td><td> <a class="<?=$btnx;?>"  href="<?php echo $link; ?>"><?php echo $v -> tname;?></a></td></tr>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
