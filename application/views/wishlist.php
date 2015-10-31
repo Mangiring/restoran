@@ -64,6 +64,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 									  $tname=$v -> tname;
 									  $person=$v -> person;
 									  $notes=$v -> wnotes;
+									  $note=$v -> wnote;
 								  }
 							$wcount= count($wishlist);
 							if($wcount==0){
@@ -73,6 +74,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 									  $tname="";
 									  $person="";
 									  $notes="";
+									  $note="";
 								
 							}
 							//if($wcount>0){  
@@ -99,11 +101,12 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
                             <table class="table">
                               <thead>
                                 <tr>
-          <th>Menu</th>
+          <th>Menu</th>		  
 		  <th>Qty</th>
          <th>Harga</th>
 		 <th>Total</th>
           <th>Status</th>
+		  <th>Notes</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -120,6 +123,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		  <td><input type=hidden name="wdid[]" value="<?php echo $v -> wdid; ?>" >
 		  <input type=hidden name="harga[]" value="<?php echo $v -> wharga; ?>" >
 		  <?php echo $v -> mname; ?></td>
+		  
 		  <td><select name="qty[]" class="form-control">
 		  <option><?php echo $v -> wqty;?></option>
 		  <?php for($i=1;$i<30;$i++){ ?>
@@ -135,7 +139,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		<td><?php echo __get_rupiah($total,1); ?></td>
           <td><?php echo __get_status($v -> wstatus,1); ?></td>
 		  <td>
-              &nbsp;
+              <textarea class="form-control" name="note[]"><?php echo $v->wnote; ?></textarea >
           </td>
 										</tr>
         <?php endforeach; ?>
@@ -144,6 +148,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		<tr><td>
                                         <button type="submit" class="btn btn-primary"> <i class="fa fa-save"></i> Submit</button>
 										<a href="<?php echo site_url('wishlist/home/wishlist_cancel/'.$id.'/'.$wtid); ?>" class="btn btn-danger">Cancel</a>
+										<a target=blank href="<?php echo site_url('wishlist/home/wishlist_print/'.$id.'/'.$wtid); ?>" class="btn btn-primary">Print</a>
 										<button class="btn btn-default" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
 		</td><td></td><td></td><td><?=$t;?></td></tr>
                             </table>							

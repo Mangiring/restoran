@@ -148,11 +148,16 @@ class Home extends MY_Controller {
 					$wdid = $_POST['wdid'][$j];
 					$wqty = $_POST['qty'][$j];
 					$wharga = $_POST['harga'][$j];
+					$wnote = $_POST['note'][$j];
+					//$wnote=$this -> input -> post('note[]', TRUE);
+					//echo $wnote;
+					//echo $wnotes;
 					$dta=array('wname'=>$wname,'person'=>$person,'wnotes'=>$wnotes);
 					$this -> wishlist_model -> __update_wishlist($id,$dta);
-					$dtx=array('wharga'=>$wharga,'wqty'=>$wqty,'wstatus'=>1,'wupdateby'=>$uid,'wudate'=>date('Y-m-d h:i:s'));	
+					$dtx=array('wharga'=>$wharga,'wqty'=>$wqty,'wstatus'=>1,'wnote'=>$wnote,'wupdateby'=>$uid,'wudate'=>date('Y-m-d h:i:s'));	
 					$this -> wishlist_model -> __update_wishlist_detail($wdid,$dtx);
 				}
+				//die;
 				__set_error_msg(array('error' => 'Data berhasil di simpan'));
 				redirect(site_url('wishlist'));
 			}
@@ -168,6 +173,19 @@ class Home extends MY_Controller {
 		$this->load->view('wishlist', $view);
 	}	
 	
+	function wishlist_print($id,$wtid){
+		
+			$pager = $this -> pagination_lib -> pagination($this -> wishlist_model -> __get_wishlistx($id),3,10,site_url('wishlist/home/wishlist_list/'.$id.'/'.$wtid));
+		$view['wishlist'] = $this -> pagination_lib -> paginate();
+		$view['pages'] = $this -> pagination_lib -> pages();
+		$view['id']=$id;
+		$view['wtid']=$wtid;
+		
+		// print_r($view);die;
+		$this->load->view('wishlist_print', $view,FALSE);	
+		
+		
+	}
 	
 	function wishlist_cancel($id,$wtid) {
 		$this -> wishlist_model -> __cancel_wishlist($id);
