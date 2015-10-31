@@ -71,6 +71,13 @@ $route['peti_cash/peti_cash_add'] = 'peti_cash/home/peti_cash_add';
 $route['peti_cash/peti_cash_update/?(:num)?'] = 'peti_cash/home/peti_cash_update/$1';
 $route['peti_cash/peti_cash_delete/(:num)'] = 'peti_cash/home/peti_cash_delete/$1';
 
+$route['itemreceiving/?(:num)?'] = 'itemreceiving/home/index/$1';
+$route['itemreceiving/itemreceiving_add'] = 'itemreceiving/home/itemreceiving_add';
+$route['itemreceiving/itemreceiving_update/?(:num)?'] = 'itemreceiving/home/itemreceiving_update/$1';
+$route['itemreceiving/itemreceiving_delete/(:num)'] = 'itemreceiving/home/itemreceiving_delete/$1';
+$route['itemreceiving/receiving_list/(:num)'] = 'itemreceiving/home/receiving_list/$1';
+$route['itemreceiving/receiving_rawmaterial_add/(:num)'] = 'itemreceiving/home/receiving_rawmaterial_add/$1';
+
 $route['report_peti_cash/?(:num)?'] = 'report_peti_cash/home/index/$1';
 $route['report_transaction/?(:num)?'] = 'report_transaction/home/index/$1';
 $route['report_opname/?(:num)?'] = 'report_opname/home/index/$1';
@@ -105,6 +112,9 @@ $route['raw_material/raw_material_search_result/(:any)'] = 'raw_material/home/ra
 $route['inventory/?(:num)?'] = 'inventory/home/index/$1';
 $route['opname/?(:num)?'] = 'opname/home/index/$1';
 $route['opname/opname_adjust/?(:num)?'] = 'opname/home/opname_adjust/$1';
+
+$route['itemout/?(:num)?'] = 'itemout/home/index/$1';
+$route['itemout/itemout_adjust/?(:num)?'] = 'itemout/home/itemout_adjust/$1';
 
 $route['tables/?(:num)?'] = 'tables/home/index/$1';
 $route['tables/tables_add'] = 'tables/home/tables_add';

@@ -31,7 +31,8 @@
                       </a>
                       <ul class="sub">
                           <li><a class="" href="<?php echo site_url('inventory'); ?>"><i class="icon_archive_alt"></i>Inventory</a></li>                          
-                          <li><a class="" href="<?php echo site_url('wishlist'); ?>"><i class="icon_cloud-download"></i>Item Receiving</a></li>
+                          <li><a class="" href="<?php echo site_url('itemreceiving'); ?>"><i class="icon_cloud-download"></i>Item Receiving</a></li>
+                          <li><a class="" href="<?php echo site_url('itemout'); ?>"><i class="icon_cloud-upload"></i>Item Out</a></li>
                           <li><a class="" href="<?php echo site_url('opname'); ?>"><i class="icon_pushpin"></i>Opname</a></li>
                       </ul>
                   </li>

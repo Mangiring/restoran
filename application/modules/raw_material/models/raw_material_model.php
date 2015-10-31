@@ -7,6 +7,11 @@ class Raw_material_model extends CI_Model {
 	function __get_raw_material() {
 		return 'SELECT * FROM raw_material_tab WHERE (rstatus=1 OR rstatus=0) ORDER BY rid DESC';
 	}
+
+	function __get_raw_material_by_id($ids) {
+		$this -> db -> select("rid,rname,rdesc FROM raw_material_tab WHERE (rstatus=1 OR rstatus=0) AND rid IN (".$ids.") ORDER BY rid DESC", FALSE);
+		return $this -> db -> get() -> result();
+	}
 	
 	function __get_raw_material_search($keyword) {
 		return "SELECT * FROM raw_material_tab WHERE (rstatus=1 OR rstatus=0) AND (rname LIKE '%".$keyword."%' OR rdesc LIKE '%".$keyword."%') ORDER BY rid DESC";
