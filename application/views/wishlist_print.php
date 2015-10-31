@@ -1,3 +1,29 @@
+
+<style type="text/css">
+table.gridtable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+</style>
+
 <link rel="stylesheet" 
 href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>" />
 		<script src="<?php echo site_url('application/views/assets/colorbox/jquery.min.js'); ?>"></script>
@@ -30,30 +56,19 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 	<!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-		  <div class="row">
-				<div class="col-lg-12">
-					<h3 class="page-header"><i class="icon_cart"></i> Wishlist</h3>
-					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="./">Home</a></li>
-						<li><i class="icon_cart"></i>Wishlist</li>
-					</ol>
-				</div>
-			</div>
+	
               <!-- page start-->
               <div class="row">
                   <div class="col-lg-12">
-	<?php echo __get_error_msg(); ?>
-					<h3 class="box-title" style="margin-top:0;"><a id="iframe" href="<?php echo site_url('wishlist/home/wishlist_add/'.$id); ?>" class="btn btn-default"><i class="fa fa-plus"></i> Add Menu</a></h3>
+
                       <section class="panel">
                           <header class="panel-heading">
                               Wishlist Menu
                           </header>
-						  <!--p><a id='iframe' href="../../../application/views/jquery.min.js">Outside Webpage (Iframe)</a></p-->
-						  	<!--p><a id='iframe' href="application/views/jquery.min.js">Outside Webpage (Iframe)</a></p>
-							<p><a id='iframe' href="application/views/jquery.min.js">Outside Webpage (Iframe2)</a></p-->
+						
                           <div class="table-responsive">
-						  <form method=POST >
-                            <table class="table">
+						
+                            <table  class="gridtable" >
                               <thead>
 						<?php			
 //print_r($wtid);						
@@ -79,34 +94,28 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 							}
 							//if($wcount>0){  
 						?>
-                                <tr>
-          <th>Meja</th><th><?php echo $tname; ?></th></tr>
+                               
+          <tr><th>Meja</th><th><?php echo $tname; ?></th></tr>
 		  <tr><th>Nama</th><th>
-		  <input type=text name="wname" class="form-control" value="<?php echo $wname; ?>" ></th></tr>
+		  <?php echo $wname; ?></th></tr>
           <tr><th>Person</th><th>
-		  <input type=number class="form-control" name="person" value="<?php echo $person; ?>" ></th></tr>
-		  <!--tr><th valign=top >Notes</th><th>
-		  <textarea class="form-control" name="notes"><?php echo $notes; ?></textarea ></th></tr-->
-		  <input type=hidden name="notes">
-          <th>Status</th><th><?php echo __get_status($wstatus,1); ?></th></tr>
-                                </tr>
+		  <?php echo $person; ?></th></tr>
+		  <tr><th valign=top >Notes</th><th>
+		  <?php echo $notes; ?></th></tr>
+         
+                               
 								
 							<?php //} ?>
                               </thead>
-                              <tbody>
-								  
-		  
-                              </tbody>
+                             
                             </table><br>
 							
-                            <table class="table">
+                           <table  class="gridtable" >
                               <thead>
                                 <tr>
           <th>Menu</th>		  
 		  <th>Qty</th>
-         <th>Harga</th>
-		 <th>Total</th>
-          <th>Status</th>
+
 		  <th>Notes</th>
                                 </tr>
                               </thead>
@@ -125,33 +134,20 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		  <input type=hidden name="harga[]" value="<?php echo $v -> wharga; ?>" >
 		  <?php echo $v -> mname; ?></td>
 		  
-		  <td><select name="qty[]" class="form-control">
-		  <option><?php echo $v -> wqty;?></option>
-		  <?php for($i=1;$i<30;$i++){ ?>
-		  <option><?=$i;?></option>
-		  <?php } ?>
-		  <option>0</option>
-		  </select></td>
+		  <td> <?php echo $v -> wqty;?></td>
         <!--td><?php //echo $v -> wqty; ?></td-->
-		<td><?php echo __get_rupiah($v -> wharga,1);
-		$total=$v -> wqty * $v -> wharga;
-		$t=$total+$t;
-		?></td>
-		<td><?php echo __get_rupiah($total,1); ?></td>
-          <td><?php echo __get_status($v -> wstatus,1); ?></td>
+
 		  <td>
-              <textarea class="form-control" name="note[]"><?php echo $v->wnote; ?></textarea >
+         <?php echo $v->wnote; ?>
           </td>
 										</tr>
-        <?php endforeach; ?>
+        <?php 
+		$t=$t+$v -> wqty;
+		
+		endforeach; ?>
 		
                               </tbody>
-		<tr><td>
-                                        <button type="submit" class="btn btn-primary"> <i class="fa fa-save"></i> Submit</button>
-										<a href="<?php echo site_url('wishlist/home/wishlist_cancel/'.$id.'/'.$wtid); ?>" class="btn btn-danger">Cancel</a>
-										<a target=blank href="<?php echo site_url('wishlist/home/wishlist_print/'.$id.'/'.$wtid); ?>" class="btn btn-primary">Print</a>
-										<button class="btn btn-default" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
-		</td><td></td><td></td><td><?=$t;?></td></tr>
+		<tr><td>Total </td><td><?=$t;?></td><td></td></tr>
                             </table>							
 							
 			</form>				
