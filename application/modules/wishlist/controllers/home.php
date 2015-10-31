@@ -64,6 +64,7 @@ class Home extends MY_Controller {
 		//$person = $_POST['person'];
 		$discc = $_POST['discc'];
 		$wppn = $_POST['ppn'];
+		$wpayment = $_POST['wpayment'];
 		$t=0;
 		$jwdid= count($_POST['wdid']);	
 			$hargax=0;
@@ -82,9 +83,10 @@ class Home extends MY_Controller {
 				}
 				$wtotal=$t;
 				$tall=$t-($t*$discc/100)+($t*$wppn/100);
+				$wbackpayment=$wpayment-$tall;
 			}
 			
-			$dta=array('wtotal'=>$wtotal,'wppn'=>$wppn,'wdis'=>$discc,'wtotalall'=>$tall,'bupdateby'=>$uid,'budate'=>date('Y-m-d h:i:s'));
+			$dta=array('wtotal'=>$wtotal,'wppn'=>$wppn,'wdis'=>$discc,'wtotalall'=>$tall,'wpayment'=>$wpayment,'wbackpayment'=>$wbackpayment,'bupdateby'=>$uid,'budate'=>date('Y-m-d h:i:s'));
 				if($this -> wishlist_model -> __update_wishlist($id,$dta)){
 				__set_error_msg(array('error' => 'Data berhasil di simpan'));
 				redirect(site_url('wishlist/home/wishlist_list2/'.$id));
@@ -132,6 +134,7 @@ class Home extends MY_Controller {
 			$person = $this -> input -> post('person', TRUE);
 			$jwdid=count($this -> input -> post('wdid', TRUE));	
 			$hargax=0;
+			$wnotes = $this -> input -> post('notes', TRUE);
 			
 			if (!$wname || !$person) {
 				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
@@ -145,7 +148,7 @@ class Home extends MY_Controller {
 					$wdid = $_POST['wdid'][$j];
 					$wqty = $_POST['qty'][$j];
 					$wharga = $_POST['harga'][$j];
-					$dta=array('wname'=>$wname,'person'=>$person);
+					$dta=array('wname'=>$wname,'person'=>$person,'wnotes'=>$wnotes);
 					$this -> wishlist_model -> __update_wishlist($id,$dta);
 					$dtx=array('wharga'=>$wharga,'wqty'=>$wqty,'wstatus'=>1,'wupdateby'=>$uid,'wudate'=>date('Y-m-d h:i:s'));	
 					$this -> wishlist_model -> __update_wishlist_detail($wdid,$dtx);
@@ -178,6 +181,7 @@ class Home extends MY_Controller {
 		$uid=$this->memcachedlib->sesresult['uid'];
 		if ($_POST) {
 			$wname = $this -> input -> post('wname', TRUE);
+			
 			$jumt=count($_POST['mid']);	
 			$hargax=0;
 			$uid=$this->memcachedlib->sesresult['uid'];

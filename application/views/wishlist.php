@@ -63,6 +63,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 									  $wtid=$wtid;
 									  $tname=$v -> tname;
 									  $person=$v -> person;
+									  $notes=$v -> wnotes;
 								  }
 							$wcount= count($wishlist);
 							if($wcount==0){
@@ -71,6 +72,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 									  //$wtid="";
 									  $tname="";
 									  $person="";
+									  $notes="";
 								
 							}
 							//if($wcount>0){  
@@ -81,6 +83,8 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		  <input type=text name="wname" class="form-control" value="<?php echo $wname; ?>" ></th></tr>
           <tr><th>Person</th><th>
 		  <input type=number class="form-control" name="person" value="<?php echo $person; ?>" ></th></tr>
+		  <tr><th valign=top >Notes</th><th>
+		  <textarea class="form-control" name="notes"><?php echo $notes; ?></textarea ></th></tr>
           <th>Status</th><th><?php echo __get_status($wstatus,1); ?></th></tr>
                                 </tr>
 								

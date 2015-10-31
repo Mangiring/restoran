@@ -41,6 +41,7 @@
           <th>Person</th>
           <th>Bruto</th>
           <th>Netto</th>
+		  <th>View</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -64,6 +65,7 @@ if($tgl <> $date){
           <td><?php echo $v -> person; ?></td>
 			<td><?php echo __get_rupiah($v -> wtotal,1); ?></td>
 			<td><?php echo __get_rupiah($v -> wtotalall,1); ?></td>
+			<td><a href="<?php echo site_url('report_transaction_detail/home/index/'.$v -> wid);?>">Detail</a></td>
 										</tr>
         <?php
         $total += $v -> wtotal;
