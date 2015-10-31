@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Inang: 127.0.0.1
--- Waktu pembuatan: 31 Okt 2015 pada 02.05
+-- Waktu pembuatan: 31 Okt 2015 pada 16.53
 -- Versi Server: 5.5.32
 -- Versi PHP: 5.4.16
 
@@ -145,14 +145,18 @@ CREATE TABLE IF NOT EXISTS `menus_tab` (
   `mharga` int(10) DEFAULT NULL,
   `mstatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`mid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data untuk tabel `menus_tab`
 --
 
 INSERT INTO `menus_tab` (`mid`, `mcid`, `mname`, `mdesc`, `mdisc`, `mharga`, `mstatus`) VALUES
-(1, 1, 'Nasi Goreng Pedas Asam Manis Bumbu Cabe', 'Nasi Goreng Pedas Asam Manis Bumbu Cabe', 10, 150000, 1);
+(1, 1, 'Nasi Goreng Pedas Asam Manis Bumbu Cabe', 'Nasi Goreng Pedas Asam Manis Bumbu Cabe', 10, 150000, 1),
+(2, 1, 'Pecel', 'Pecel', 5, 15000, 1),
+(3, 2, 'Soda Susu', 'minuman segar', 4, 3000, 1),
+(4, 2, 'Jus Buah', 'pizza', 5, 25000, 1),
+(5, 2, 'Teh Manis', 'teh manis', 0, 2000, 1);
 
 -- --------------------------------------------------------
 
@@ -280,8 +284,8 @@ INSERT INTO `tables_tab` (`tid`, `tcid`, `tname`, `tdesc`, `tstatus`) VALUES
 (2, 3, 'Table II', 'Table II', 1),
 (3, 3, 'Table III', 'Table III', 1),
 (4, 3, 'Table IV', 'Table IV', 1),
-(5, 4, 'Table I', 'Table I', 1),
-(6, 4, 'Table II', 'Table II', 3);
+(5, 4, 'Table I', 'Table I', 3),
+(6, 4, 'Table II', 'Table II', 1);
 
 -- --------------------------------------------------------
 
@@ -305,7 +309,7 @@ CREATE TABLE IF NOT EXISTS `users_tab` (
 --
 
 INSERT INTO `users_tab` (`uid`, `ugid`, `ubid`, `uemail`, `upass`, `ulastlogin`, `ustatus`) VALUES
-(1, 1, 1, 'root@restoran.com', 'e89591ee9b8e7018511649a2146ae279', '*1446253253', 1),
+(1, 1, 1, 'root@restoran.com', 'e89591ee9b8e7018511649a2146ae279', '*1446303862', 1),
 (2, 1, 1, 'palma@restoran.com', 'e89591ee9b8e7018511649a2146ae279', NULL, 1);
 
 -- --------------------------------------------------------
@@ -331,7 +335,7 @@ CREATE TABLE IF NOT EXISTS `wishlist_detail_tab` (
   `bcdate` datetime DEFAULT NULL,
   `budate` datetime DEFAULT NULL,
   PRIMARY KEY (`wdid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=85 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=90 ;
 
 --
 -- Dumping data untuk tabel `wishlist_detail_tab`
@@ -357,7 +361,12 @@ INSERT INTO `wishlist_detail_tab` (`wdid`, `wid`, `wmid`, `wqty`, `wdisc`, `whar
 (81, 55, 1, 1, 10, 150000, 1, 1, 1, '2015-10-31 00:24:32', '2015-10-31 00:33:39', NULL, 1, NULL, '2015-10-31 12:41:18'),
 (82, 52, 1, 1, 10, 150000, 1, 1, 1, '2015-10-31 01:05:19', '2015-10-31 01:15:01', NULL, NULL, NULL, NULL),
 (83, 56, 1, 2, 10, 150000, 1, 1, 1, '2015-10-31 01:19:16', '2015-10-31 01:19:25', NULL, 1, NULL, '2015-10-31 01:19:53'),
-(84, 53, 1, 3, 10, 150000, 1, 1, 1, '2015-10-31 01:54:25', '2015-10-31 01:54:34', NULL, NULL, NULL, NULL);
+(84, 53, 1, 3, 10, 150000, 1, 1, 1, '2015-10-31 01:54:25', '2015-10-31 01:54:34', NULL, NULL, NULL, NULL),
+(85, 57, 5, 2, 0, 2000, 1, 1, 1, '2015-10-31 12:33:38', '2015-10-31 12:33:57', NULL, 1, NULL, '2015-10-31 02:25:26'),
+(86, 57, 2, 2, 5, 15000, 1, 1, 1, '2015-10-31 12:33:38', '2015-10-31 12:33:57', NULL, 1, NULL, '2015-10-31 02:25:26'),
+(87, 57, 4, 1, 5, 25000, 1, 1, NULL, '2015-10-31 12:35:04', NULL, NULL, 1, NULL, '2015-10-31 02:25:26'),
+(88, 58, 5, 3, 0, 2000, 1, 1, 1, '2015-10-31 03:59:54', '2015-10-31 04:11:33', NULL, 1, NULL, '2015-10-31 04:51:09'),
+(89, 58, 2, 2, 5, 15000, 1, 1, 1, '2015-10-31 03:59:54', '2015-10-31 04:11:33', NULL, 1, NULL, '2015-10-31 04:51:09');
 
 -- --------------------------------------------------------
 
@@ -374,6 +383,8 @@ CREATE TABLE IF NOT EXISTS `wishlist_tab` (
   `wppn` double DEFAULT NULL,
   `wdis` double NOT NULL,
   `wtotalall` double NOT NULL,
+  `wpayment` double NOT NULL,
+  `wbackpayment` double NOT NULL,
   `wdate` datetime DEFAULT NULL,
   `wstatus` int(11) NOT NULL,
   `wcreateby` int(11) DEFAULT NULL,
@@ -384,27 +395,30 @@ CREATE TABLE IF NOT EXISTS `wishlist_tab` (
   `bupdateby` int(11) DEFAULT NULL,
   `bcdate` datetime DEFAULT NULL,
   `budate` datetime DEFAULT NULL,
+  `wnotes` text,
   PRIMARY KEY (`wid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=57 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=59 ;
 
 --
 -- Dumping data untuk tabel `wishlist_tab`
 --
 
-INSERT INTO `wishlist_tab` (`wid`, `wname`, `person`, `wtid`, `wtotal`, `wppn`, `wdis`, `wtotalall`, `wdate`, `wstatus`, `wcreateby`, `wupdateby`, `wcdate`, `wudate`, `bcreateby`, `bupdateby`, `bcdate`, `budate`) VALUES
-(44, 'Mona', 2, 4, 945000, 0, 0, 945000, '2015-10-23 00:00:00', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(45, 'Mona', 2, 1, 270000, 10, 10, 216000, '2015-10-23 00:00:00', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(46, 'Mona', 3, 1, 150000, NULL, 0, 150000, '2015-10-23 00:00:00', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(47, 'Mona', 3, 4, 405000, 3, 10, 352350, '2015-10-23 00:00:00', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(48, 'Mona', 2, 4, 150000, NULL, 0, 150000, '2015-10-23 00:00:00', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(49, 'Mona', 2, 4, 150000, NULL, 0, 150000, '2015-10-23 00:00:00', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(50, '', NULL, 3, 0, NULL, 0, 0, '2015-10-29 00:00:00', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(51, '', NULL, 2, 0, NULL, 0, 0, '2015-10-29 00:00:00', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(52, 'kk', 2, 1, 150000, NULL, 0, 150000, '2015-10-31 01:05:19', 3, NULL, 1, NULL, '2015-10-31 01:18:56', NULL, NULL, NULL, NULL),
-(53, 'saya', 5, 6, 150000, NULL, 0, 150000, '2015-10-31 01:54:26', 1, NULL, 1, NULL, '2015-10-31 01:54:26', NULL, NULL, NULL, NULL),
-(54, '', NULL, 4, 0, NULL, 0, 0, '2015-10-31 00:00:00', 3, NULL, 1, NULL, '2015-10-31 12:18:52', NULL, NULL, NULL, NULL),
-(55, 'jjj', 2, 4, 405000, 10, 3, 433350, '2015-10-31 00:24:32', 3, 1, 1, '2015-10-31 00:19:17', '2015-10-31 00:24:32', 1, 1, '2015-10-31 12:42:59', '2015-10-31 12:42:59'),
-(56, 'kkk', 3, 2, 270000, 10, 5, 283500, '2015-10-31 01:19:16', 3, 1, 1, '2015-10-31 01:19:09', '2015-10-31 01:19:16', 1, 1, '2015-10-31 01:20:59', '2015-10-31 01:20:59');
+INSERT INTO `wishlist_tab` (`wid`, `wname`, `person`, `wtid`, `wtotal`, `wppn`, `wdis`, `wtotalall`, `wpayment`, `wbackpayment`, `wdate`, `wstatus`, `wcreateby`, `wupdateby`, `wcdate`, `wudate`, `bcreateby`, `bupdateby`, `bcdate`, `budate`, `wnotes`) VALUES
+(44, 'Mona', 2, 4, 945000, 0, 0, 945000, 0, 0, '2015-10-23 00:00:00', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(45, 'Mona', 2, 1, 270000, 10, 10, 216000, 0, 0, '2015-10-23 00:00:00', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(46, 'Mona', 3, 1, 150000, NULL, 0, 150000, 0, 0, '2015-10-23 00:00:00', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(47, 'Mona', 3, 4, 405000, 3, 10, 352350, 0, 0, '2015-10-23 00:00:00', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(48, 'Mona', 2, 4, 150000, NULL, 0, 150000, 0, 0, '2015-10-23 00:00:00', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(49, 'Mona', 2, 4, 150000, NULL, 0, 150000, 0, 0, '2015-10-23 00:00:00', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(50, '', NULL, 3, 0, NULL, 0, 0, 0, 0, '2015-10-29 00:00:00', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(51, '', NULL, 2, 0, NULL, 0, 0, 0, 0, '2015-10-29 00:00:00', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(52, 'kk', 2, 1, 150000, NULL, 0, 150000, 0, 0, '2015-10-31 01:05:19', 3, NULL, 1, NULL, '2015-10-31 01:18:56', NULL, NULL, NULL, NULL, NULL),
+(53, 'saya', 5, 6, 150000, NULL, 0, 150000, 0, 0, '2015-10-31 01:54:26', 2, NULL, 1, NULL, '2015-10-31 12:33:26', NULL, NULL, NULL, NULL, NULL),
+(54, '', NULL, 4, 0, NULL, 0, 0, 0, 0, '2015-10-31 00:00:00', 3, NULL, 1, NULL, '2015-10-31 12:18:52', NULL, NULL, NULL, NULL, NULL),
+(55, 'jjj', 2, 4, 405000, 10, 3, 433350, 0, 0, '2015-10-31 00:24:32', 3, 1, 1, '2015-10-31 00:19:17', '2015-10-31 00:24:32', 1, 1, '2015-10-31 12:42:59', '2015-10-31 12:42:59', NULL),
+(56, 'kkk', 3, 2, 270000, 10, 5, 283500, 0, 0, '2015-10-31 01:19:16', 3, 1, 1, '2015-10-31 01:19:09', '2015-10-31 01:19:16', 1, 1, '2015-10-31 01:20:59', '2015-10-31 01:20:59', NULL),
+(57, 'sandi', 3, 5, 56250, 10, 10, 56250, 70000, 13750, '2015-10-31 12:35:04', 3, 1, 1, '2015-10-31 12:33:29', '2015-10-31 12:35:04', 1, 1, '2015-10-31 03:06:50', '2015-10-31 03:06:50', NULL),
+(58, 'sandi', 2, 5, 34500, 10, 0, 37950, 0, -37950, '2015-10-31 03:59:54', 1, 1, 1, '2015-10-31 03:53:42', '2015-10-31 03:59:54', NULL, 1, NULL, '2015-10-31 04:51:09', 'ga pake garem, kecap dikit aja');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
