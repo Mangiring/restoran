@@ -52,15 +52,15 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 						  	<!--p><a id='iframe' href="application/views/jquery.min.js">Outside Webpage (Iframe)</a></p>
 							<p><a id='iframe' href="application/views/jquery.min.js">Outside Webpage (Iframe2)</a></p-->
                           <div class="table-responsive">
-						  <form method=POST>
+						  <form method=POST >
                             <table class="table">
                               <thead>
 						<?php			
-//print_r($wishlist);						
+//print_r($wtid);						
 								  foreach($wishlist as $k => $v) {
 									  $wname=$v -> wname;
 									  $wstatus=$v -> wstatus;
-									  $wtid=$v -> wtid;
+									  $wtid=$wtid;
 									  $tname=$v -> tname;
 									  $person=$v -> person;
 								  }
@@ -68,7 +68,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 							if($wcount==0){
 										$wname="";
 									  $wstatus="";
-									  $wtid="";
+									  //$wtid="";
 									  $tname="";
 									  $person="";
 								
@@ -106,7 +106,9 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 								  
 		  <?php
 		  $t=0;
+		 //print_r($wishlist);die;
 		  foreach($wishlist as $k => $v) :
+		  
 		  ?>
 		
                                         <tr>
@@ -137,6 +139,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
                               </tbody>
 		<tr><td>
                                         <button type="submit" class="btn btn-primary"> <i class="fa fa-save"></i> Submit</button>
+										<a href="<?php echo site_url('wishlist/home/wishlist_cancel/'.$id.'/'.$wtid); ?>" class="btn btn-danger">Cancel</a>
 										<button class="btn btn-default" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
 		</td><td></td><td></td><td><?=$t;?></td></tr>
                             </table>							

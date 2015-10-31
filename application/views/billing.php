@@ -55,7 +55,13 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
                             <table  border=0 width=50%  >
                               <thead>
 						<?php			
-			
+			$jw= count($wishlist);
+			if($jw<1){
+				__set_error_msg(array('error' => 'Data masih kosong'));
+				redirect(site_url('wishlist/home/billing'));
+				
+			//die;
+			}
 								  foreach($wishlist as $k => $v) {
 									  $wname=$v -> wname;
 									  $wstatus=$v -> wstatus;
@@ -150,7 +156,8 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 							  
 			<tr><td>Discount</td><td><input class="form-control" type="number" name="discc"value="<?=$v -> wdis;?>" ><p>%</p></td><td></td><td></td><td><?php echo __get_rupiah($tdis,1);?></td></tr>					  
 		<tr><td>PPN</td><td style="width:200px"><input class="form-control" type="number" name="ppn" value="<?=$v -> wppn;?>" ><p>%</p></td><td></td><td></td><td><?php echo __get_rupiah($tppn,1);?></td></tr>					  
-		<tr><td><input type=submit class="btn btn-danger" value="Save">
+		<tr><td><input type=submit class="btn btn-primary" value="Save">
+		<a href="<?php echo site_url('wishlist/home/wishlist_cancel/'.$id.'/'.$wtid); ?>" class="btn btn-danger">Cancel Order</a>
 		<a id="iframex" class="btn btn-primary" target=blank href="<?php echo site_url('wishlist/home/billing2/' . $v -> wid); ?>">Print </a>
 		<a id="iframex" class="btn btn-danger" href="<?php echo site_url('wishlist/home/billing_approve/' . $v -> wid); ?>">Approve </a>
 		</td><td></td><td></td><td></td><td><?php echo __get_rupiah($v -> wtotalall,1);?></td></tr>

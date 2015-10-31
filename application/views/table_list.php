@@ -1,4 +1,4 @@
-
+<?php //print_r($this->memcachedlib->sesresult['uid']);die;?>
 
 	<!--main content start-->
       <section id="main-content">

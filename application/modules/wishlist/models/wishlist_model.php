@@ -8,9 +8,20 @@ class Wishlist_model extends CI_Model {
 		return 'SELECT * FROM wishlist_tab WHERE (wstatus=1 OR wstatus=0) ORDER BY wid DESC';
 	}
 
+	function __get_wishlistz() {
+		
+		$this -> db -> select(" *,
+		(select wname from wishlist_tab where wtid=tid order by wid desc limit 1) as wname,
+		(select person from wishlist_tab where wtid=tid  order by wid desc limit 1) as person
+		FROM tables_tab,categories_tab WHERE  tstatus <>2 and cid=tcid ORDER BY tid DESC");
+		return $this -> db -> get() -> result();
+	}	
+	
 	function __last_wishlist_by_wtid($wtid) {
 		$queryd = $this->db->query("SELECT wid FROM wishlist_tab WHERE wtid='$wtid' and wstatus='1'	ORDER BY wid DESC");
-			 $queryd = $queryd-> result();	 
+			 $queryd = $queryd-> result();
+//echo $wtid;			 
+//print_r($queryd);die;			 
 			 $wid=$queryd[0] -> wid;
 			 return $wid;
 	}
@@ -18,10 +29,7 @@ class Wishlist_model extends CI_Model {
 	function __get_wishlistx($wid) {
 		//echo $id;die;
 		return "SELECT *,(select tname from tables_tab d where d.tid=a.wtid) as tname FROM wishlist_tab a,wishlist_detail_tab b, menus_tab c WHERE a.wid=b.wid and b.wmid=c.mid and (a.wstatus=1 OR a.wstatus=0) and a.wid='".$wid."' ORDER BY a.wid DESC";
-		
-		
-
-		
+	
 	}
 	
 	function __get_wishlist_search($keyword) {
@@ -56,6 +64,22 @@ class Wishlist_model extends CI_Model {
         return $this -> db -> update('wishlist_tab', $data);
 	}
 
+	function __cancel_wishlist($id) {
+		echo $id;
+		$uid=$this->memcachedlib->sesresult['uid'];
+		$wudate=date('Y-m-d h:i:s');
+		$data=array('wstatus'=>2,'wupdateby'=>$uid,'wudate'=>$wudate);
+        $this -> db -> where('wid', $id);
+        return $this -> db -> update('wishlist_tab', $data);
+	}	
+
+	function __cancel_table($wtid) {
+		//echo $id;die;
+		$dat=array('tstatus'=>1);
+        $this -> db -> where('tid', $wtid);
+        return $this -> db -> update('tables_tab', $dat);
+	}
+	
 	function __update_wishlist_detail($id, $data) {
         $this -> db -> where('wdid', $id);
         return $this -> db -> update('wishlist_detail_tab', $data);

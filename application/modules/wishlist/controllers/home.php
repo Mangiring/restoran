@@ -26,35 +26,39 @@ class Home extends MY_Controller {
 		$pager = $this -> pagination_lib -> pagination($this -> wishlist_model -> __get_wishlist(),3,10,site_url('wishlist'));
 		$view['wishlist'] = $this -> pagination_lib -> paginate();
 		$view['pages'] = $this -> pagination_lib -> pages();
-		$view['tables']=$this -> tables_model -> __get_tables_list();
+		//$view['tables']=$this -> tables_model -> __get_tables_list();
+		$view['tables']=$this -> wishlist_model -> __get_wishlistz();
 		$view['cat']=$this -> categories_tables_model -> __get_categories_list();
 		$this->load->view('table_list2', $view);
 	}	
 
 	function wishlist_listx($wtid) {
+		$uid=$this->memcachedlib->sesresult['uid'];
 		$jtid=$this -> tables_model -> __cek_tables($wtid);
 		if($jtid==1){
 			$arr=array('tstatus'=>3);
 			$this -> tables_model -> __update_tables($wtid, $arr);
 			$wdate=date('Y-m-d');
 			$dt=array('wid'=>'','wname'=>'','wtid'=>$wtid,'wtotal'=>'','wdis'=>'',
-			'wtotalall'=>'','wdate'=>$wdate,'wstatus'=>1);	
+			'wtotalall'=>'','wdate'=>$wdate,'wstatus'=>1,'wcreateby'=>$uid,'wcdate'=>date('Y-m-d h:i:s'));	
 			
 			if($this -> wishlist_model ->__insert_wishlist($dt)){
 				$wid=$this->db->insert_id();
-				redirect('wishlist/home/wishlist_list/'.$wid);
+				redirect('wishlist/home/wishlist_list/'.$wid.'/'.$wtid);
 			}
 		}else{	
 		$wid= $this -> wishlist_model ->__last_wishlist_by_wtid($wtid);
-		redirect('wishlist/home/wishlist_list/'.$wid);	}
+		redirect('wishlist/home/wishlist_list/'.$wid.'/'.$wtid);	}
 	}
 	
 	function billing_list($wtid) {
 		$wid= $this -> wishlist_model ->__last_wishlist_by_wtid($wtid);
+		//echo $wid;die;
 		redirect('wishlist/home/wishlist_list2/'.$wid);
 	}	
 
 	function wishlist_list2($id) {
+		$uid=$this->memcachedlib->sesresult['uid'];
 		if($_POST){
 		//$wname = $_POST['wname'];	
 		//$person = $_POST['person'];
@@ -72,7 +76,7 @@ class Home extends MY_Controller {
 						$wdisc = $_POST['wdisc'][$j];
 						$t=$t+(($wharga*$wqty)-($wharga*$wqty*$wdisc/100));
 				
-				$dtx=array('wharga'=>$wharga,'wqty'=>$wqty,'wstatus'=>1);	
+				$dtx=array('wharga'=>$wharga,'wqty'=>$wqty,'wstatus'=>1,'bupdateby'=>$uid,'budate'=>date('Y-m-d h:i:s'));	
 				$this -> wishlist_model -> __update_wishlist_detail($wdid,$dtx);		
 						
 				}
@@ -80,7 +84,7 @@ class Home extends MY_Controller {
 				$tall=$t-($t*$discc/100)+($t*$wppn/100);
 			}
 			
-			$dta=array('wtotal'=>$wtotal,'wppn'=>$wppn,'wdis'=>$discc,'wtotalall'=>$tall);
+			$dta=array('wtotal'=>$wtotal,'wppn'=>$wppn,'wdis'=>$discc,'wtotalall'=>$tall,'bupdateby'=>$uid,'budate'=>date('Y-m-d h:i:s'));
 				if($this -> wishlist_model -> __update_wishlist($id,$dta)){
 				__set_error_msg(array('error' => 'Data berhasil di simpan'));
 				redirect(site_url('wishlist/home/wishlist_list2/'.$id));
@@ -106,6 +110,7 @@ class Home extends MY_Controller {
 	
 	
 	function billing_approve($id) {
+		$uid=$this->memcachedlib->sesresult['uid'];
 		$pager = $this -> pagination_lib -> pagination($this -> wishlist_model -> __get_wishlistx($id),3,10,site_url('wishlist/home/billing2/'.$id));
 		$view['wishlist'] = $this -> pagination_lib -> paginate();
 		$view['pages'] = $this -> pagination_lib -> pages();
@@ -113,14 +118,15 @@ class Home extends MY_Controller {
 		$wtid=$view['wishlist'][0]->wtid;
 		$arr=array('tstatus'=>1);
 		$this -> tables_model -> __update_tables($wtid, $arr);
-		$dta=array('wstatus'=>3);
+		$dta=array('wstatus'=>3,'bcreateby'=>$uid,'bcdate'=>date('Y-m-d h:i:s'),'bupdateby'=>$uid,'budate'=>date('Y-m-d h:i:s'));
 		$this -> wishlist_model -> __update_wishlist($id,$dta);
 		__set_error_msg(array('error' => 'Billing sudah di bayar'));
 		redirect(site_url('wishlist/home/billing'));
 	}	
 	
 	
-	function wishlist_list($id) {
+	function wishlist_list($id,$wtid) {
+		$uid=$this->memcachedlib->sesresult['uid'];
 		if($_POST) {
 			$wname = $this -> input -> post('wname', TRUE);
 			$person = $this -> input -> post('person', TRUE);
@@ -129,7 +135,7 @@ class Home extends MY_Controller {
 			
 			if (!$wname || !$person) {
 				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
-				redirect(site_url('wishlist' . '/home/' . __FUNCTION__.'/'.$id));
+				redirect(site_url('wishlist' . '/home/' . __FUNCTION__.'/'.$id.'/'.$wtid));
 			}			
 			
 			
@@ -141,27 +147,41 @@ class Home extends MY_Controller {
 					$wharga = $_POST['harga'][$j];
 					$dta=array('wname'=>$wname,'person'=>$person);
 					$this -> wishlist_model -> __update_wishlist($id,$dta);
-					$dtx=array('wharga'=>$wharga,'wqty'=>$wqty,'wstatus'=>1);	
+					$dtx=array('wharga'=>$wharga,'wqty'=>$wqty,'wstatus'=>1,'wupdateby'=>$uid,'wudate'=>date('Y-m-d h:i:s'));	
 					$this -> wishlist_model -> __update_wishlist_detail($wdid,$dtx);
 				}
 				__set_error_msg(array('error' => 'Data berhasil di simpan'));
 				redirect(site_url('wishlist'));
 			}
 		}	
-		$pager = $this -> pagination_lib -> pagination($this -> wishlist_model -> __get_wishlistx($id),3,10,site_url('wishlist/home/wishlist_list/'.$id));
+		
+		$pager = $this -> pagination_lib -> pagination($this -> wishlist_model -> __get_wishlistx($id),3,10,site_url('wishlist/home/wishlist_list/'.$id.'/'.$wtid));
 		$view['wishlist'] = $this -> pagination_lib -> paginate();
 		$view['pages'] = $this -> pagination_lib -> pages();
 		$view['id']=$id;
+		$view['wtid']=$wtid;
+		
+		// print_r($view);die;
 		$this->load->view('wishlist', $view);
 	}	
+	
+	
+	function wishlist_cancel($id,$wtid) {
+		$this -> wishlist_model -> __cancel_wishlist($id);
+		$this -> wishlist_model -> __cancel_table($wtid);
+		__set_error_msg(array('error' => 'Wishlist berhasil di cancel'));
+		redirect(site_url('wishlist'));
+	}
 
 	
 	function wishlist_add($id) {
+		$uid=$this->memcachedlib->sesresult['uid'];
 		if ($_POST) {
 			$wname = $this -> input -> post('wname', TRUE);
 			$jumt=count($_POST['mid']);	
 			$hargax=0;
-			
+			$uid=$this->memcachedlib->sesresult['uid'];
+			$wcdate=date('Y-m-d h:i:s');
 			if($jumt>0){
 				for($j=0;$j<$jumt;$j++){	
 					$mids = explode("-",$_POST['mid'][$j]);
@@ -169,11 +189,11 @@ class Home extends MY_Controller {
 					$harga = $mids[1];
 					$dis = $mids[2];
 					$hargax=$harga+$hargax;
-					$arr=array('wdid'=>'','wid'=>$id,'wmid'=>$mid,'wharga'=>$harga,'wdisc'=>$dis,'wstatus'=>1);
+					$arr=array('wdid'=>'','wid'=>$id,'wmid'=>$mid,'wharga'=>$harga,'wdisc'=>$dis,'wstatus'=>1,'wcreateby'=>$uid,'wcdate'=>$wcdate);
 					$this -> wishlist_model -> __insert_wishlist_detail($arr);
 				}
 				
-				$dtx=array('wtotal'=>$hargax,'wdis'=>'','wtotalall'=>$hargax,'wdate'=>date('Y-m-d H:i:s'),'wstatus'=>1);	
+				$dtx=array('wtotal'=>$hargax,'wdis'=>'','wtotalall'=>$hargax,'wdate'=>date('Y-m-d h:i:s'),'wstatus'=>1,'wupdateby'=>$uid,'wudate'=>date('Y-m-d h:i:s'));	
 				$this -> wishlist_model -> __update_wishlist($id,$dtx);
 				
 			}	
@@ -195,6 +215,7 @@ class Home extends MY_Controller {
 	}
 
 	function billing_add($id) {
+		$uid=$this->memcachedlib->sesresult['uid'];
 		if ($_POST) {
 			$wname = $this -> input -> post('wname', TRUE);
 			$wdt=$this -> input -> post('wdate', TRUE);
@@ -210,11 +231,11 @@ class Home extends MY_Controller {
 					$harga = $mids[1];
 					$dis = $mids[2];
 					$hargax=$harga+$hargax;
-					$arr=array('wdid'=>'','wid'=>$id,'wmid'=>$mid,'wharga'=>$harga,'wdisc'=>$dis,'wstatus'=>1);
+					$arr=array('wdid'=>'','wid'=>$id,'wmid'=>$mid,'wharga'=>$harga,'wdisc'=>$dis,'wstatus'=>1,'bupdateby'=>$uid,'budate'=>date('Y-m-d h:i:s'));
 					$this -> wishlist_model -> __insert_wishlist_detail($arr);
 				}
 				
-				$dtx=array('wtotal'=>$hargax,'wdisc'=>'','wtotalall'=>$hargax,'wdate'=>$wdate,'wstatus'=>1);	
+				$dtx=array('wtotal'=>$hargax,'wdisc'=>'','wtotalall'=>$hargax,'wdate'=>$wdate,'wstatus'=>1,'bupdateby'=>$uid,'budate'=>date('Y-m-d h:i:s'));	
 				$this -> wishlist_model -> __update_wishlist($id,$dtx);
 				
 			}	

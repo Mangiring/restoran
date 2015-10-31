@@ -34,11 +34,12 @@
           <td colspan=4 ><h3><?=$vv->cname;?></h3></td>	
 		  <td>&nbsp;</td>
 	</tr>							  
-							  
-		<tr><td>
+	<tr><th>Nama</th><th>Person</th><th>Status</th><th>Table</th></tr>						  
+		
 								  
 		  <?php
 		  $d=0;
+		  //print_r($wlist);
 		  foreach($tables as $k => $v) :
 		  ?>
 		  <?php if ( $v -> cid == $vv->cid){ 
@@ -49,20 +50,20 @@
           
 		  <?php  
 		  $b= $d%4;
-		  if( $v -> tstatus=='3') { $btnx="btn btn-dangerx"; 
+		  if( $v -> tstatus=='3') { $btnx="btn btn-dangerx"; $st="Ada";
 		  $link=site_url('wishlist/home/billing_list/' . $v -> tid);
-		  }else{$btnx="btn btn-primaryx";$link="";}
+		  }else{$btnx="btn btn-primaryx";$link=""; $st="Kosong"; $v -> wname="-";}
 		  ?>
-              <a class="<?=$btnx;?>"  href="<?php echo $link; ?>"><?php echo $v -> tname;?></a>
+             <tr><td><?=$v -> wname;?></td><td><?=$v -> person;?></td><td><?=$st;?></td><td> <a class="<?=$btnx;?>"  href="<?php echo $link; ?>"><?php echo $v -> tname;?></a></td></tr>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           
 										
 		  <?php 
-		  if($b==3){echo "<br><br>";}
+		  //if($b==3){echo "<br><br>";}
 		  $d=$d+1;
 		  }?>						
         <?php endforeach; ?>
-		</td></tr>
+		
 		<?php } ?>
                               </tbody>
                             </table>
