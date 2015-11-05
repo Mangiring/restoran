@@ -63,6 +63,7 @@
                           <li><a class="" href="<?php echo site_url('report_transaction'); ?>"><i class="icon_grid-3x3"></i>Transaction</a></li>
                           <li><a class="" href="<?php echo site_url('report_opname'); ?>"><i class="icon_pushpin"></i>Opname</a></li>
                           <li><a class="" href="<?php echo site_url('report_peti_cash'); ?>"><i class="icon_calculator_alt"></i>Peti Cash</a></li>
+                          <li><a class="" href="<?php echo site_url('report_itemout'); ?>"><i class="icon_cloud-upload"></i>Item Out</a></li>
                       </ul>
                   </li>
 				  <li class="sub-menu shuser">

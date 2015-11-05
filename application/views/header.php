@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="<?php echo site_url('application/views/img/favicon.ico'); ?>">
-    <title>Restoran Sehat Bersama</title>
+    <title>Restoran Ayam Goreng / Bakar Presto</title>
     <!-- Bootstrap CSS -->    
     <link href="<?php echo site_url('application/views/css/bootstrap.min.css'); ?>" rel="stylesheet">
     <!-- bootstrap theme -->
@@ -60,20 +60,20 @@
             </div>
 
             <!--logo start-->
-            <a href="<?php echo site_url(); ?>" class="logo">Restoran <span class="lite">Mama Suka</span></a>
+            <a href="<?php echo site_url(); ?>" class="logo">Restoran <span class="lite">Ayam Goreng / Bakar Presto</span></a>
             <!--logo end-->
 
+<!--
             <div class="nav search-row" id="top_menu">
-                <!--  search form start -->
                 <ul class="nav top-menu">                    
                     <li>
                         <form class="navbar-form">
                             <input class="form-control" placeholder="Search" type="text">
                         </form>
                     </li>                    
-                </ul>
-                <!--  search form end -->                
+                </ul>                
             </div>
+-->
 
             <div class="top-nav notification-row">                
                 <!-- notificatoin dropdown start-->

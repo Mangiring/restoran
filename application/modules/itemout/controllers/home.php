@@ -43,10 +43,9 @@ class Home extends MY_Controller {
 				redirect(site_url('itemout/itemout_adjust/' . $id));
 			}
 			else {
-				if ($aplus) $sfinal = $sfinal2 + $aplus;
-				else $sfinal = $sfinal2 - $amin;
+				$sfinal = $sfinal2 - $amin;
 				
-				$arr = array('istockout' => $sout2 + $amin,'istock' => $sfinal);
+				$arr = array('istockout' => ($sout2 + $sfinal),'istock' => $amin);
 				if ($this -> itemout_model -> __update_inventory($id, $arr)) {
 					$oarr = array('iidid' => $id, 'idate' => time(), 'istockbegining' => $sbegin2, 'istockin' => $sin2, 'istockout' => $sout2, 'istockretur' => $sretur2, 'istock' => $sfinal2, 'iadjust' => $amin, 'idesc' => $desc);
 					$this -> itemout_model -> __insert_itemout($oarr);

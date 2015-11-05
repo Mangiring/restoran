@@ -31,22 +31,58 @@
                           <header class="panel-heading">
                               List Transaction Detail
                           </header>
+                      <section class="panel">
+                          <div class="table-responsive">
+                            <table class="table">
+                              <thead>
+                                <tr>
+          <th>Created By</th>
+          <th>Created Date</th>
+          <th>Updated By</th>
+          <th>Updated Date</th>
+          <th>Billing By</th>
+          <th>Billing Date</th>
+          <th>Updated Billing By</th>
+          <th>Updated Billing Date</th>
+          
+                                </tr>
+                              </thead>
+                              <tbody>
+								  <tr>
+									  <td><?php echo __get_email($transaction[0] -> wcreateby);?></td>
+									  <td><?php echo date('d/m/Y H:i',strtotime($transaction[0] -> wcdate));?></td>
+									  <td><?php echo __get_email($transaction[0] -> wupdateby);?></td>
+									  <td><?php echo date('d/m/Y H:i',strtotime($transaction[0] -> wudate));?></td>
+									  <td><?php echo __get_email($transaction[0] -> bcreateby);?></td>
+									  <td><?php echo date('d/m/Y H:i',strtotime($transaction[0] -> bcdate));?></td>
+									  <td><?php echo __get_email($transaction[0] -> bupdateby);?></td>
+									  <td><?php echo date('d/m/Y H:i',strtotime($transaction[0] -> budate));?></td>
+								  </tr>
+                              </tbody>
+								</table>
+							</div>
+							</section>
+							<hr style="border:1px solid #ddd" />
+                      <section class="panel">
                           <div class="table-responsive">
                             <table class="table">
                               <thead>
                                 <tr>
           <th>Date</th>
+          <th>Person</th>
           <th>Menu</th>
           <th>Qty</th>
           <th>Harga</th>
 		  <th>Disc</th>
           <th>Total</th>
+          <th>Status</th>
           
                                 </tr>
                               </thead>
                               <tbody>
 		  <?php
 $tgl = 0;
+$totalqty = 0;
 $total = 0;
 $total2 = 0;
 		  foreach($transaction as $k => $v) :
@@ -61,20 +97,22 @@ if($tgl <> $date){
 	echo __get_date(strtotime($tgl),1);
 }
 ?></td>
+          <td><?php echo $v -> person; ?></td>
           <td><?php echo $v -> mname; ?></td>
           <td><?php echo $v -> wqty; ?></td>
           <td><?php echo __get_rupiah($v -> wharga,1); ?></td>
 		  <td><?php echo $v -> wdisc; ?>%</td>
 			<td><?php echo __get_rupiah($wall,1); ?></td>
-			
+			<td><?php echo ($v -> wstatus == 2 ? 'Cancel' : 'Approved'); ?></td>
 										</tr>
         <?php
-        $total += $v -> wtotal;
+        $total += $v -> wharga * $v -> wqty;
         $total2 += $wall;
+        $totalqty += $v -> wqty;
         endforeach; ?>
                               </tbody>
                               <tfoot>
-                              <tr><td></td><td></td><td></td><td>Total</td><td>&nbsp;</td><td><?php echo __get_rupiah($total2,1); ?></td></tr>
+                              <tr><td></td><td></td><td>Total</td><td><?php echo $totalqty; ?></td><td><?php echo __get_rupiah($total,1); ?></td><td></td><td><?php echo __get_rupiah($total2,1); ?></td><td></td></tr>
                               </tfoot>
                             </table>
                           </div>

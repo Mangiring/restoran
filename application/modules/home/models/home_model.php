@@ -22,7 +22,7 @@ class home_model extends CI_Model {
 		else if ($type == 3)
 			$sql = $this -> db -> query('SELECT * FROM wishlist_tab');
 		else
-			$sql = $this -> db -> query('SELECT * FROM menus_tab WHERE mstatus=0');
+			$sql = $this -> db -> query('SELECT * FROM raw_material_tab WHERE rstatus=1');
 		return $sql -> num_rows();
 	}
 }

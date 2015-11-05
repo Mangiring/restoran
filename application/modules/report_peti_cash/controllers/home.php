@@ -30,4 +30,9 @@ class Home extends MY_Controller {
 		$view['to'] = $to;
 		$this->load->view('report_peti_cash', $view);
 	}
+	
+	function cleanup() {
+		$this -> report_peti_cash_model -> __clean_peti_cash();
+		redirect(site_url('report_peti_cash'));
+	}
 }

@@ -19,7 +19,7 @@ class Home extends MY_Controller {
 	
 	function peti_cash_add() {
 		if ($_POST) {
-			$nominal = $this -> input -> post('nominal', TRUE);
+			$nominal = str_replace(',','',$this -> input -> post('nominal', TRUE));
 			$desc = $this -> input -> post('desc', TRUE);
 			$type = (int) $this -> input -> post('type');
 			

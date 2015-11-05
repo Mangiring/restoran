@@ -26,6 +26,8 @@
 					</h3>
 					<br />
 					<div style="clear:both"></div>
+					<h3 class="box-title" style="margin-top:0;"><a href="<?php echo site_url('report_peti_cash/cleanup'); ?>" class="btn btn-default"><i class="fa fa-trash-o"></i> Clear</a></h3>
+					<div style="clear:both"></div>
 	<?php echo __get_error_msg(); ?>
                       <section class="panel">
                           <header class="panel-heading">
@@ -72,13 +74,13 @@ if($tgl <> $date){
                               </tbody>
                               <tfoot>
                               <tr>
-                              <td></td><td></td><td><b>Kas Besar:</b></td><td></td><td><b><?php echo __get_rupiah($kasbesar[0] -> total,1);?></b></td>
+                              <td></td><td></td><td><b>Kas Besar:</b></td><td></td><td></td><td><b><?php echo __get_rupiah($kasbesar[0] -> total,1);?></b></td>
                               </tr>
                               <tr>
-                              <td></td><td></td><td><b>Kas Kecil:</b></td><td></td><td><b><?php echo __get_rupiah($kaskecil[0] -> total,1);?></b></td>
+                              <td></td><td></td><td><b>Kas Kecil:</b></td><td></td><td></td><td><b><?php echo __get_rupiah($kaskecil[0] -> total,1);?></b></td>
                               </tr>
                               <tr>
-                              <td></td><td></td><td><b>Biaya Operasional:</b></td><td></td><td><b><?php echo __get_rupiah($operasional[0] -> total,1);?></b></td>
+                              <td></td><td></td><td><b>Biaya Operasional:</b></td><td></td><td></td><td><b><?php echo __get_rupiah($operasional[0] -> total,1);?></b></td>
                               </tr>
                               </tfoot>
                             </table>

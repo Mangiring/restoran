@@ -63,13 +63,13 @@
                                   <div class="form-group">
                                       <label class="col-lg-2 control-label">Adjust Min (-)</label>
                                       <div class="col-lg-10">
-                                          <input type="number" name="amin" class="form-control" placeholder="Adjust Min">
+                                          <input type="text" name="amin" class="form-control" placeholder="Adjust Min">
                                       </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-lg-2 control-label">Adjust Plus (+)</label>
                                       <div class="col-lg-10">
-                                          <input type="number" name="aplus" class="form-control" placeholder="Adjust Plus">
+                                          <input type="text" name="aplus" class="form-control" placeholder="Adjust Plus">
                                       </div>
                                   </div>
                                   <div class="form-group">

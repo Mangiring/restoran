@@ -13,7 +13,7 @@ class Home extends MY_Controller {
 		$view['totalmenu'] = $this -> home_model -> __get_total(1);
 		$view['totalbilling'] = $this -> home_model -> __get_total(2);
 		$view['totalwislist'] = $this -> home_model -> __get_total(3);
-		$view['totalstock'] = $this -> home_model -> __get_total(4);
+		$view['totalrawmaterial'] = $this -> home_model -> __get_total(4);
 		$this->load->view('index', $view);
 	}
 }

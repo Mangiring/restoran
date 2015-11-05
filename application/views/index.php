@@ -40,8 +40,8 @@
 				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 					<div class="info-box green-bg">
 						<i class="fa fa-cubes"></i>
-						<div class="count"><?php echo $totalstock; ?></div>
-						<div class="title">Stock</div>						
+						<div class="count"><?php echo $totalrawmaterial; ?></div>
+						<div class="title">Raw Material</div>						
 					</div><!--/.info-box-->			
 				</div><!--/.col-->
 				

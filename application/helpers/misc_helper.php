@@ -139,3 +139,10 @@ function __get_peti_cash_type($id,$type) {
 	else
 		return ($id == 1 ? 'Debit <input type="radio" checked="checked" name="type" value="1" /> Credit <input type="radio" name="type" value="2" />' : 'Debit <input type="radio" name="type" value="1" /> Credit <input type="radio" checked="checked" name="type" value="2" />');
 }
+
+function __get_email($uid) {
+    $CI =& get_instance();
+	$CI -> load -> model('users/users_model');
+	$r = $CI -> users_model -> __get_email($uid);
+	return $r[0] -> uemail;
+}

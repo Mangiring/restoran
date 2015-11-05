@@ -7,7 +7,7 @@ class Home extends MY_Controller {
 	function __construct() {
 		parent::__construct();
 		$this -> load -> library('pagination_lib');
-		$this -> load -> model('reportopname_model');
+		$this -> load -> model('reportitemout_model');
 	}
 
 	function index() {
@@ -23,14 +23,14 @@ class Home extends MY_Controller {
 			}
 		}
 		
-		$view['report_opname'] = $this -> reportopname_model -> __get_reportopname($from,$to);
+		$view['report_itemout'] = $this -> reportitemout_model -> __get_reportitemout($from,$to);
 		$view['from'] = $from;
 		$view['to'] = $to;
-		$this->load->view('report_opname', $view);
+		$this->load->view('report_itemout', $view);
 	}
 	
 	function cleanup() {
-		$this -> reportopname_model -> __clean_opname();
-		redirect(site_url('report_opname'));
+		$this -> reportitemout_model -> __clean_itemout();
+		redirect(site_url('report_itemout'));
 	}
 }

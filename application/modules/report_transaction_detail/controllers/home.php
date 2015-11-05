@@ -22,7 +22,7 @@ class Home extends MY_Controller {
 			}
 		}
 		$view['transaction'] = $this -> report_transaction_detail_model -> __get_transaction_detail($wid);
-		$view['wid'] = $wid;		
+		$view['wid'] = $wid;
 		$this->load->view('report_transaction_detail', $view);
 	}
 }

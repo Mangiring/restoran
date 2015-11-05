@@ -75,16 +75,23 @@ $route['itemreceiving/?(:num)?'] = 'itemreceiving/home/index/$1';
 $route['itemreceiving/itemreceiving_add'] = 'itemreceiving/home/itemreceiving_add';
 $route['itemreceiving/itemreceiving_update/?(:num)?'] = 'itemreceiving/home/itemreceiving_update/$1';
 $route['itemreceiving/itemreceiving_delete/(:num)'] = 'itemreceiving/home/itemreceiving_delete/$1';
-$route['itemreceiving/receiving_list/(:num)'] = 'itemreceiving/home/receiving_list/$1';
+$route['itemreceiving/receiving_list/(:num)/?(:num)?'] = 'itemreceiving/home/receiving_list/$1/$2';
 $route['itemreceiving/receiving_rawmaterial_add/(:num)'] = 'itemreceiving/home/receiving_rawmaterial_add/$1';
+$route['itemreceiving/receiving_rawmaterial_delete/(:num)'] = 'itemreceiving/home/receiving_rawmaterial_delete/$1';
 
 $route['report_peti_cash/?(:num)?'] = 'report_peti_cash/home/index/$1';
+$route['report_peti_cash/cleanup'] = 'report_peti_cash/home/cleanup';
 $route['report_transaction/?(:num)?'] = 'report_transaction/home/index/$1';
+$route['report_transaction/cleanup'] = 'report_transaction/home/cleanup';
 $route['report_opname/?(:num)?'] = 'report_opname/home/index/$1';
+$route['report_opname/cleanup'] = 'report_opname/home/cleanup';
+$route['report_itemout/?(:num)?'] = 'report_itemout/home/index/$1';
+$route['report_itemout/cleanup'] = 'report_itemout/home/cleanup';
 
 $route['wishlist/?(:num)?'] = 'wishlist/home/index/$1';
 $route['wishlist/wishlist_add/?(:num)?'] = 'wishlist/home/wishlist_add/$1';
 $route['wishlist/wishlist/wishlist_list/?(:num)?'] = 'wishlist/home/wishlist_list/$1';
+
 $route['categories_tables/?(:num)?'] = 'categories_tables/home/index/$1';
 $route['categories_tables/categories_tables_add'] = 'categories_tables/home/categories_tables_add';
 $route['categories_tables/categories_tables_update/?(:num)?'] = 'categories_tables/home/categories_tables_update/$1';

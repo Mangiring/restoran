@@ -1,5 +1,8 @@
 <html>
 <body>
+	<style>
+	html,body{margin:0;padding:0}
+	</style>
 <div style="width:300px">
 <div style="text-align:center;">
 Ayam Goreng Bakar Presto <br />
@@ -42,5 +45,8 @@ $tallx=$tall+$tppn;
 <tr><td></td><td>Grand Total</td><td style="text-align:right;">: <?php echo __get_rupiah($tallx,2); ?></td></tr>
 </table>
 </div>
+<br />
+<br />
+&nbsp;
 </body>
 </html>

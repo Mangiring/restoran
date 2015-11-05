@@ -116,7 +116,7 @@ $(document).ready(function(){
 	else if (/\/wishlist/.test(window.location.href) === true) {
 		$('li.shorder > ul.sub').css({'display': 'block', 'overflow': 'hidden'});
 	}
-	else if (/\/report_transaction|report_opname|report_peti_cash/.test(window.location.href) === true) {
+	else if (/\/report_transaction|report_opname|report_itemout|report_peti_cash/.test(window.location.href) === true) {
 		$('li.shreport > ul.sub').css({'display': 'block', 'overflow': 'hidden'});
 	}
 });

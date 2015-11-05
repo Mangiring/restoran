@@ -82,7 +82,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
                                 <tr>
           <th>Meja</th><th><?php echo $tname; ?></th></tr>
 		  <tr><th>Nama</th><th>
-		  <input type=text name="wname" class="form-control" value="<?php echo $wname; ?>" ></th></tr>
+		  <input type=text name="wname" class="form-control" value="<?php echo ($wname ? $wname : $tname); ?>" ></th></tr>
           <tr><th>Person</th><th>
 		  <input type=number class="form-control" name="person" value="<?php echo $person; ?>" ></th></tr>
 		  <!--tr><th valign=top >Notes</th><th>

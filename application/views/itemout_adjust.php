@@ -61,9 +61,9 @@
 	<input type="hidden" name="sretur2" value="<?php echo $detail[0] -> istockretur; ?>">
 	<input type="hidden" name="sfinal2" value="<?php echo $detail[0] -> istock; ?>">
                                   <div class="form-group">
-                                      <label class="col-lg-2 control-label">Material Out (-)</label>
+                                      <label class="col-lg-2 control-label">Material Left</label>
                                       <div class="col-lg-10">
-                                          <input type="number" name="amin" class="form-control" placeholder="Material Out">
+                                          <input type="text" name="amin" class="form-control" placeholder="Material Out">
                                       </div>
                                   </div>
                                   <div class="form-group">

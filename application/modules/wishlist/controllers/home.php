@@ -46,58 +46,65 @@ class Home extends MY_Controller {
 				$wid=$this->db->insert_id();
 				redirect('wishlist/home/wishlist_list/'.$wid.'/'.$wtid);
 			}
-		}else{	
-		$wid= $this -> wishlist_model ->__last_wishlist_by_wtid($wtid);
-		redirect('wishlist/home/wishlist_list/'.$wid.'/'.$wtid);	}
+		}
+		else {	
+			$wid = $this -> wishlist_model ->__last_wishlist_by_wtid($wtid);
+			redirect('wishlist/home/wishlist_list/'.$wid.'/'.$wtid);
+		}
 	}
 	
 	function billing_list($wtid) {
 		$wid= $this -> wishlist_model ->__last_wishlist_by_wtid($wtid);
-		//echo $wid;die;
 		redirect('wishlist/home/wishlist_list2/'.$wid);
 	}	
 
 	function wishlist_list2($id) {
 		$uid=$this->memcachedlib->sesresult['uid'];
-		if($_POST){
-		//$wname = $_POST['wname'];	
-		//$person = $_POST['person'];
-		$discc = $_POST['discc'];
-		$wppn = $_POST['ppn'];
-		$wpayment = $_POST['wpayment'];
-		$t=0;
-		$jwdid= count($_POST['wdid']);	
-			$hargax=0;
-			if($jwdid>0){
-				for($j=0;$j<$jwdid;$j++){	
+		if($_POST) {
+			$discc = $this -> input -> post('discc');
+			$wppn = $this -> input -> post('ppn');
+			$wpayment = str_replace(',','',$this -> input -> post('wpayment', TRUE));
+			$t=0;
+			$jwdid = count($_POST['wdid']);	
+			$hargax = 0;
+			
+			if (!$wpayment) {
+				__set_error_msg(array('error' => 'Nominal pembayaran harus di isi !!!'));
+				redirect(site_url('wishlist/home/wishlist_list2/'.$id));
+			}
+			else {
+				if($jwdid>0) {
+					for($j=0;$j<$jwdid;$j++){	
 						$wdid = $_POST['wdid'][$j];
 						$wqty = $_POST['qty'][$j];
 						$wqty = $_POST['qty'][$j];
 						$wharga = $_POST['harga'][$j];
 						$wdisc = $_POST['wdisc'][$j];
 						$t=$t+(($wharga*$wqty)-($wharga*$wqty*$wdisc/100));
-				
-				$dtx=array('wharga'=>$wharga,'wqty'=>$wqty,'wstatus'=>1,'bupdateby'=>$uid,'budate'=>date('Y-m-d h:i:s'));	
-				$this -> wishlist_model -> __update_wishlist_detail($wdid,$dtx);		
-						
-				}
-				$wtotal=$t;
-				$tall=$t-($t*$discc/100)+($t*$wppn/100);
-				$wbackpayment=$wpayment-$tall;
-			}
-			
-			$dta=array('wtotal'=>$wtotal,'wppn'=>$wppn,'wdis'=>$discc,'wtotalall'=>$tall,'wpayment'=>$wpayment,'wbackpayment'=>$wbackpayment,'bupdateby'=>$uid,'budate'=>date('Y-m-d h:i:s'));
-				if($this -> wishlist_model -> __update_wishlist($id,$dta)){
-				__set_error_msg(array('error' => 'Data berhasil di simpan'));
-				redirect(site_url('wishlist/home/wishlist_list2/'.$id));
 					
+						$dtx = array('wharga'=>$wharga,'wqty'=>$wqty,'wstatus'=>1,'bupdateby'=>$uid,'budate'=>date('Y-m-d h:i:s'));	
+						$this -> wishlist_model -> __update_wishlist_detail($wdid,$dtx);
+					}
+					$wtotal=$t;
+					$tall=$t-($t*$discc/100)+($t*$wppn/100);
+					$wbackpayment=$wpayment-$tall;
 				}
-		}	
-		$pager = $this -> pagination_lib -> pagination($this -> wishlist_model -> __get_wishlistx($id),3,10,site_url('wishlist/home/wishlist_list2/'.$id));
-		$view['wishlist'] = $this -> pagination_lib -> paginate();
-		$view['pages'] = $this -> pagination_lib -> pages();
-		$view['id']=$id;
-		$this->load->view('billing', $view);
+				
+				$dta = array('wtotal'=>$wtotal,'wppn'=>$wppn,'wdis'=>$discc,'wtotalall'=>$tall,'wpayment'=>$wpayment,'wbackpayment'=>$wbackpayment,'bupdateby'=>$uid,'budate'=>date('Y-m-d h:i:s'));
+				
+				if($this -> wishlist_model -> __update_wishlist($id,$dta)){
+					__set_error_msg(array('error' => 'Data berhasil di simpan'));
+					redirect(site_url('wishlist/home/wishlist_list2/'.$id));
+				}
+			}
+		}
+		else {
+			$pager = $this -> pagination_lib -> pagination($this -> wishlist_model -> __get_wishlistx($id),3,10,site_url('wishlist/home/wishlist_list2/'.$id));
+			$view['wishlist'] = $this -> pagination_lib -> paginate();
+			$view['pages'] = $this -> pagination_lib -> pages();
+			$view['id']=$id;
+			$this->load->view('billing', $view);
+		}
 	}	
 
 

@@ -23,4 +23,9 @@ class Report_peti_cash_model extends CI_Model {
 		$this -> db -> select("sum(pnominal) as total from peticash_tab where pstatus=1 AND ptype=2 and DATE(FROM_UNIXTIME( pdate,  '%Y-%m-%d' ))>='".$from."' and DATE(FROM_UNIXTIME( pdate,  '%Y-%m-%d' ))<='".$to."'", FALSE);
 		return $this -> db -> get() -> result();
 	}
+	
+	function __clean_peti_cash() {
+        $this -> db -> where('pstatus', 1);
+        return $this -> db -> update('peticash_tab', array('pstatus' => 0));
+	}
 }

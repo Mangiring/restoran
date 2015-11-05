@@ -26,4 +26,9 @@ class Home extends MY_Controller {
 		$view['to'] = $to;
 		$this->load->view('report_transaction', $view);
 	}
+	
+	function cleanup() {
+		$this -> report_transaction_model -> __clean_transaction();
+		redirect(site_url('report_transaction'));
+	}
 }
