@@ -17,14 +17,14 @@ class Wishlist_model extends CI_Model {
 	}	
 	
 	function __last_wishlist_by_wtid($wtid) {
-		$queryd = $this->db->query("SELECT wid FROM wishlist_tab WHERE wtid='$wtid' and wstatus='1'	ORDER BY wid DESC");
-			 $queryd = $queryd-> result();
-			 $wid=$queryd[0] -> wid;
-			 return $wid;
+		$queryd = $this -> db -> query("SELECT wid FROM wishlist_tab WHERE wtid='$wtid' and wstatus='1'	ORDER BY wid DESC");
+		$queryd = $queryd-> result();
+		$wid = $queryd[0] -> wid;
+		return $wid;
 	}
 	
 	function __get_wishlistx($wid) {
-		return "SELECT *,(select tname from tables_tab d where d.tid=a.wtid) as tname FROM wishlist_tab a,wishlist_detail_tab b, menus_tab c WHERE a.wid=b.wid and b.wmid=c.mid and (a.wstatus=1 OR a.wstatus=0) and a.wid='".$wid."' ORDER BY a.wid DESC";
+		return "SELECT *,(select tname from tables_tab d where d.tid=a.wtid) as tname FROM wishlist_tab a,wishlist_detail_tab b, menus_tab c WHERE a.wid=b.wid and b.wmid=c.mid and (a.wstatus=1 OR a.wstatus=0) AND b.wstatus=1 and a.wid='".$wid."' ORDER BY a.wid DESC";
 	
 	}
 	
@@ -59,9 +59,9 @@ class Wishlist_model extends CI_Model {
 	}
 
 	function __cancel_wishlist($id) {
-		$uid=$this->memcachedlib->sesresult['uid'];
-		$wudate=date('Y-m-d h:i:s');
-		$data=array('wstatus'=>2,'wupdateby'=>$uid,'wudate'=>$wudate);
+		$uid= $this -> memcachedlib -> sesresult['uid'];
+		$wudate = date('Y-m-d h:i:s');
+		$data = array('wstatus'=>2,'wupdateby'=>$uid,'wudate'=>$wudate);
         $this -> db -> where('wid', $id);
         return $this -> db -> update('wishlist_tab', $data);
 	}	
@@ -75,8 +75,9 @@ class Wishlist_model extends CI_Model {
 	function __update_wishlist_detail($id, $data) {
         $this -> db -> where('wdid', $id);
         return $this -> db -> update('wishlist_detail_tab', $data);
-	}	
-	function __delete_wishlist($id) {
-		return $this -> db -> query('UPDATE wishlist_tab SET cstatus=2 WHERE cid=' . $id);
+	}
+	
+	function __delete_wishlist_detail($id) {
+		return $this -> db -> query('UPDATE wishlist_detail_tab SET wstatus=2 WHERE wdid=' . $id);
 	}
 }

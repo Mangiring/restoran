@@ -57,10 +57,8 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 						<?php			
 			$jw= count($wishlist);
 			if($jw<1){
-				__set_error_msg(array('error' => 'Data masih kosong'));
+				__set_error_msg(array('error' => 'Pesanan masih kosong, silahkan isi wishlist terlebih dahulu.'));
 				redirect(site_url('wishlist/home/billing'));
-				
-			//die;
 			}
 								  foreach($wishlist as $k => $v) {
 									  $wname=$v -> wname;
@@ -105,7 +103,6 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
          <th>Harga</th>
 		 <th>Discount</th>
 		 <th>Total</th>
-          <!--th>Status</th-->
                                 </tr>
                               </thead>
                               <tbody>
@@ -144,7 +141,6 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		
 		</td>
 		<td><?php echo __get_rupiah($total,1);?></td>
-          <!--td><?php echo __get_status($v -> wstatus,1); ?></td-->
 		  <td>
               &nbsp;
           </td>
@@ -155,19 +151,19 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 			<tr><td>Before Tax</td><td></td><td></td><td></td><td><?php echo __get_rupiah($tt,1);?></td></tr>					  
 							  
 							  
-			<tr><td>Discount</td><td><input class="form-control" type="number" name="discc"value="<?=$v -> wdis;?>" ><p>%</p></td><td></td><td></td><td><?php echo __get_rupiah($tdis,1);?></td></tr>					  
-		<tr><td>PPN</td><td style="width:200px"><input class="form-control" value="0" type="number" name="ppn" value="<?=$v -> wppn;?>" ><p>%</p></td><td></td><td></td><td><?php echo __get_rupiah($tppn,1);?></td></tr>	
+			<tr><td>Discount</td><td><input class="form-control" type="number" name="discc"value="<?php echo $v -> wdis;?>" ><p>%</p></td><td></td><td></td><td><?php echo __get_rupiah($tdis,1);?></td></tr>					  
+		<tr><td>PPN</td><td style="width:200px"><input class="form-control" type="number" name="ppn" value="<?php echo ($v -> wppn ? $v -> wppn : 0);?>" ><p>%</p></td><td></td><td></td><td><?php echo __get_rupiah($tppn,1);?></td></tr>	
 		
 		<tr><td>Total</td><td style="width:200px">&nbsp;</td><td></td><td></td><td><?php echo __get_rupiah($v->wtotalall,1);?></td></tr>
 
-		<tr><td>Payment</td><td style="width:200px"><input onkeyup="formatharga(this.value,this)" value="0" class="form-control" type="text" name="wpayment" value="<?=$v -> wpayment;?>" ></td><td></td><td></td><td><?php echo __get_rupiah($v->wpayment,1);?></td></tr>
+		<tr><td>Payment</td><td style="width:200px"><input onkeyup="formatharga(this.value,this)" class="form-control" type="text" name="wpayment" value="<?php echo __get_rupiah($v -> wpayment,2);?>" ></td><td></td><td></td><td><?php echo __get_rupiah($v->wpayment,1);?></td></tr>
 		
 			
 		
 		<tr><td><input type=submit class="btn btn-primary" value="Save">
 		<a href="<?php echo site_url('wishlist/home/wishlist_cancel/'.$id.'/'.$wtid); ?>" class="btn btn-danger">Cancel Order</a>
 		<a class="btn btn-primary" target=blank href="<?php echo site_url('wishlist/home/billing2/' . $v -> wid); ?>">Print </a>
-		<a id="iframex" class="btn btn-danger" href="<?php echo site_url('wishlist/home/billing_approve/' . $v -> wid); ?>">Approve </a>
+		<a class="btn btn-danger" href="<?php echo site_url('wishlist/home/billing_approve/' . $v -> wid); ?>">Approve </a>
 		</td><td></td><td></td><td></td><td><?php echo __get_rupiah($v -> wbackpayment,1);?></td></tr>
                             </table>							
 							

@@ -40,7 +40,7 @@
           <th>Date</th>
           <th>Time</th>
           <th>Table</th>
-          <th>Name</th>
+          <th>Order Name</th>
           <th>Person</th>
           <th>Bruto</th>
           <th>Netto</th>

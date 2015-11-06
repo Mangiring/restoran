@@ -19,7 +19,6 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 				$('.non-retina').colorbox({rel:'group5', transition:'none'})
 				$('.retina').colorbox({rel:'group5', transition:'none', retinaImage:true, retinaUrl:true});
 				
-				//Example of preserving a JavaScript event for inline calls.
 				$("#click").click(function(){ 
 					$('#click').css({"background-color":"#f00", "color":"#fff", "cursor":"inherit"}).text("Open this window again and this message will still be here.");
 					return false;
@@ -48,15 +47,11 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
                           <header class="panel-heading">
                               Wishlist Menu
                           </header>
-						  <!--p><a id='iframe' href="../../../application/views/jquery.min.js">Outside Webpage (Iframe)</a></p-->
-						  	<!--p><a id='iframe' href="application/views/jquery.min.js">Outside Webpage (Iframe)</a></p>
-							<p><a id='iframe' href="application/views/jquery.min.js">Outside Webpage (Iframe2)</a></p-->
                           <div class="table-responsive">
 						  <form method=POST >
                             <table class="table">
                               <thead>
-						<?php			
-//print_r($wtid);						
+						<?php
 								  foreach($wishlist as $k => $v) {
 									  $wname=$v -> wname;
 									  $wstatus=$v -> wstatus;
@@ -70,14 +65,12 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 							if($wcount==0){
 										$wname="";
 									  $wstatus="";
-									  //$wtid="";
 									  $tname="";
 									  $person="";
 									  $notes="";
 									  $note="";
 								
 							}
-							//if($wcount>0){  
 						?>
                                 <tr>
           <th>Meja</th><th><?php echo $tname; ?></th></tr>
@@ -88,10 +81,6 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		  <!--tr><th valign=top >Notes</th><th>
 		  <textarea class="form-control" name="notes"><?php echo $notes; ?></textarea ></th></tr-->
 		  <input type=hidden name="notes">
-          <th>Status</th><th><?php echo __get_status($wstatus,1); ?></th></tr>
-                                </tr>
-								
-							<?php //} ?>
                               </thead>
                               <tbody>
 								  
@@ -102,24 +91,26 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
                             <table class="table">
                               <thead>
                                 <tr>
+          <th style="width:50px"></th>		  
           <th>Menu</th>		  
 		  <th>Qty</th>
          <th>Harga</th>
 		 <th>Total</th>
-          <th>Status</th>
 		  <th>Notes</th>
+		  <th></th>
                                 </tr>
                               </thead>
                               <tbody>
 								  
 		  <?php
+		  $ckprint = false;
 		  $t=0;
-		 //print_r($wishlist);die;
 		  foreach($wishlist as $k => $v) :
-		  
+		  if ($v -> wqty > 0) $ckprint = true;
+		  else $ckprint = false;
 		  ?>
-		
-                                        <tr>
+          <tr>
+          <td><input type="checkbox" value="<?php echo $v -> wdid; ?>" name="adp[]" class="adp"></td>
           
 		  <td><input type=hidden name="wdid[]" value="<?php echo $v -> wdid; ?>" >
 		  <input type=hidden name="harga[]" value="<?php echo $v -> wharga; ?>" >
@@ -132,31 +123,43 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		  <?php } ?>
 		  <option>0</option>
 		  </select></td>
-        <!--td><?php //echo $v -> wqty; ?></td-->
 		<td><?php echo __get_rupiah($v -> wharga,1);
 		$total=$v -> wqty * $v -> wharga;
 		$t=$total+$t;
 		?></td>
 		<td><?php echo __get_rupiah($total,1); ?></td>
-          <td><?php echo __get_status($v -> wstatus,1); ?></td>
 		  <td>
               <textarea class="form-control" name="note[]"><?php echo $v->wnote; ?></textarea >
+          </td>
+		  <td>
+              <a class="btn btn-danger" href="<?php echo site_url('wishlist/home/wishlist_menu_delete/' . $v -> wdid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-times"></i></a>
           </td>
 										</tr>
         <?php endforeach; ?>
 		
                               </tbody>
-		<tr><td>
-                                        <button type="submit" class="btn btn-primary"> <i class="fa fa-save"></i> Submit</button>
+		<tr><td></td><td>
+                                        <button type="submit" class="btn btn-primary" id="simpan"> <i class="fa fa-save"></i> Submit</button>
 										<a href="<?php echo site_url('wishlist/home/wishlist_cancel/'.$id.'/'.$wtid); ?>" class="btn btn-danger">Cancel</a>
-										<a target=blank href="<?php echo site_url('wishlist/home/wishlist_print/'.$id.'/'.$wtid); ?>" class="btn btn-primary">Print</a>
-										<button class="btn btn-default" type="button" onclick="location.href='javascript:history.go(-1);'">Back</button>
-		</td><td></td><td></td><td><?=$t;?></td></tr>
-                            </table>							
-							
-			</form>				
-							
+										<?php if ($ckprint == true) : ?>
+										<a href="javascript:void(0);" rel="<?php echo site_url('wishlist/home/wishlist_print/'.$id.'/'.$wtid); ?>" class="btn btn-primary adprint">Print</a>
+										<?php endif; ?>
+										<button class="btn btn-default" type="button" onclick="location.href='<?php echo site_url('wishlist'); ?>'">Back</button>
+		</td><td></td><td></td><td><?php echo __get_rupiah($t,1);?></td><td></td></tr>
+                            </table>
+			</form>
                           </div>
                       </section>
                   </div>
               </div>
+<script type="text/javascript">
+$('a.adprint').click(function(){
+	var foo = '';
+	$('.adp').each(function(){
+		if ($(this).val() > 0 && $(this).is(':checked')) {
+			foo += $(this).val()+'+';
+		}
+	});
+	window.open($(this).attr('rel')+'?'+foo, '_blank');
+});
+</script>

@@ -1,3 +1,28 @@
+<?php
+function __check_if_exists($id,$arr) {
+	for($i=0;$i<count($arr);++$i) {
+		if ($id == $arr[$i]) {
+			return true;
+		}
+	}
+	return false;
+}
+
+$wishlist2 = '';
+$res = array();
+$wids = explode('+',$_SERVER['QUERY_STRING']);
+
+for($i=0;$i<count($wids);++$i) {
+	if ($wids[$i]) $res[] = $wids[$i];
+}
+if (count($res) > 0) {
+	foreach($wishlist as $k => $v) {
+		if (__check_if_exists($v -> wdid,$res))
+		$wishlist2[] = $v;
+	}
+	$wishlist = $wishlist2;
+}
+?>
 <html>
 <style>
 html,body{margin:0;padding:0}
