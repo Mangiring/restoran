@@ -4050,6 +4050,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .breadcrumb > .active {
   color: #d7d7d7;
 }
+
 .pagination {
   display: inline-block;
   padding-left: 0;
@@ -5929,3 +5930,4 @@ td.visible-print {
     display: none !important;
   }
 }
+.box-footer > .pull-right > .pagination{padding-right:10px}

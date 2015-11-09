@@ -6,7 +6,7 @@
 				<div class="col-lg-12">
 					<h3 class="page-header"><i class="icon_cloud-download"></i> Item Receiving</h3>
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="./">Home</a></li>
+						<li><i class="fa fa-home"></i><a href="<?php echo site_url()?>">Home</a></li>
 						<li><i class="icon_cloud-download"></i>Item Receiving</li>
 					</ol>
 				</div>
@@ -20,7 +20,7 @@
 	<?php echo __get_error_msg(); ?>
                       <section class="panel">
                           <header class="panel-heading">
-                              Item Out
+                              Item Receiving
                           </header>
                           <div class="table-responsive">
                             <table class="table">
@@ -63,9 +63,9 @@ if($tgl <> $date){
                             </table>
                           </div>
                                 <div class="box-footer clearfix">
-                                    <ul class="pagination pagination-sm no-margin pull-right">
+                                    <div class="pull-right">
                                         <?php echo $pages; ?>
-                                    </ul>
+                                    </div>
                                 </div>
 
                       </section>

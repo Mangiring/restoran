@@ -5,7 +5,8 @@ class Wishlist_model extends CI_Model {
     }
 	
 	function __get_wishlist() {
-		return 'SELECT * FROM wishlist_tab WHERE (wstatus=1 OR wstatus=0) ORDER BY wid DESC';
+		$this -> db -> select('* FROM wishlist_tab WHERE (wstatus=1 OR wstatus=0) ORDER BY wid DESC');
+		return $this -> db -> get() -> result();
 	}
 
 	function __get_wishlistz() {
@@ -24,8 +25,8 @@ class Wishlist_model extends CI_Model {
 	}
 	
 	function __get_wishlistx($wid) {
-		return "SELECT *,(select tname from tables_tab d where d.tid=a.wtid) as tname FROM wishlist_tab a,wishlist_detail_tab b, menus_tab c WHERE a.wid=b.wid and b.wmid=c.mid and (a.wstatus=1 OR a.wstatus=0) AND b.wstatus=1 and a.wid='".$wid."' ORDER BY a.wid DESC";
-	
+		$this -> db -> select("*,(select tname from tables_tab d where d.tid=a.wtid) as tname FROM wishlist_tab a,wishlist_detail_tab b, menus_tab c WHERE a.wid=b.wid and b.wmid=c.mid and (a.wstatus=1 OR a.wstatus=0) AND b.wstatus=1 and a.wid='".$wid."' ORDER BY a.wid DESC");
+		return $this -> db -> get() -> result();
 	}
 	
 	function __get_wishlist_search($keyword) {
@@ -79,5 +80,20 @@ class Wishlist_model extends CI_Model {
 	
 	function __delete_wishlist_detail($id) {
 		return $this -> db -> query('UPDATE wishlist_detail_tab SET wstatus=2 WHERE wdid=' . $id);
+	}
+	
+	function ___get_wishlist_menus() {
+		$res = array();
+		$this -> db -> select('cid,cname FROM categories_tab WHERE ctype=1 AND cstatus=1');
+		$cat = $this -> db -> get() -> result();
+		foreach($cat as $k => $v) {
+			$this -> db -> select('mid,mname,mdesc,mdisc,mharga FROM menus_tab WHERE mstatus=1 AND mcid=' . $v -> cid);
+			$menus = $this -> db -> get() -> result();
+			foreach($menus as $k1 => $v1) {
+				$res[$v -> cid][$v -> cname][] = $v1;
+			}
+			$menus = array();
+		}
+		return $res;
 	}
 }

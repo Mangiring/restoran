@@ -5,7 +5,7 @@
 				<div class="col-lg-12">
 					<h3 class="page-header"><i class="icon_genius"></i> Tables</h3>
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="./">Home</a></li>
+						<li><i class="fa fa-home"></i><a href="<?php echo site_url()?>">Home</a></li>
 						<li><i class="icon_genius"></i>Tables</li>
 					</ol>
 				</div>
@@ -47,9 +47,9 @@
                             </table>
                           </div>
                                 <div class="box-footer clearfix">
-                                    <ul class="pagination pagination-sm no-margin pull-right">
+                                    <div class="pull-right">
                                         <?php echo $pages; ?>
-                                    </ul>
+                                    </div>
                                 </div>
 
                       </section>

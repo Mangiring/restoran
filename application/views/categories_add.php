@@ -5,7 +5,7 @@
 				<div class="col-lg-12">
 					<h3 class="page-header"><i class="fa fa-tags"></i> Category Menu Add</h3>
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="./">Home</a></li>
+						<li><i class="fa fa-home"></i><a href="<?php echo site_url()?>">Home</a></li>
 						<li><i class="fa fa-tags"></i>Category Menu</li>
 						<li>Category Menu Add</li>
 					</ol>

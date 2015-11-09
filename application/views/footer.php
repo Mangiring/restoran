@@ -105,19 +105,31 @@
 
 $(document).ready(function(){
 	if (/\/users/.test(window.location.href) === true) {
-		$('li.shuser > ul.sub').css({'display': 'block', 'overflow': 'hidden'});
+		$('ul.sidebar-menu > li').removeClass('active');
+		$('li.shuser').addClass('active');
 	}
 	else if (/\/menus|categories|raw_material|tables|categories_tables/.test(window.location.href) === true) {
-		$('li.shmaster > ul.sub').css({'display': 'block', 'overflow': 'hidden'});
+		$('ul.sidebar-menu > li').removeClass('active');
+		$('li.shmaster').addClass('active');
 	}
 	else if (/\/(inventory|itemout|itemreceiving|opname)/.test(window.location.href) === true) {
-		$('li.shstock > ul.sub').css({'display': 'block', 'overflow': 'hidden'});
+		$('ul.sidebar-menu > li').removeClass('active');
+		$('li.shstock').addClass('active');
 	}
 	else if (/\/wishlist/.test(window.location.href) === true) {
-		$('li.shorder > ul.sub').css({'display': 'block', 'overflow': 'hidden'});
+		$('ul.sidebar-menu > li').removeClass('active');
+		$('li.shorder').addClass('active');
+	}
+	else if (/\/peti_cash/.test(window.location.href) === true) {
+		$('li.shpeticash').addClass('active');
 	}
 	else if (/\/report_transaction|report_opname|report_itemout|report_peti_cash/.test(window.location.href) === true) {
-		$('li.shreport > ul.sub').css({'display': 'block', 'overflow': 'hidden'});
+		$('ul.sidebar-menu > li').removeClass('active');
+		$('li.shreport').addClass('active');
+	}
+	else {
+		$('ul.sidebar-menu > li').removeClass('active');
+		$('ul.sidebar-menu > li:nth-child(1)').addClass('active');
 	}
 });
 </script>

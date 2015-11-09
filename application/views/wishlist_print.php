@@ -82,9 +82,8 @@ foreach($wishlist as $k => $v) :
 ++$i;
 $t=$t+$v -> wqty;
 endforeach; ?>
-
 </tbody>
-<tr><td></td><td>Total </td><td><?=$t;?></td><td></td></tr>
-</table>	
+<tr><td></td><td>Total </td><td><?php echo $t;?></td><td></td></tr>
+</table>
 </body>
 </html>

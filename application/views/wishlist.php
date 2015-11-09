@@ -33,8 +33,9 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 				<div class="col-lg-12">
 					<h3 class="page-header"><i class="icon_cart"></i> Wishlist</h3>
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="./">Home</a></li>
+						<li><i class="fa fa-home"></i><a href="<?php echo site_url(); ?>">Home</a></li>
 						<li><i class="icon_cart"></i>Wishlist</li>
+						<li>Wishlist Order</li>
 					</ol>
 				</div>
 			</div>
@@ -77,7 +78,16 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		  <tr><th>Nama</th><th>
 		  <input type=text name="wname" class="form-control" value="<?php echo ($wname ? $wname : $tname); ?>" ></th></tr>
           <tr><th>Person</th><th>
-		  <input type=number class="form-control" name="person" value="<?php echo $person; ?>" ></th></tr>
+		  <select name="person" style="width:150px" class="form-control">
+		  <?php for($i=0;$i<=50;++$i) : ?>
+		  <?php if ($person == $i) : ?>
+		  <option value="<?php echo $i; ?>" selected><?php echo $i; ?></option>
+		  <?php else : ?>
+		  <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+		  <?php endif; ?>
+		  <?php endfor;?>
+		  </select>
+		  </th></tr>
 		  <!--tr><th valign=top >Notes</th><th>
 		  <textarea class="form-control" name="notes"><?php echo $notes; ?></textarea ></th></tr-->
 		  <input type=hidden name="notes">
@@ -106,8 +116,16 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		  $ckprint = false;
 		  $t=0;
 		  foreach($wishlist as $k => $v) :
-		  if ($v -> wqty > 0) $ckprint = true;
-		  else $ckprint = false;
+		  if ($v -> wqty > 0) {
+			  $ckprint = true;
+		  }
+		  else {
+			  $ckprint = false;
+			  break;
+		  }
+		  endforeach;
+		  
+		  foreach($wishlist as $k => $v) :
 		  ?>
           <tr>
           <td><input type="checkbox" value="<?php echo $v -> wdid; ?>" name="adp[]" class="adp"></td>

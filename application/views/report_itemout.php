@@ -6,10 +6,10 @@
           <section class="wrapper">
 		  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="icon_pushpin"></i> Report Item Out</h3>
+					<h3 class="page-header"><i class="icon_cloud-upload"></i> Report Item Out</h3>
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="./">Home</a></li>
-						<li><i class="icon_pushpin"></i>Report Item Out</li>
+						<li><i class="fa fa-home"></i><a href="<?php echo site_url()?>">Home</a></li>
+						<li><i class="icon_cloud-upload"></i>Report Item Out</li>
 					</ol>
 				</div>
 			</div>
@@ -26,7 +26,8 @@
 					</h3>
 					<br />
 					<div style="clear:both"></div>
-					<h3 class="box-title" style="margin-top:0;"><a href="<?php echo site_url('report_timeout/cleanup'); ?>" class="btn btn-default"><i class="fa fa-trash-o"></i> Clear</a></h3>
+					<h3 class="box-title" style="margin-top:0;"><a href="<?php echo site_url('report_timeout/cleanup'); ?>" class="btn btn-default"><i class="fa fa-trash-o"></i> Clear</a>
+					<a href="<?php echo site_url('report_itemout/export/excel?from='.$from.'&to=' . $to); ?>" class="btn btn-default"><i class="fa fa-file"></i> Export</a></h3>
 					<div style="clear:both"></div>
 	<?php echo __get_error_msg(); ?>
                       <section class="panel">

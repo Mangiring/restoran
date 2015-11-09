@@ -7,7 +7,7 @@
 				<div class="col-lg-12">
 					<h3 class="page-header"><i class="icon_cart"></i> Wishlist</h3>
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="./">Home</a></li>
+						<li><i class="fa fa-home"></i><a href="<?php echo site_url()?>">Home</a></li>
 						<li><i class="icon_cart"></i>Wishlist</li>
 					</ol>
 				</div>
@@ -20,11 +20,9 @@
                       <section class="panel">
 						  
 						  	
-                          <div class="table-responsive">
+                          <div class="table-responsive" style="padding:5px">
+							  <br />
                             <table class="table">
-                              <thead>
-                                
-                              </thead>
                               <tbody>
 							  
 	<?php 

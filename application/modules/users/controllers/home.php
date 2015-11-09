@@ -35,10 +35,6 @@ class Home extends MY_Controller {
 					__set_error_msg(array('error' => 'Penulisan email salah !!!'));
 					redirect(site_url('users/users_add'));
 				}
-				else if (!$branch) {
-					__set_error_msg(array('error' => 'Cabang harus dipilih salah satu !!!'));
-					redirect(site_url('users/users_add'));
-				}
 				else {
 					if ($this -> users_model -> __check_users($uemail) > 0) {
 						__set_error_msg(array('error' => 'Email sudah terdaftar !!!'));
@@ -63,6 +59,7 @@ class Home extends MY_Controller {
 		}
 		else {
 			$data['groups'] = $this -> users_lib -> __get_groups();
+			$data['permission'] = $this -> users_model -> __get_permission(1,0);
 			$this->load->view('users_add', $data);
 		}
 	}
@@ -89,10 +86,6 @@ class Home extends MY_Controller {
 					__set_error_msg(array('info' => 'Data berhasil di ubah.'));
 					redirect(site_url('users'));
 				}
-				else if (!$branch) {
-					__set_error_msg(array('error' => 'Cabang harus dipilih salah satu !!!'));
-					redirect(site_url('users/users_update/' . $id));
-				}
 				else {
 					$this -> users_model -> __update_users($uemail, $id, $group, 1, $status);
 					__set_error_msg(array('info' => 'Data berhasil di ubah.'));
@@ -108,6 +101,7 @@ class Home extends MY_Controller {
 		else {
 			$data['id'] = $id;
 			$data['users'] = $this -> users_model -> __get_detail_users($id);
+			$view['permission'] = $this -> users_model -> __get_permission(2,$id);
 			$data['groups'] = $this -> users_lib -> __get_groups($data['users'][0] -> ugid);
 			$this->load->view('users_update', $data);
 		}

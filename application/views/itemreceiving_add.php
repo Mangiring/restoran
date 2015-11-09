@@ -36,7 +36,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 				<div class="col-lg-12">
 					<h3 class="page-header"><i class="icon_cloud-download"></i> Item Receiving Add</h3>
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="./">Home</a></li>
+						<li><i class="fa fa-home"></i><a href="<?php echo site_url()?>">Home</a></li>
 						<li><i class="icon_cloud-download"></i>Item Receiving</li>
 						<li>Item Receiving Add</li>
 					</ol>

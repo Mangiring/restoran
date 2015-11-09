@@ -7,7 +7,7 @@ class Memcachedlib {
     function __construct() {
 		$this -> _ci =& get_instance();
         if (!session_id()) {
-            session_name( 'DistPal' );
+            session_name( 'RestPal' );
             session_start();
         }
         
@@ -31,15 +31,23 @@ class Memcachedlib {
         $this -> memcached_obj -> addServer($this->_memcache_conf['default']['hostname'], $this->_memcache_conf['default']['port']);
 
         $this -> sesresult = self::get('__login');
-
 		if (isset($this -> sesresult['uemail']) && isset($this -> sesresult['uid']) && isset($this -> sesresult['ubranchid']) && isset($this -> sesresult['skey']) == md5(sha1($this -> sesresult['ugid'].$this -> sesresult['uemail']) . 'dist'))
 			$this -> login = true;
 		else
 			$this -> login = false;
         self::__check_login();
         self::__save_post();
-        //~ self::delete('__request_suggestion', true);
+        self::__user_priveleges();
     }
+	
+	function __user_priveleges() {
+		if ($this -> login) {
+			foreach($this -> sesresult['permission'] as $k => $v) :
+				if (preg_match('/'.addcslashes($v['purl'], '/').'/i', $_SERVER['REQUEST_URI']))
+					if ($v['aaccess'] <> 1) redirect('');
+			endforeach;
+        }
+	}
     
     function __save_post() {
 		if (preg_match('/\_update/i',$_SERVER['REQUEST_URI'])) return false;
@@ -77,7 +85,7 @@ class Memcachedlib {
         else
 			return json_decode($this -> memcached_obj -> get($this -> ses_id . $key), true);
     }
-
+	
     function set_key($key,$keyGlobal) {
 		if ($keyGlobal)
 			return $key;

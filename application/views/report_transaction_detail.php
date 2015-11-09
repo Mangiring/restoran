@@ -8,8 +8,9 @@
 				<div class="col-lg-12">
 					<h3 class="page-header"><i class="icon_grid-3x3"></i> Report Transaction Detail</h3>
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="./">Home</a></li>
-						<li><i class="icon_grid-3x3"></i>Report Transaction Detail</li>
+						<li><i class="fa fa-home"></i><a href="<?php echo site_url()?>">Home</a></li>
+						<li><i class="icon_grid-3x3"></i>Report Transaction</li>
+						<li>Transaction Detail</li>
 					</ol>
 				</div>
 			</div>
@@ -29,7 +30,7 @@
 	<?php echo __get_error_msg(); ?>
                       <section class="panel">
                           <header class="panel-heading">
-                              List Transaction Detail
+                              Transaction Detail
                           </header>
                       <section class="panel">
                           <div class="table-responsive">
@@ -50,13 +51,13 @@
                               <tbody>
 								  <tr>
 									  <td><?php echo __get_email($transaction[0] -> wcreateby);?></td>
-									  <td><?php echo date('d/m/Y H:i',strtotime($transaction[0] -> wcdate));?></td>
+									  <td><?php echo __get_date(strtotime($transaction[0] -> wcdate),3);?></td>
 									  <td><?php echo __get_email($transaction[0] -> wupdateby);?></td>
-									  <td><?php echo date('d/m/Y H:i',strtotime($transaction[0] -> wudate));?></td>
+									  <td><?php echo __get_date(strtotime($transaction[0] -> wudate),3);?></td>
 									  <td><?php echo __get_email($transaction[0] -> bcreateby);?></td>
-									  <td><?php echo date('d/m/Y H:i',strtotime($transaction[0] -> bcdate));?></td>
+									  <td><?php echo __get_date(strtotime($transaction[0] -> bcdate),3);?></td>
 									  <td><?php echo __get_email($transaction[0] -> bupdateby);?></td>
-									  <td><?php echo date('d/m/Y H:i',strtotime($transaction[0] -> budate));?></td>
+									  <td><?php echo __get_date(strtotime($transaction[0] -> budate),3);?></td>
 								  </tr>
                               </tbody>
 								</table>
@@ -69,6 +70,7 @@
                               <thead>
                                 <tr>
           <th>Date</th>
+          <th>Customer Name</th>
           <th>Person</th>
           <th>Menu</th>
           <th>Qty</th>
@@ -97,6 +99,7 @@ if($tgl <> $date){
 	echo __get_date(strtotime($tgl),1);
 }
 ?></td>
+          <td><?php echo $v -> wname; ?></td>
           <td><?php echo $v -> person; ?></td>
           <td><?php echo $v -> mname; ?></td>
           <td><?php echo $v -> wqty; ?></td>

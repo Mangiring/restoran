@@ -20,7 +20,6 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 				$('.non-retina').colorbox({rel:'group5', transition:'none'})
 				$('.retina').colorbox({rel:'group5', transition:'none', retinaImage:true, retinaUrl:true});
 				
-				//Example of preserving a JavaScript event for inline calls.
 				$("#click").click(function(){ 
 					$('#click').css({"background-color":"#f00", "color":"#fff", "cursor":"inherit"}).text("Open this window again and this message will still be here.");
 					return false;
@@ -35,8 +34,9 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 				<div class="col-lg-12">
 					<h3 class="page-header"><i class="icon_currency"></i> Billing</h3>
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="./">Home</a></li>
+						<li><i class="fa fa-home"></i><a href="<?php echo site_url()?>">Home</a></li>
 						<li><i class="icon_currency"></i>Billing</li>
+						<li>Billing Close</li>
 					</ol>
 				</div>
 			</div>
@@ -52,8 +52,8 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 
                           <div class="table-responsive">
 						  <form method="POST">
-                            <table  border=0 width=50%  >
-                              <thead>
+							  <br />
+                            <table border="0" style="width:50%;margin-left:5px">
 						<?php			
 			$jw= count($wishlist);
 			if($jw<1){
@@ -76,23 +76,10 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 									  $person="";
 								
 							}
-							//if($wcount>0){  
 						?>
-                                <tr>
-          <th>&nbsp;&nbsp;</th><th>Meja</th><th><?php echo $tname; ?></th><th></th></tr>
-		  <tr><th>&nbsp;&nbsp;</th><th>Nama</th><th><?php echo $wname; ?>
-		  <tr><th>&nbsp;&nbsp;</th><th>Person</th><th><?php echo $person; ?>
-		  <input type=hidden name="wname" value="<?php echo $wname; ?>" ></th><th></th></tr>
-         
-          <th>&nbsp;&nbsp;</th><th>Status</th><th><?php echo __get_status($wstatus,1); ?></th><th></th></tr>
-                                </tr>
-								
-							<?php //} ?>
-                              </thead>
-                              <tbody>
-								  
-		  
-                              </tbody>
+		  <tr><td><b>Table</b></td><td>: <?php echo $tname; ?></td><td></td></tr>
+		  <tr><td><b>Customer Name</b></td><td>: <?php echo $wname; ?></td><td></td></tr>
+		  <tr><td><b>Person</b></td><td>: <?php echo $person; ?><input type=hidden name="wname" value="<?php echo $wname; ?>" ></td><td></td></tr>
                             </table><br>
 							
                             <table class="table">
@@ -137,22 +124,20 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		
 		$t=$totaldis+$t;
 		$tsisa= ($v->wpayment) - ($v -> wtotalall);
-		?> %
+		?>%
 		
 		</td>
 		<td><?php echo __get_rupiah($total,1);?></td>
-		  <td>
-              &nbsp;
-          </td>
 										</tr>
         <?php endforeach; ?>
 		
                               </tbody>
+                              <tfoot>
 			<tr><td>Before Tax</td><td></td><td></td><td></td><td><?php echo __get_rupiah($tt,1);?></td></tr>					  
 							  
 							  
-			<tr><td>Discount</td><td><input class="form-control" type="number" name="discc"value="<?php echo $v -> wdis;?>" ><p>%</p></td><td></td><td></td><td><?php echo __get_rupiah($tdis,1);?></td></tr>					  
-		<tr><td>PPN</td><td style="width:200px"><input class="form-control" type="number" name="ppn" value="<?php echo ($v -> wppn ? $v -> wppn : 0);?>" ><p>%</p></td><td></td><td></td><td><?php echo __get_rupiah($tppn,1);?></td></tr>	
+			<tr><td>Discount (%)</td><td><input class="form-control" type="number" name="discc"value="<?php echo $v -> wdis;?>" ></td><td></td><td></td><td><?php echo __get_rupiah($tdis,1);?></td></tr>					  
+		<tr><td>PPN (%)</td><td style="width:200px"><input class="form-control" type="number" name="ppn" value="<?php echo ($v -> wppn ? $v -> wppn : 0);?>" ></p></td><td></td><td></td><td><?php echo __get_rupiah($tppn,1);?></td></tr>	
 		
 		<tr><td>Total</td><td style="width:200px">&nbsp;</td><td></td><td></td><td><?php echo __get_rupiah($v->wtotalall,1);?></td></tr>
 
@@ -162,9 +147,12 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		
 		<tr><td><input type=submit class="btn btn-primary" value="Save">
 		<a href="<?php echo site_url('wishlist/home/wishlist_cancel/'.$id.'/'.$wtid); ?>" class="btn btn-danger">Cancel Order</a>
+		<?php if ($v -> wpayment && $v -> wbackpayment >= 0) : ?>
 		<a class="btn btn-primary" target=blank href="<?php echo site_url('wishlist/home/billing2/' . $v -> wid); ?>">Print </a>
 		<a class="btn btn-danger" href="<?php echo site_url('wishlist/home/billing_approve/' . $v -> wid); ?>">Approve </a>
-		</td><td></td><td></td><td></td><td><?php echo __get_rupiah($v -> wbackpayment,1);?></td></tr>
+		<?php endif; ?>
+		</td><td></td><td></td><td></td><td><?php echo __get_rupiah(($v -> wpayment ? $v -> wbackpayment : 0),1);?></td></tr>
+		</tfoot>
                             </table>							
 							
 			</form>				

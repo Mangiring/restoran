@@ -141,6 +141,7 @@ function __get_peti_cash_type($id,$type) {
 }
 
 function __get_email($uid) {
+	if (!$uid) return false;
     $CI =& get_instance();
 	$CI -> load -> model('users/users_model');
 	$r = $CI -> users_model -> __get_email($uid);

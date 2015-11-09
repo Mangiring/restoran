@@ -3,10 +3,10 @@
           <section class="wrapper">
 		  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="icon_cloud"></i> Item Out</h3>
+					<h3 class="page-header"><i class="icon_cloud-upload"></i> Item Out</h3>
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="./">Home</a></li>
-						<li><i class="icon_cloud"></i>Item Out</li>
+						<li><i class="fa fa-home"></i><a href="<?php echo site_url()?>">Home</a></li>
+						<li><i class="icon_cloud-upload"></i>Item Out</li>
 					</ol>
 				</div>
 			</div>
@@ -45,9 +45,9 @@
                             </table>
                           </div>
                                 <div class="box-footer clearfix">
-                                    <ul class="pagination pagination-sm no-margin pull-right">
+                                    <div class="pull-right">
                                         <?php echo $pages; ?>
-                                    </ul>
+                                    </div>
                                 </div>
 
                       </section>

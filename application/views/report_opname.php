@@ -8,7 +8,7 @@
 				<div class="col-lg-12">
 					<h3 class="page-header"><i class="icon_pushpin"></i> Report Opname</h3>
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="./">Home</a></li>
+						<li><i class="fa fa-home"></i><a href="<?php echo site_url()?>">Home</a></li>
 						<li><i class="icon_pushpin"></i>Report Opname</li>
 					</ol>
 				</div>
@@ -26,7 +26,8 @@
 					</h3>
 					<br />
 					<div style="clear:both"></div>
-					<h3 class="box-title" style="margin-top:0;"><a href="<?php echo site_url('report_opname/cleanup'); ?>" class="btn btn-default"><i class="fa fa-trash-o"></i> Clear</a></h3>
+					<h3 class="box-title" style="margin-top:0;"><a href="<?php echo site_url('report_opname/cleanup'); ?>" class="btn btn-default"><i class="fa fa-trash-o"></i> Clear</a>
+					<a href="<?php echo site_url('report_opname/export/excel?from='.$from.'&to=' . $to); ?>" class="btn btn-default"><i class="fa fa-file"></i> Export</a></h3></h3>
 					<div style="clear:both"></div>
 	<?php echo __get_error_msg(); ?>
                       <section class="panel">

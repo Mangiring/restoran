@@ -81,12 +81,16 @@ $route['itemreceiving/receiving_rawmaterial_delete/(:num)'] = 'itemreceiving/hom
 
 $route['report_peti_cash/?(:num)?'] = 'report_peti_cash/home/index/$1';
 $route['report_peti_cash/cleanup'] = 'report_peti_cash/home/cleanup';
+$route['report_peti_cash/export/(html|excel)'] = 'report_peti_cash/home/export/$1';
 $route['report_transaction/?(:num)?'] = 'report_transaction/home/index/$1';
 $route['report_transaction/cleanup'] = 'report_transaction/home/cleanup';
+$route['report_transaction/export/(html|excel)'] = 'report_transaction/home/export/$1';
 $route['report_opname/?(:num)?'] = 'report_opname/home/index/$1';
 $route['report_opname/cleanup'] = 'report_opname/home/cleanup';
+$route['report_opname/export/(html|excel)'] = 'report_opname/home/export/$1';
 $route['report_itemout/?(:num)?'] = 'report_itemout/home/index/$1';
 $route['report_itemout/cleanup'] = 'report_itemout/home/cleanup';
+$route['report_itemout/export/(html|excel)'] = 'report_itemout/home/export/$1';
 
 $route['wishlist/?(:num)?'] = 'wishlist/home/index/$1';
 $route['wishlist/wishlist_add/?(:num)?'] = 'wishlist/home/wishlist_add/$1';

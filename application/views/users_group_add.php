@@ -3,9 +3,9 @@
           <section class="wrapper">
 		  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="icon_cog"></i> Users Group Add</h3>
+					<h3 class="page-header"><i class="icon_group"></i> Users Group Add</h3>
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="./">Home</a></li>
+						<li><i class="fa fa-home"></i><a href="<?php echo site_url()?>">Home</a></li>
 						<li><i class="fa fa-users"></i>Users</li>
 						<li><i class="icon_group"></i>Users Group</li>
 						<li>Users Group Add</li>
@@ -37,6 +37,28 @@
                                             <label class="col-lg-2 control-label">Status</label>
                                             <?php echo __get_status(0,2); ?>
                                         </div>
+                                  <div class="form-group">
+									  
+                                      <div class="col-lg-12">
+                                    <table class="table table-bordered">
+      <thead>
+		<tr>
+		<th>Name</th>
+		<th>Access</th>
+		</tr>
+      </thead>
+      <tbody>
+        <?php foreach($permission as $k => $v) : ?>
+		<tr>
+        <td><?php echo ($v -> pparent != 0 ? '-- '.$v -> pdesc.'' : $v -> pdesc); ?></td>
+        <td><label>Yes <input type="radio" class="uniform" value="1" name="perm[<?php echo $v -> pid?>]"></label>&nbsp;<label> No <input class="uniform" type="radio" value="0" name="perm[<?php echo $v -> pid?>]" checked></label></td>
+        </tr>
+        <?php endforeach; ?>
+      </tbody>
+      </table>
+                            </div>
+<br />
+								</div>
                                   <div class="form-group">
                                       <label class="col-lg-2 control-label"></label>
                                       <div class="col-lg-10">

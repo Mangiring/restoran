@@ -1,4 +1,5 @@
-  <!-- CSS goes in the document HEAD or added to your external stylesheet -->
+<html>
+<script src="<?php echo site_url('application/views/js/jquery.js'); ?>"></script>
 <style type="text/css">
 table.gridtable {
 	font-family: verdana,arial,sans-serif;
@@ -78,7 +79,43 @@ table.gridtable td {
     width: 16px;
     height: 16px;
 }
+.btn{
+display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.428571429;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    font-weight: 300;
+    -webkit-transition: all 0.15s;
+    -moz-transition: all 0.15s;
+    transition: all 0.15s;
+    color: #ffffff;
+    background-color: #007aff;
+    border-color: #007aff;	
+}
+.btn:hover{
+    color: #007aff;
+    border-color: #007aff;
+    background: transparent;	
+}
+.titlecat {border:1px solid #B3B3B3;padding:3px;font-size:24px;background-color:#ff2d55;color:#fff;cursor:pointer}
+.nhide{display:none;}
+.nshow{display:block;}
+.nactive {background-color:#BF0000!important;}
 </style>
+<body>
 <!-- Table goes in the document BODY -->
 
   <!--main content start-->
@@ -89,48 +126,70 @@ table.gridtable td {
             <section class="panel">
                           <header class="panel-heading">
                               <h2>List Menu</h2>						  
-							  
+							  <hr />
                           </header>
                           <div class="table-responsive">
 						  <form method="POST">
+							  <?php $i=0; ?>
+							  <?php foreach($menus as $k => $v) : ?>
+							  <?php foreach($v as $k1 => $v1) : ?>
+							  <div class="ambrul">
+							  <div class="titlecat <?php echo ($i==0 ? 'nactive' : '');?>" wew="wam<?php echo $k;?>">
+							  <?php echo $k1; ?>
+							  </div>
+							  <div class="blabla wam<?php echo $k;?> <?php echo ($i==0 ? 'nshow' : 'nhide');?>">
                             <table class="gridtable" border="0" width="100%">
                               <thead>
 							  
                                 <tr>
-								<th>&nbsp;</th>
-          <th>Category</th>
-          <th>Name</th>
-          <th>Discount</th>
-          <th>Description</th>
+								<th style="width:10%;">&nbsp;</th>
+          <th style="width:30%;">Name</th>
+          <th style="width:10%;text-align:center;">Discount</th>
+          <th style="width:50%;">Description</th>
                                 </tr>
                               </thead>
                               <tbody>
-								  
 		  <?php
-		  foreach($menus as $k => $v) :
+		  foreach($v1 as $k2 => $v2) :
 		  ?>
                                         <tr>
-			<td style="text-align:center;"><input class="myinput large" type=checkbox name="mid[]" value="<?php echo $v -> mid.'-'.$v -> mharga.'-'.$v -> mdisc; ?>" ></td>							
-          <td><?php echo $v -> cname; ?></td>
-          <td><?php echo $v -> mname; ?></td>
-          <td><?php echo $v -> mdisc; ?>%</td>
-          <td><?php echo substr($v -> mdesc,0,150); ?></td>
+		  <td style="text-align:center;width:10%"><input class="myinput large" type=checkbox name="mid[]" value="<?php echo $v2 -> mid.'-'.$v2 -> mharga.'-'.$v2 -> mdisc; ?>" ></td>							
+          <td><?php echo $v2 -> mname; ?></td>
+          <td style="text-align:center;"><?php echo $v2 -> mdisc; ?>%</td>
+          <td><?php echo $v2 -> mdesc; ?></td>
 		  
 		
 										</tr>
         <?php endforeach; ?>
-		<tr><td><input type=submit >
-		
-		</td></tr>
                               </tbody>
                             </table>
+                            </div>
+                            </div>
+                            <br />
+        <?php endforeach; ?>
+        <?php ++$i; ?>
+        <?php endforeach; ?>
+							<button type="submit" class="btn btn-primary"> <i class="fa fa-save"></i> Submit</button>
 							</form>
                           </div>
-                                <div class="box-footer clearfix">
-                                    <ul class="pagination pagination-sm no-margin pull-right">
-                                        <?php echo $pages; ?>
-                                    </ul>
-                                </div>
-
                       </section>
                           </div>
+
+
+</body>
+</html>
+<script>
+$(document).ready(function(){
+	$('.titlecat').click(function(){
+		if ($('.'+$(this).attr('wew')).hasClass('nshow')) return false;
+		$('.ambrul > div.blabla').hide('slow');
+		$('.ambrul > div.blabla').addClass('nhide');
+		$('.ambrul > div.blabla').removeClass('nshow');
+		$('div.nhide').prev().removeClass('nactive');
+		
+		$('.'+$(this).attr('wew')).show('slow');
+		$('.'+$(this).attr('wew')).addClass('nshow');
+		$('div.nshow').prev().addClass('nactive');
+	});
+});
+</script>

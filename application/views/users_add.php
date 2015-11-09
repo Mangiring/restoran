@@ -3,9 +3,9 @@
           <section class="wrapper">
 		  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="icon_cog"></i> Users Add</h3>
+					<h3 class="page-header"><i class="fa fa-users"></i> Users Add</h3>
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="./">Home</a></li>
+						<li><i class="fa fa-home"></i><a href="<?php echo site_url()?>">Home</a></li>
 						<li><i class="fa fa-users"></i>Users</li>
 						<li>Users Add</li>
 					</ol>
@@ -35,7 +35,7 @@
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                      <label class="col-lg-2 control-label">PAssword</label>
+                                      <label class="col-lg-2 control-label">Password</label>
                                       <div class="col-lg-10">
                                           <input type="password" name="newpass" class="form-control">
                                       </div>

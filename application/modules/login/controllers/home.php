@@ -17,7 +17,7 @@ class Home extends MY_Controller {
 			$upass = $this -> input -> post('upass', true);
 			$remember = (int) $this -> input -> post('remember');
 			$this -> session -> unset_userdata('error');
-			
+
 			if (!$uemail || !$upass) {
 				__set_error_msg(array('error' => 'Email dan password harus di isi !!!'));
 				redirect(site_url('login'));
