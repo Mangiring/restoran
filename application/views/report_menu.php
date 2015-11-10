@@ -1,4 +1,3 @@
-
     <link href="<?php echo site_url('application/views/css/daterangepicker-bs3.css'); ?>" rel="stylesheet" />   
     <script src="<?php echo site_url('application/views/js/daterangepicker.js'); ?>"></script>
       <!--main content start-->
@@ -6,17 +5,16 @@
           <section class="wrapper">
 		  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="icon_cloud-upload"></i> Report Item Out</h3>
+					<h3 class="page-header"><i class="icon_balance"></i>Report Menu</h3>
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="<?php echo site_url()?>">Home</a></li>
-						<li><i class="icon_cloud-upload"></i>Report Item Out</li>
+						<li><i class="icon_balance"></i>Report Menu</li>
 					</ol>
 				</div>
 			</div>
               <!-- page start-->
               <div class="row">
-				  
-						  
+
                               <form class="form-horizontal " method="post">
                   <div class="col-lg-12">
 					<h3 class="box-title" style="margin-top:0;width:30%;">Sort Date
@@ -26,54 +24,63 @@
 					</h3>
 					<br />
 					<div style="clear:both"></div>
-					<h3 class="box-title" style="margin-top:0;"><a href="<?php echo site_url('report_timeout/cleanup'); ?>" class="btn btn-default"><i class="fa fa-trash-o"></i> Clear</a>
+					<h3 class="box-title" style="margin-top:0;">
 					<?php if ($from && $to) : ?>
-					<a href="<?php echo site_url('report_itemout/export/excel?from='.$from.'&to=' . $to); ?>" class="btn btn-default"><i class="fa fa-file"></i> Export</a>
+					<a href="<?php echo site_url('report_menu/export/excel?from='.$from.'&to=' . $to); ?>" class="btn btn-default"><i class="fa fa-file"></i> Export</a>
 					<?php endif; ?>
 					</h3>
 					<div style="clear:both"></div>
 	<?php echo __get_error_msg(); ?>
                       <section class="panel">
                           <header class="panel-heading">
-                              List Opname <?php echo ($from ? '- ' . __get_date(strtotime($from),1) : ''); ?> <?php echo ($to ? __get_date(strtotime($to),1) : ''); ?>
+                              List Menu <?php echo ($from ? '- ' . __get_date(strtotime($from),1) : ''); ?> <?php echo ($to ? __get_date(strtotime($to),1) : ''); ?>
                           </header>
                           <div class="table-responsive">
+		  <?php
+		  foreach($category as $k1 => $v1) :
+		  ?>
+		  <h3 style="padding-left:8px;border-bottom:1px solid #ccc"><?php echo $v1 -> cname; ?></h3>
                             <table class="table">
                               <thead>
                                 <tr>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Raw Material</th>
-          <th>Stock Out</th>
-          <th>Stock Final</th>
-          <th>Material Left</th>
-          <th>Description</th>
+          <th style="width:200px">Name</th>
+          <th style="width:100px">Harga</th>
+          <th style="width:50px">Discount</th>
+          <th style="width:200px">Description</th>
+          <th style="width:50px">Total</th>
                                 </tr>
                               </thead>
                               <tbody>
 		  <?php
-		  $tgl = '';
-		  foreach($report_itemout as $k => $v) :
+		  $rtotal = 0;
+		  $htotal = 0;
+		  $dsc = 0;
+		  $menus = $this -> reportmenu_model -> __get_menu($v1 -> cid);
+		  foreach($menus as $k => $v) :
+		  $total = $this -> reportmenu_model -> __get_total_report_menu($v -> mid,$from,$to);
+		  if ($total[0] -> totalmenu > 0) {
 		  ?>
                                         <tr>
-<td>
-<?php
-$date = date('Y-m-d',$v -> idate);
-if($tgl <> $date){
-	$tgl = $date;
-	echo __get_date(strtotime($tgl),1);
-}
-?></td>
-          <td><?php echo date('H:i',$v -> idate); ?></td>
-          <td><?php echo $v -> rname; ?></td>
-          <td><?php echo $v -> istockout; ?></td>
-          <td><?php echo $v -> istock; ?></td>
-          <td><?php echo $v -> iadjust; ?></td>
-          <td><?php echo $v -> idesc; ?></td>
+          <td><?php echo $v -> mname; ?></td>
+          <td><?php echo __get_rupiah($v -> mharga,1); ?></td>
+          <td><?php echo $v -> mdisc; ?>%</td>
+          <td><?php echo substr($v -> mdesc,0,150); ?></td>
+          <td><?php echo $total[0] -> totalmenu; ?></td>
 										</tr>
-        <?php endforeach; ?>
+        <?php
+        $dsc = ($v -> mharga * $v -> mdisc) / 100;
+        $htotal += ($v -> mharga - $dsc) * $total[0] -> totalmenu;
+		}
+		$rtotal += $total[0] -> totalmenu;
+        endforeach;
+        $menus = array();
+        ?>
                               </tbody>
+                              <tfoot>
+                              <tr><td>Total</td><td><?php echo __get_rupiah($htotal,1); ?></td><td></td><td></td><td><?php echo $rtotal; ?></td></tr>
+                              </tfoot>
                             </table>
+        <?php endforeach; ?>
                           </div>
                       </section>
                   </div>

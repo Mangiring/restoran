@@ -146,9 +146,9 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 			
 		
 		<tr><td><input type=submit class="btn btn-primary" value="Save">
-		<a href="<?php echo site_url('wishlist/home/wishlist_cancel/'.$id.'/'.$wtid); ?>" class="btn btn-danger">Cancel Order</a>
-		<?php if ($v -> wpayment && $v -> wbackpayment >= 0) : ?>
+		<a href="<?php echo site_url('wishlist/home/wishlist_cancel/'.$id.'/'.$wtid); ?>" class="btn btn-danger" onclick="return confirm('Anda yakin ingin batalkan pemesanan ?');">Cancel Order</a>
 		<a class="btn btn-primary" target=blank href="<?php echo site_url('wishlist/home/billing2/' . $v -> wid); ?>">Print </a>
+		<?php if ($v -> wpayment && $v -> wbackpayment >= 0) : ?>
 		<a class="btn btn-danger" href="<?php echo site_url('wishlist/home/billing_approve/' . $v -> wid); ?>">Approve </a>
 		<?php endif; ?>
 		</td><td></td><td></td><td></td><td><?php echo __get_rupiah(($v -> wpayment ? $v -> wbackpayment : 0),1);?></td></tr>

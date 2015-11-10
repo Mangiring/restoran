@@ -1,4 +1,5 @@
 <html>
+	<script>window.print();</script>
 <body>
 <style>
 html,body{margin:0;padding:0}

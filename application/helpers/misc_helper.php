@@ -23,7 +23,6 @@ function __get_status($status, $type) {
 		if($status==1){ $st='Active';}
 		else if ($status==0){ $st='Inactive';}
 		else if ($status==3){ $st='Booked';}
-		//return ($status == 1 ? 'Active' : 'Inactive');
 		return $st;
 	}else{
 		return ($status == 1 ? 'Active <input type="radio" checked="checked" name="status" value="1" /> Inactive <input type="radio" name="status" value="0" />' : 'Active <input type="radio" name="status" value="1" /> Inactive <input type="radio" checked="checked" name="status" value="0" />');
@@ -31,6 +30,7 @@ function __get_status($status, $type) {
 }
 
 function __get_rupiah($num,$type=1) {
+	if (!$num) return false;
 	if ($type == 1) return "Rp. " . number_format($num,0,',','.');
 	elseif ($type == 2) return number_format($num,0,',',',');
 	elseif ($type == 3) return number_format($num,0,',','.');

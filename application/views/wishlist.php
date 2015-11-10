@@ -76,7 +76,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
                                 <tr>
           <th>Meja</th><th><?php echo $tname; ?></th></tr>
 		  <tr><th>Nama</th><th>
-		  <input type=text name="wname" class="form-control" value="<?php echo ($wname ? $wname : $tname); ?>" ></th></tr>
+		  <input type=text name="wname" class="form-control" value="<?php echo ($wname ? $wname : ($tname ? $tname : 'Table')); ?>" ></th></tr>
           <tr><th>Person</th><th>
 		  <select name="person" style="width:150px" class="form-control">
 		  <?php for($i=0;$i<=50;++$i) : ?>
@@ -158,7 +158,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
                               </tbody>
 		<tr><td></td><td>
                                         <button type="submit" class="btn btn-primary" id="simpan"> <i class="fa fa-save"></i> Submit</button>
-										<a href="<?php echo site_url('wishlist/home/wishlist_cancel/'.$id.'/'.$wtid); ?>" class="btn btn-danger">Cancel</a>
+										<a href="<?php echo site_url('wishlist/home/wishlist_cancel/'.$id.'/'.$wtid); ?>" class="btn btn-danger" onclick="return confirm('Anda yakin ingin batalkan pemesanan ?');">Cancel</a>
 										<?php if ($ckprint == true) : ?>
 										<a href="javascript:void(0);" rel="<?php echo site_url('wishlist/home/wishlist_print/'.$id.'/'.$wtid); ?>" class="btn btn-primary adprint">Print</a>
 										<?php endif; ?>
@@ -171,6 +171,15 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
                   </div>
               </div>
 <script type="text/javascript">
+$('#simpan').click(function(){
+	var person = $('select[name="person"]').val();
+	$('div.alert-danger').remove();
+	if (person == 0) {
+		$('.row > .col-lg-12').append('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>Person harus di isi !!!</div>');
+		return false;
+	}
+	return true;
+});
 $('a.adprint').click(function(){
 	var foo = '';
 	$('.adp').each(function(){

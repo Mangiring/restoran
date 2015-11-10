@@ -143,9 +143,14 @@ display: inline-block;
 							  
                                 <tr>
 								<th style="width:10%;">&nbsp;</th>
-          <th style="width:30%;">Name</th>
+								<?php if ($k == 8) : ?>
+								          <th style="width:30%;">Name</th>
           <th style="width:10%;text-align:center;">Discount</th>
           <th style="width:50%;">Description</th>
+          <?php else : ?>
+          <th style="width:70%;">Name</th>
+          <th style="width:20%;text-align:center;">Discount</th>
+          <?php endif; ?>
                                 </tr>
                               </thead>
                               <tbody>
@@ -156,8 +161,9 @@ display: inline-block;
 		  <td style="text-align:center;width:10%"><input class="myinput large" type=checkbox name="mid[]" value="<?php echo $v2 -> mid.'-'.$v2 -> mharga.'-'.$v2 -> mdisc; ?>" ></td>							
           <td><?php echo $v2 -> mname; ?></td>
           <td style="text-align:center;"><?php echo $v2 -> mdisc; ?>%</td>
-          <td><?php echo $v2 -> mdesc; ?></td>
-		  
+								<?php if ($k == 8) : ?>
+								<td><?php echo $v2 -> mdesc; ?></td>
+								<?php endif; ?>
 		
 										</tr>
         <?php endforeach; ?>

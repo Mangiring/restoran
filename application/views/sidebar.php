@@ -2,7 +2,7 @@
       <aside>
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
-              <ul class="sidebar-menu">                
+              <ul class="sidebar-menu">
                   <li class="active">
                       <a class="" href="<?php echo site_url(); ?>">
                           <i class="icon_house_alt"></i>
@@ -103,6 +103,7 @@
 							<?php if (__get_roles('ReportItemOut')) : ?>
                           <li><a class="" href="<?php echo site_url('report_itemout'); ?>"><i class="icon_cloud-upload"></i>Item Out</a></li>
                           <?php endif; ?>
+                          <li><a class="" href="<?php echo site_url('report_menu'); ?>"><i class="icon_balance"></i>Report Menu</a></li>
                       </ul>
                   </li>
                   <?php endif; ?>

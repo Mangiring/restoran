@@ -27,17 +27,21 @@
 					<br />
 					<div style="clear:both"></div>
 					<h3 class="box-title" style="margin-top:0;"><a href="<?php echo site_url('report_peti_cash/cleanup'); ?>" class="btn btn-default"><i class="fa fa-trash-o"></i> Clear</a>
-					<a href="<?php echo site_url('report_peti_cash/export/excel?from='.$from.'&to=' . $to); ?>" class="btn btn-default"><i class="fa fa-file"></i> Export</a></h3></h3>
+					<?php if ($from && $to) : ?>
+					<a href="<?php echo site_url('report_peti_cash/export/excel?from='.$from.'&to=' . $to); ?>" class="btn btn-default"><i class="fa fa-file"></i> Export</a>
+					<?php endif; ?>
+					</h3>
 					<div style="clear:both"></div>
 	<?php echo __get_error_msg(); ?>
                       <section class="panel">
                           <header class="panel-heading">
-                              List Transaction - <?php echo __get_date(strtotime($from),1); ?> <?php echo __get_date(strtotime($to),1); ?>
+                              List Transaction <?php echo ($from ? '- ' . __get_date(strtotime($from),1) : ''); ?> <?php echo ($to ? __get_date(strtotime($to),1) : ''); ?>
                           </header>
                           <div class="table-responsive">
                             <table class="table">
                               <thead>
                                 <tr>
+          <th>No.</th>
           <th>Date</th>
           <th>Time</th>
           <th>Description</th>
@@ -49,9 +53,11 @@
                               <tbody>
 		  <?php
 $tgl = '';
+$i = 1;
 		  foreach($peti_cash as $k => $v) :
 		  ?>
                                         <tr>
+          <td><?php echo $i; ?>.</td>
 <td>
 <?php
 $date = date('Y-m-d',$v -> pdate);
@@ -71,17 +77,20 @@ if($tgl <> $date){
 			<?php endif; ?>
           <td><?php echo __get_rupiah($v -> psaldo,1); ?></td>
 										</tr>
-        <?php endforeach; ?>
+        <?php
+        ++$i;
+        endforeach;
+        ?>
                               </tbody>
                               <tfoot>
                               <tr>
-                              <td></td><td></td><td><b>Kas Besar:</b></td><td></td><td></td><td><b><?php echo __get_rupiah($kasbesar[0] -> total,1);?></b></td>
+                              <td></td><td></td><td></td><td><b>Kas Besar:</b></td><td></td><td></td><td><b><?php echo __get_rupiah($kasbesar[0] -> total,1);?></b></td>
                               </tr>
                               <tr>
-                              <td></td><td></td><td><b>Kas Kecil:</b></td><td></td><td></td><td><b><?php echo __get_rupiah($kaskecil[0] -> total,1);?></b></td>
+                              <td></td><td></td><td></td><td><b>Kas Kecil:</b></td><td></td><td></td><td><b><?php echo __get_rupiah($kaskecil[0] -> total,1);?></b></td>
                               </tr>
                               <tr>
-                              <td></td><td></td><td><b>Biaya Operasional:</b></td><td></td><td></td><td><b><?php echo __get_rupiah($operasional[0] -> total,1);?></b></td>
+                              <td></td><td></td><td></td><td><b>Biaya Operasional:</b></td><td></td><td></td><td><b><?php echo __get_rupiah($operasional[0] -> total,1);?></b></td>
                               </tr>
                               </tfoot>
                             </table>

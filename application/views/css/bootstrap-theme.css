@@ -1892,17 +1892,19 @@ fieldset[disabled] .btn-default.active {
   color: #ffffff;
   background-color: #ff2d55;
   border-color: #ff2d55;
-  width:100px;
+  min-width:100px;
   padding:10px;
   font-size:16px!important;
+  margin-bottom:20px;
 }
 .btn-primaryx {
   color: #ffffff;
   background-color: #007aff;
   border-color: #007aff; 
-  width:100px;
+  min-width:100px;
   padding:10px;
   font-size:16px!important;
+  margin-bottom:20px;
 }
 .btn-primary {
   color: #ffffff;

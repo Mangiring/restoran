@@ -11,8 +11,9 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
-		$from = date('Y-m-d', strtotime('-1 month'));
-		$to = date('Y-m-d');
+		$view['report_itemout'] = array();
+		$from = '';
+		$to = '';
 		
 		if ($_POST) {
 			$sort = $this -> input -> post('sort');
@@ -21,9 +22,9 @@ class Home extends MY_Controller {
 				$from = date('Y-m-d',strtotime(str_replace('/','-',$sort[0])));
 				$to = date('Y-m-d',strtotime(str_replace('/','-',$sort[1])));
 			}
+			$view['report_itemout'] = $this -> reportitemout_model -> __get_reportitemout($from,$to);
 		}
 		
-		$view['report_itemout'] = $this -> reportitemout_model -> __get_reportitemout($from,$to);
 		$view['from'] = $from;
 		$view['to'] = $to;
 		$this->load->view('report_itemout', $view);

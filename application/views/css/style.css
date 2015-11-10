@@ -4938,3 +4938,12 @@ span.customSelect.changed {
 .customSelectInner {
     background:url(../img/customSelect-arrow.gif) no-repeat center right;
 }
+
+.inactive{display:none}
+.active{display:block}
+.tabber {padding-top:10px}
+.tabber .tabList{border-bottom:1px solid #ccc; height:34px;}
+.tabber .tabList li{float:left; border-right:1px solid #ccc;  }
+.tabber .tabList li.on{border-top:1px solid #ccc; background-color:#fff; }
+.tabber .tabList li.on:first-child{border-left:1px solid #ccc;}
+.tabber .tabList li a{display:block; line-height:35px; padding:0 10px;font-size:16px; color:#666;}

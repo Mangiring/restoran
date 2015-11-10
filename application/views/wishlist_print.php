@@ -24,9 +24,10 @@ if (count($res) > 0) {
 }
 ?>
 <html>
+	<script>window.print();</script>
 <style>
 html,body{margin:0;padding:0}
-table{font-size:18px;border-collapse:collapse}
+table{font-size:16px;border-collapse:collapse}
 table th {border:1px solid #000}
 </style>
 <body>
@@ -53,11 +54,10 @@ $note="";
 ?>
 <tr><td>Meja</td><td>: <?php echo $tname; ?></td></tr>
 <tr><td>Nama</td><td>: <?php echo $wname; ?></td></tr>
-<tr><td>Person</th><td>: <?php echo $person; ?></td></tr>
 </table>
 <br>
 
-<table border="0" style="width:400px">
+<table border="0" style="width:300px">
 <thead>
 <tr>
 <th>No. </th>		  

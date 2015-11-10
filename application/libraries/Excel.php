@@ -43,7 +43,7 @@ class Excel {
 	}
 
 	public function addArray ($array) {
-		$this->addRow ($array['header'], 1, true);
+		if ($array['header']) $this->addRow ($array['header'], 1, true);
 		foreach ($array['data'] as $k => $v) $this->addRow ($v, 2);
 	}
 
