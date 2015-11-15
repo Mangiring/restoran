@@ -141,7 +141,7 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 		
 		<tr><td>Total</td><td style="width:200px">&nbsp;</td><td></td><td></td><td><?php echo __get_rupiah($v->wtotalall,1);?></td></tr>
 
-		<tr><td>Payment</td><td style="width:200px"><input onkeyup="formatharga(this.value,this)" class="form-control" type="text" name="wpayment" value="<?php echo __get_rupiah($v -> wpayment,2);?>" ></td><td></td><td></td><td><?php echo __get_rupiah($v->wpayment,1);?></td></tr>
+		<tr><td>Payment</td><td style="width:200px"><input onkeyup="formatharga(this.value,this)" class="form-control" type="text" name="wpayment" value="<?php echo ($v -> wpayment ? __get_rupiah($v -> wpayment,2) : 0);?>" ></td><td></td><td></td><td><?php echo __get_rupiah($v->wpayment,1);?></td></tr>
 		
 			
 		

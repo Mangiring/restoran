@@ -27,8 +27,9 @@ if (count($res) > 0) {
 	<script>window.print();</script>
 <style>
 html,body{margin:0;padding:0}
-table{font-size:16px;border-collapse:collapse}
+table{font-size:20px;border-collapse:collapse}
 table th {border:1px solid #000}
+table > tfoot > tr > td{border-top:1px solid #000}
 </style>
 <body>
 <table border="0" style="width:200px">
@@ -54,36 +55,35 @@ $note="";
 ?>
 <tr><td>Meja</td><td>: <?php echo $tname; ?></td></tr>
 <tr><td>Nama</td><td>: <?php echo $wname; ?></td></tr>
+<tr><td>Order No.</td><td>: OR<?php echo str_pad($ono,4,'0', STR_PAD_LEFT); ?></td></tr>
 </table>
 <br>
 
 <table border="0" style="width:300px">
 <thead>
 <tr>
-<th>No. </th>		  
-<th>Menu</th>		  
 <th>Qty</th>
+<th>Menu</th>
 <th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <?php
 $t=0;
-$i=1;
 foreach($wishlist as $k => $v) :
 ?>
 <tr>
-<td><?php echo $i; ?></td>
-<td><?php echo $v -> mname; ?></td>
 <td> <?php echo $v -> wqty;?></td>
+<td><?php echo $v -> mname; ?></td>
 <td><?php echo $v->wnote; ?></td>
 </tr>
 <?php
-++$i;
 $t=$t+$v -> wqty;
 endforeach; ?>
 </tbody>
-<tr><td></td><td>Total </td><td><?php echo $t;?></td><td></td></tr>
+<tfoot>
+<tr><td><b><?php echo $t;?></b></td><td></td><td></td></tr>
+</tfoot>
 </table>
 </body>
 </html>

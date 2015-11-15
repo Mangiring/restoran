@@ -9,12 +9,11 @@ class Home extends MY_Controller {
 		$this -> load -> library('pagination_lib');
 		$this -> load -> library('categories_tables/categories_tables_lib');
 		$this -> load -> model('tables_model');
+		$this -> load -> model('categories_tables/categories_tables_model');
 	}
 
 	function index() {
-		$pager = $this -> pagination_lib -> pagination($this -> tables_model -> __get_tables(),3,10,site_url('tables'));
-		$view['tables'] = $this -> pagination_lib -> paginate();
-		$view['pages'] = $this -> pagination_lib -> pages();
+		$view['categories'] = $this -> categories_tables_model -> __get_categories_tables();
 		$this->load->view('tables', $view);
 	}
 	

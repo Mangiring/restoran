@@ -10,10 +10,7 @@ class Wishlist_model extends CI_Model {
 	}
 
 	function __get_wishlistz() {
-		$this -> db -> select(" *,
-		(select wname from wishlist_tab where wtid=tid order by wid desc limit 1) as wname,
-		(select person from wishlist_tab where wtid=tid  order by wid desc limit 1) as person
-		FROM tables_tab,categories_tab WHERE  tstatus <>2 and cid=tcid ORDER BY tid DESC");
+		$this -> db -> select(" *, (select wname from wishlist_tab where wtid=tid order by wid desc limit 1) as wname, (select person from wishlist_tab where wtid=tid  order by wid desc limit 1) as person FROM tables_tab,categories_tab WHERE  tstatus <>2 and cid=tcid ORDER BY tid DESC");
 		return $this -> db -> get() -> result();
 	}	
 	
@@ -95,5 +92,14 @@ class Wishlist_model extends CI_Model {
 			$menus = array();
 		}
 		return $res;
+	}
+	
+	function __check_order_no() {
+		$this -> db -> select("worderno FROM wishlist_order_tab WHERE DATE(FROM_UNIXTIME( wdate, '%Y-%m-%d' ))>=DATE(now()) ORDER BY wid DESC LIMIT 1", FALSE);
+		return $this -> db -> get() -> result();
+	}
+	
+	function __insert_wishlist_order($data) {
+		return $this -> db -> insert('wishlist_order_tab', $data);
 	}
 }

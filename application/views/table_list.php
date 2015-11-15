@@ -7,6 +7,9 @@ $(function(){
 	$('table.active').addClass('inactive');
 	$('table.active').removeClass('active');
 	$('table.'+ahs).addClass('active');
+	$('h3.active').addClass('inactive');
+	$('h3.active').removeClass('active');
+	$('h3.'+ahs).addClass('active');
 	$('ul.tabList > li').removeClass('on');
 	$('ul.tabList > li > a[rel="'+ahs+'"]').parent().addClass('on');
 	}
@@ -48,11 +51,9 @@ $(function(){
 		$ti = 1;
 		foreach($cat as $kk => $vv) {
 	?>
+	<h3 style="border-bottom:1px solid #ccc;padding-bottom:10px;padding-left:10px" class="<?php echo ($ti == 1 ? 'active' : 'inactive');?> tcid_<?php echo $vv -> cid; ?>"><?php echo $vv->cname;?></h3>
+	
                             <table class="table <?php echo ($ti == 1 ? 'active' : 'inactive');?> tcid_<?php echo $vv -> cid; ?>">
-                              <tbody>
-		<tr>
-          <td colspan="4" style="border:none"><h3 style="border-bottom:1px solid #ccc;padding-bottom:10px"><?php echo $vv->cname;?></h3></td>
-		</tr>	  
 		<tr>
 			<td style="width:100%;border:none;">		  
 		  <?php
@@ -62,7 +63,7 @@ $(function(){
 		  <?php if ( $v -> cid == $vv->cid){ 
 		  
 		  $b= $d%4;
-		  if( $v -> tstatus=='3') { $btnx="btn btn-dangerx";}else{$btnx="btn btn-primaryx";}
+		  if( $v -> tstatus == 3) { $btnx="btn btn-dangerx";}else{$btnx="btn btn-primaryx";}
 		  ?>
               <a class="<?=$btnx;?>"  href="<?php echo site_url('wishlist/home/wishlist_listx/' . $v -> tid); ?>"><?php echo $v -> tname;?></a>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -71,7 +72,6 @@ $(function(){
 		  }?>						
         <?php endforeach; ?>
 		</td></tr>
-		</tbody>
 		</table>
 		<?php
 		++$ti;
@@ -87,7 +87,10 @@ $(document).ready(function(){
 		if ($('table.'+$(this).attr('rel')).hasClass('active')) return false;
 		$('table.active').addClass('inactive');
 		$('table.active').removeClass('active');
+		$('h3.active').addClass('inactive');
+		$('h3.active').removeClass('active');
 		$('table.'+$(this).attr('rel')).addClass('active');
+		$('h3.'+$(this).attr('rel')).addClass('active');
 		$('ul.tabList > li').removeClass('on');
 		$(this).parent().addClass('on');
 	});

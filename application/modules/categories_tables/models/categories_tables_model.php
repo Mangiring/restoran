@@ -8,9 +8,13 @@ class Categories_tables_model extends CI_Model {
 		return 'SELECT * FROM categories_tab WHERE ctype=2 AND (cstatus=1 OR cstatus=0) ORDER BY cid DESC';
 	}
 	
+	function __get_categories_tables() {
+		$this -> db -> select('* FROM categories_tab WHERE ctype=2 AND cstatus=1 ORDER BY cid ASC');
+		return $this -> db -> get() -> result();
+	}
+	
 	function __get_categories_list() {
 		$this -> db -> SELECT (' * FROM categories_tab WHERE ctype=2 AND (cstatus=1 OR cstatus=0) ORDER BY cid ASC');
-	
 		return $this -> db -> get() -> result();
 	}
 	function __get_categories_search($keyword) {

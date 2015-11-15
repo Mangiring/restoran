@@ -4,8 +4,9 @@ class Tables_model extends CI_Model {
         parent::__construct();
     }
 	
-	function __get_tables() {
-		return 'SELECT * FROM tables_tab WHERE (tstatus=1 OR tstatus=0) ORDER BY tid DESC';
+	function __get_tables($id) {
+		$this -> db -> select('* FROM tables_tab WHERE (tstatus=1 OR tstatus=0) AND tcid='.$id.' ORDER BY tid DESC');
+		return $this -> db -> get() -> result();
 	}
 
 	function __get_tables_list() {

@@ -1,11 +1,17 @@
 <?php
-class menus_model extends CI_Model {
+class Menus_model extends CI_Model {
     function __construct() {
         parent::__construct();
     }
 	
-	function __get_menus() {
-		return 'SELECT a.*,b.cname FROM menus_tab a LEFT JOIN categories_tab b ON a.mcid=b.cid WHERE (a.mstatus=1 OR a.mstatus=0) ORDER BY a.mid DESC';
+	function __get_menus($cid) {
+		$this -> db -> select('* FROM menus_tab WHERE (mstatus=1 OR mstatus=0) AND mcid='.$cid.' ORDER BY mid DESC');
+		return $this -> db -> get() -> result();
+	}
+	
+	function __get_category_menu() {
+		$this -> db -> select('* FROM categories_tab WHERE cstatus=1 AND ctype=1 ORDER BY cid DESC');
+		return $this -> db -> get() -> result();
 	}
 	
 	function __get_menus_search($keyword) {

@@ -26,7 +26,10 @@
 					</h3>
 					<br />
 					<div style="clear:both"></div>
-					<h3 class="box-title" style="margin-top:0;"><a href="<?php echo site_url('report_opname/cleanup'); ?>" class="btn btn-default"><i class="fa fa-trash-o"></i> Clear</a>
+					<h3 class="box-title" style="margin-top:0;">
+<!--
+						<a href="<?php echo site_url('report_opname/cleanup'); ?>" class="btn btn-default"><i class="fa fa-trash-o"></i> Clear</a>
+-->
 					<?php if ($from && $to) : ?>
 					<a href="<?php echo site_url('report_opname/export/excel?from='.$from.'&to=' . $to); ?>" class="btn btn-default"><i class="fa fa-file"></i> Export</a>
 					<?php endif; ?>

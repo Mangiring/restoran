@@ -118,8 +118,8 @@ class Home extends MY_Controller {
 		if($_POST) {
 			$wname = $this -> input -> post('wname', TRUE);
 			$person = $this -> input -> post('person', TRUE);
-			$jwdid=count($this -> input -> post('wdid', TRUE));	
-			$hargax=0;
+			$jwdid = count($this -> input -> post('wdid', TRUE));	
+			$hargax = 0;
 			$wnotes = $this -> input -> post('notes', TRUE);
 			
 			if (!$wname || !$person) {
@@ -133,9 +133,9 @@ class Home extends MY_Controller {
 					$wqty = $_POST['qty'][$j];
 					$wharga = $_POST['harga'][$j];
 					$wnote = $_POST['note'][$j];
-					$dta=array('wname'=>$wname,'person'=>$person,'wnotes'=>$wnotes);
+					$dta = array('wname'=>$wname,'person'=>$person,'wnotes'=>$wnotes);
 					$this -> wishlist_model -> __update_wishlist($id,$dta);
-					$dtx=array('wharga'=>$wharga,'wqty'=>$wqty,'wstatus'=>1,'wnote'=>$wnote,'wupdateby'=>$uid,'wudate'=>date('Y-m-d h:i:s'));	
+					$dtx = array('wharga'=>$wharga,'wqty'=>$wqty,'wstatus'=>1,'wnote'=>$wnote,'wupdateby'=>$uid,'wudate'=>date('Y-m-d h:i:s'));	
 					$this -> wishlist_model -> __update_wishlist_detail($wdid,$dtx);
 				}
 				__set_error_msg(array('info' => 'Data berhasil di simpan'));
@@ -144,16 +144,23 @@ class Home extends MY_Controller {
 		}	
 		
 		$view['wishlist'] = $this -> wishlist_model -> __get_wishlistx($id);
-		$view['id']=$id;
-		$view['wtid']=$wtid;
+		$view['id'] = $id;
+		$view['wtid'] = $wtid;
 		
 		$this->load->view('wishlist', $view);
 	}	
 	
-	function wishlist_print($id,$wtid){
+	function wishlist_print($id, $wtid){
 		$view['wishlist'] = $this -> wishlist_model -> __get_wishlistx($id);
-		$view['id']=$id;
-		$view['wtid']=$wtid;
+		$view['id'] = $id;
+		$view['wtid'] = $wtid;
+		$ckno = $this -> wishlist_model -> __check_order_no();
+		
+		if (!$ckno) $view['ono'] = 1;
+		else $view['ono'] = $ckno[0] -> worderno + 1;
+		
+		$this -> wishlist_model -> __insert_wishlist_order(array('wwid' => $id, 'worderno' => $view['ono'], 'wdate' => time()));
+		
 		$this->load->view('wishlist_print', $view,FALSE);
 	}
 	
@@ -224,7 +231,7 @@ class Home extends MY_Controller {
 					$arr = array('wdid'=>'','wid'=>$id,'wmid'=>$mid,'wharga'=>$harga,'wdisc'=>$dis,'wstatus'=>1,'bupdateby'=>$uid,'budate'=>date('Y-m-d h:i:s'));
 					$this -> wishlist_model -> __insert_wishlist_detail($arr);
 				}
-				$dtx=array('wtotal'=>$hargax,'wdisc'=>'','wtotalall'=>$hargax,'wdate'=>$wdate,'wstatus'=>1,'bupdateby'=>$uid,'budate'=>date('Y-m-d h:i:s'));	
+				$dtx = array('wtotal'=>$hargax,'wdisc'=>'','wtotalall'=>$hargax,'wdate'=>$wdate,'wstatus'=>1,'bupdateby'=>$uid,'budate'=>date('Y-m-d h:i:s'));	
 				$this -> wishlist_model -> __update_wishlist($id,$dtx);
 			}
 			?>

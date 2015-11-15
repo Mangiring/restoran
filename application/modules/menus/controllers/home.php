@@ -12,9 +12,7 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
-		$pager = $this -> pagination_lib -> pagination($this -> menus_model -> __get_menus(),3,10,site_url('menus'));
-		$view['menus'] = $this -> pagination_lib -> paginate();
-		$view['pages'] = $this -> pagination_lib -> pages();
+		$view['categories'] = $this -> menus_model -> __get_category_menu();
 		$this->load->view('menus', $view);
 	}
 	

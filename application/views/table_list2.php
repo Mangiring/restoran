@@ -20,18 +20,15 @@
                       <section class="panel">
 						  
                           <div class="table-responsive" style="padding:5px">
-                            <table class="table">
-                              <thead>
-                                
-                              </thead>
-                              <tbody>
 							  
 							  
 	<?php 
 		foreach($cat as $kk => $vv){	
 	?>					  
+                            <table class="table">
+                              <tbody>
 	 <tr>
-          <td colspan=4 ><h3><?=$vv->cname;?></h3></td>	
+          <td colspan="3"><h3><?=$vv->cname;?></h3></td>	
 		  <td>&nbsp;</td>
 	</tr>							  
 	<tr><th>Nama</th><th>Customer Name</th><th>Status</th><th>Table</th></tr>						  
@@ -41,12 +38,7 @@
 		  $d=0;
 		  foreach($tables as $k => $v) :
 		  ?>
-		  <?php if ( $v -> cid == $vv->cid){ 
-		  
-		  ?>
-                                        
-     
-          
+		  <?php if ($v -> cid == $vv -> cid) { ?>
 		  <?php  
 		  $b= $d%4;
 		  if( $v -> tstatus=='3') { $btnx="btn btn-dangerx"; $st="Isi";
@@ -58,12 +50,13 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		  <?php
 		  $d=$d+1;
-		  }?>						
+		  }
+		  ?>				
         <?php endforeach; ?>
-		
-		<?php } ?>
                               </tbody>
                             </table>
+		
+		<?php } ?>
                           </div>
                       </section>
                   </div>

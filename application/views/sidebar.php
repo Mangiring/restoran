@@ -103,7 +103,9 @@
 							<?php if (__get_roles('ReportItemOut')) : ?>
                           <li><a class="" href="<?php echo site_url('report_itemout'); ?>"><i class="icon_cloud-upload"></i>Item Out</a></li>
                           <?php endif; ?>
+						  <?php if (__get_roles('ReportMenu')) : ?>
                           <li><a class="" href="<?php echo site_url('report_menu'); ?>"><i class="icon_balance"></i>Report Menu</a></li>
+                          <?php endif; ?>
                       </ul>
                   </li>
                   <?php endif; ?>

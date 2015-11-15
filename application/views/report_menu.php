@@ -43,11 +43,11 @@
                             <table class="table">
                               <thead>
                                 <tr>
-          <th style="width:200px">Name</th>
-          <th style="width:100px">Harga</th>
-          <th style="width:50px">Discount</th>
-          <th style="width:200px">Description</th>
-          <th style="width:50px">Total</th>
+          <th style="width:30%">Name</th>
+          <th style="width:10%">Harga</th>
+          <th style="width:10%">Discount</th>
+          <th style="width:40%">Description</th>
+          <th style="width:10%">Total</th>
                                 </tr>
                               </thead>
                               <tbody>
