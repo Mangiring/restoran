@@ -11,9 +11,7 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
-		$pager = $this -> pagination_lib -> pagination($this -> categories_model -> __get_categories(),3,10,site_url('categories'));
-		$view['categories'] = $this -> pagination_lib -> paginate();
-		$view['pages'] = $this -> pagination_lib -> pages();
+		$view['categories'] = $this -> categories_model -> __get_categories();
 		$this->load->view('categories', $view);
 	}
 	
@@ -22,13 +20,14 @@ class Home extends MY_Controller {
 			$name = $this -> input -> post('name', TRUE);
 			$desc = $this -> input -> post('desc', TRUE);
 			$status = (int) $this -> input -> post('status');
+			$position = (int) $this -> input -> post('position');
 			
-			if (!$name || !$desc) {
+			if (!$name || !$desc || !$position) {
 				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 				redirect(site_url('categories' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('ctype' => 1,'cname' => $name, 'cdesc' => $desc, 'cstatus' => $status);
+				$arr = array('ctype' => 1,'cname' => $name, 'cdesc' => $desc, 'cstatus' => $status, 'cposition' => $position);
 				if ($this -> categories_model -> __insert_categories($arr)) {
 					$arr = $this -> categories_model -> __get_suggestion();
 					$this -> memcachedlib -> __regenerate_cache('__categories_suggestion', $arr, $_SERVER['REQUEST_TIME']+60*60*24*100);
@@ -51,15 +50,16 @@ class Home extends MY_Controller {
 			$name = $this -> input -> post('name', TRUE);
 			$desc = $this -> input -> post('desc', TRUE);
 			$status = (int) $this -> input -> post('status');
+			$position = (int) $this -> input -> post('position');
 			$id = (int) $this -> input -> post('id');
 			
 			if ($id) {
-				if (!$name || !$desc) {
+				if (!$name || !$desc || !$position) {
 					__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 					redirect(site_url('categories' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('cname' => $name, 'cdesc' => $desc, 'cstatus' => $status);
+					$arr = array('cname' => $name, 'cdesc' => $desc, 'cstatus' => $status, 'cposition' => $position);
 					if ($this -> categories_model -> __update_categories($id, $arr)) {	
 						$arr = $this -> categories_model -> __get_suggestion();
 						$this -> memcachedlib -> __regenerate_cache('__categories_suggestion', $arr, $_SERVER['REQUEST_TIME']+60*60*24*100);
@@ -141,9 +141,7 @@ class Home extends MY_Controller {
 	}
 	
 	function categories_search_result($keyword) {
-		$pager = $this -> pagination_lib -> pagination($this -> categories_model -> __get_categories_search(urldecode($keyword)),3,10,site_url('categories/categories_search_result/' . $keyword));
-		$view['categories'] = $this -> pagination_lib -> paginate();
-		$view['pages'] = $this -> pagination_lib -> pages();
+		$view['categories'] = $this -> categories_model -> __get_categories_search(urldecode($keyword));
 		$this -> load -> view('categories', $view);
 	}
 	

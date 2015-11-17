@@ -23,6 +23,7 @@
                             <table class="table">
                               <thead>
                                 <tr>
+          <th>Position</th>
           <th>Name</th>
           <th>Description</th>
           <th>Status</th>
@@ -35,6 +36,7 @@
 		  foreach($categories as $k => $v) :
 		  ?>
                                         <tr>
+          <td><?php echo $v -> cposition; ?></td>
           <td><?php echo $v -> cname; ?></td>
           <td><?php echo substr($v -> cdesc,0,150); ?></td>
           <td><?php echo __get_status($v -> cstatus,1); ?></td>
@@ -46,12 +48,6 @@
         <?php endforeach; ?>
                               </tbody>
                             </table>
-                                <div class="box-footer clearfix">
-                                    <div class="pull-right">
-                                        <?php echo $pages; ?>
-                                    </div>
-                                </div>
-
                       </section>
                   </div>
               </div>

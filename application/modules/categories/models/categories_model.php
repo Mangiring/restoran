@@ -5,15 +5,17 @@ class Categories_model extends CI_Model {
     }
 	
 	function __get_categories() {
-		return 'SELECT * FROM categories_tab WHERE ctype=1 AND (cstatus=1 OR cstatus=0) ORDER BY cid DESC';
+		$this -> db -> select('* FROM categories_tab WHERE ctype=1 AND (cstatus=1 OR cstatus=0) ORDER BY cposition ASC, cid DESC');
+		return $this -> db -> get() -> result();
 	}
 	
 	function __get_categories_search($keyword) {
-		return "SELECT * FROM categories_tab WHERE ctype=1 AND (cstatus=1 OR cstatus=0) AND (cname LIKE '%".$keyword."%' OR cdesc LIKE '%".$keyword."%') ORDER BY cid DESC";
+		$this -> db -> select("* FROM categories_tab WHERE ctype=1 AND (cstatus=1 OR cstatus=0) AND (cname LIKE '%".$keyword."%' OR cdesc LIKE '%".$keyword."%') ORDER BY cposition ASC, cid DESC");
+		return $this -> db -> get() -> result();
 	}
     
     function __get_suggestion() {
-		$this -> db -> select('cid,cname as name FROM categories_tab WHERE ctype=1 AND (cstatus=1 OR cstatus=0) ORDER BY cid DESC');
+		$this -> db -> select('cid,cname as name FROM categories_tab WHERE ctype=1 AND (cstatus=1 OR cstatus=0) ORDER BY cposition ASC, cid DESC');
 		return $this -> db -> get() -> result();
 	}
 	

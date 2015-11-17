@@ -1,7 +1,7 @@
-<link rel="stylesheet" 
-href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>" />
-		<script src="<?php echo site_url('application/views/assets/colorbox/jquery.min.js'); ?>"></script>
-		<script src="<?php echo site_url('application/views/assets/colorbox/jquery.colorbox.js'); ?>"></script>
+<link rel="stylesheet" href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>" />
+<script src="<?php echo site_url('application/views/assets/colorbox/jquery.min.js'); ?>"></script>
+<script src="<?php echo site_url('application/views/assets/colorbox/jquery.colorbox.js'); ?>"></script>
+<script src="<?php echo site_url('application/views/assets/ScrewDefaultButtonsV2-master/js/jquery.screwdefaultbuttonsV2.min.js'); ?>"></script>
 		<script>
 			$(document).ready(function(){
 
@@ -188,5 +188,13 @@ $('a.adprint').click(function(){
 		}
 	});
 	window.open($(this).attr('rel')+'?'+foo, '_blank');
+});
+
+$(function(){
+	$('input:checkbox').screwDefaultButtons({
+		image: 'url("<?php echo site_url('application/views/assets/ScrewDefaultButtonsV2-master/images/checkboxSmall_Blue.jpg'); ?>")',
+		width: 43,
+		height: 43
+	});
 });
 </script>

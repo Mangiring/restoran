@@ -127,7 +127,7 @@ class Home extends MY_Controller {
 				redirect(site_url('wishlist' . '/home/' . __FUNCTION__.'/'.$id.'/'.$wtid));
 			}
 			
-			if($jwdid>0) {
+			if($jwdid > 0) {
 				for($j=0;$j<$jwdid;$j++) {
 					$wdid = $_POST['wdid'][$j];
 					$wqty = $_POST['qty'][$j];

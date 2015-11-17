@@ -22,7 +22,7 @@ class Wishlist_model extends CI_Model {
 	}
 	
 	function __get_wishlistx($wid) {
-		$this -> db -> select("*,(select tname from tables_tab d where d.tid=a.wtid) as tname FROM wishlist_tab a,wishlist_detail_tab b, menus_tab c WHERE a.wid=b.wid and b.wmid=c.mid and (a.wstatus=1 OR a.wstatus=0) AND b.wstatus=1 and a.wid='".$wid."' ORDER BY a.wid DESC");
+		$this -> db -> select("a.*,b.*,c.*,(select tname from tables_tab d where d.tid=a.wtid) as tname FROM wishlist_tab a,wishlist_detail_tab b, menus_tab c, categories_tab d WHERE a.wid=b.wid and b.wmid=c.mid and c.mcid=d.cid and d.ctype=1 and (a.wstatus=1 OR a.wstatus=0) AND b.wstatus=1 and a.wid=".$wid." ORDER BY d.cposition ASC, a.wid DESC");
 		return $this -> db -> get() -> result();
 	}
 	

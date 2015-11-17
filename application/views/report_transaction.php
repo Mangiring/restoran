@@ -21,7 +21,7 @@
                   <div class="col-lg-12">
 					<h3 class="box-title" style="margin-top:0;width:30%;">Sort Date
 					<br />
-					<input name="sort" id="datesort" class="daterange form-control" style="float:left;width:180px;margin-right:5px;" placeholder="Sort Date" />&nbsp;
+					<input autocomplete="off" name="sort" id="datesort" class="daterange form-control" style="float:left;width:180px;margin-right:5px;" placeholder="Sort Date" />&nbsp;
 					<button type="submit" class="btn btn-primary" style="float:left"> <i class="icon_document"></i></button>
 					</h3>
 					<br />
