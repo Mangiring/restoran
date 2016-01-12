@@ -12,6 +12,16 @@ class Home extends MY_Controller {
 	}
 
 	function index() {
+		//~ $cid = array(1,6,8,7,2);
+		//~ foreach($cid as $v) {
+			//~ $sql = mysql_query('SELECT * FROM menus_tab WHERE mstatus=1 AND mcid=' . $v);
+			//~ $i = 1;
+			//~ while($r = mysql_fetch_array($sql)) {
+				//~ $upd = mysql_query("UPDATE menus_tab SET mposition=".$i." WHERE mid=" . $r['mid']);
+				//~ ++$i;
+			//~ }
+		//~ }
+		//~ die;
 		$view['categories'] = $this -> menus_model -> __get_category_menu();
 		$this->load->view('menus', $view);
 	}
@@ -30,7 +40,8 @@ class Home extends MY_Controller {
 				redirect(site_url('menus' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('mcid' => $cid, 'mname' => $name, 'mdesc' => $desc, 'mdisc' => $disc, 'mharga' => $price, 'mstatus' => $status);
+				$lastposition = $this -> menus_model -> __get_last_postiton_menus($cid);
+				$arr = array('mcid' => $cid, 'mname' => $name, 'mdesc' => $desc, 'mdisc' => $disc, 'mharga' => $price, 'mstatus' => $status, 'mposition' => ($lastposition[0] -> mposition + 1));
 				if ($this -> menus_model -> __insert_menus($arr)) {
 					$arr = $this -> menus_model -> __get_suggestion();
 					$this -> memcachedlib -> __regenerate_cache('__menus_suggestion', $arr, $_SERVER['REQUEST_TIME']+60*60*24*100);
@@ -155,7 +166,15 @@ class Home extends MY_Controller {
 	}
 	
 	function menus_delete($id) {
+		$det = $this -> menus_model -> __get_menus_detail($id);
 		if ($this -> menus_model -> __delete_menus($id)) {
+			$raw = $this -> menus_model -> __get_raw_menus($det[0] -> mcid);
+			$i = 1;
+			foreach($raw as $k => $v) {
+				$this -> menus_model -> __update_menus($v -> mid, array('mposition' => $i));
+				++$i;
+			}
+			
 			$arr = $this -> menus_model -> __get_suggestion();
 			$this -> memcachedlib -> __regenerate_cache('__menus_suggestion', $arr, $_SERVER['REQUEST_TIME']+60*60*24*100);
 			__set_error_msg(array('info' => 'Data berhasil dihapus.'));
@@ -164,6 +183,38 @@ class Home extends MY_Controller {
 		else {
 			__set_error_msg(array('error' => 'Gagal hapus data !!!'));
 			redirect(site_url('menus'));
+		}
+	}
+	
+	function setposition() {
+		$pos = $this -> input -> get('pos');
+		$cid = (int) $this -> input -> get('cid');
+		$mid = (int) $this -> input -> get('mid');
+		$mposition = (int) $this -> input -> get('mposition');
+		
+		if ($cid && $mposition) {
+			if ($pos == 'up') {
+				$ck = $this -> menus_model -> __get_menus_position($mposition - 1, $cid);
+				$arr = array('mposition' => $mposition - 1);
+				$this -> menus_model -> __update_menus($mid, $arr);
+				
+				$arr2 = array('mposition' => $mposition);
+				$this -> menus_model -> __update_menus($ck[0] -> mid, $arr2);
+				
+				__set_error_msg(array('info' => 'Posisi berhasil diubah.'));
+				redirect(site_url('menus#tcid_' . $cid));
+			}
+			if ($pos == 'down') {
+				$ck = $this -> menus_model -> __get_menus_position($mposition + 1, $cid);
+				$arr = array('mposition' => $mposition + 1);
+				$this -> menus_model -> __update_menus($mid, $arr);
+				
+				$arr2 = array('mposition' => $mposition);
+				$this -> menus_model -> __update_menus($ck[0] -> mid, $arr2);
+				
+				__set_error_msg(array('info' => 'Posisi berhasil diubah.'));
+				redirect(site_url('menus#tcid_' . $cid));
+			}
 		}
 	}
 }

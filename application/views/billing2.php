@@ -8,12 +8,13 @@ html,body{margin:0;padding:0}
 <div style="text-align:center;">
 Ayam Goreng Bakar Presto <br />
 Green Lake City Ruko Colloseum No. 36 <br />
-021 255 255 19 / 0821 78 788 988
+021 225 225 19 / 0821 78 788 988
 </div>
 <br />
 <table border="0" style="width:300px">
 <tr><td>Tgl</td><td>: <?php echo __get_date(time());?></td></tr>
 <tr><td>Faktur</td><td>: <?php echo str_pad($id, 4, "0", STR_PAD_LEFT);?></td></tr>
+<tr><td>Nama</td><td>: <?php echo $wishlist[0] -> wname;?></td></tr>
 </table>
 --------------------------------------------------------
 <table border="0" style="width:300px">

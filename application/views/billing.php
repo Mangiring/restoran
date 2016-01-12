@@ -146,7 +146,9 @@ href="<?php echo site_url('application/views/assets/colorbox/colorbox.css'); ?>"
 			
 		
 		<tr><td><input type=submit class="btn btn-primary" value="Save">
+		<?php if (__get_roles('OrderCancel')) : ?>
 		<a href="<?php echo site_url('wishlist/home/wishlist_cancel/'.$id.'/'.$wtid); ?>" class="btn btn-danger" onclick="return confirm('Anda yakin ingin batalkan pemesanan ?');">Cancel Order</a>
+		<?php endif; ?>
 		<a class="btn btn-primary" target=blank href="<?php echo site_url('wishlist/home/billing2/' . $v -> wid); ?>">Print </a>
 		<?php if ($v -> wpayment && $v -> wbackpayment >= 0) : ?>
 		<a class="btn btn-danger" href="<?php echo site_url('wishlist/home/billing_approve/' . $v -> wid); ?>">Approve </a>

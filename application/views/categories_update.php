@@ -22,12 +22,6 @@
                               <form class="form-horizontal " method="post" action="<?php echo site_url('categories/categories_update');?>">
 	<input type="hidden" name="id" value="<?php echo $id; ?>">
                                   <div class="form-group">
-                                      <label class="col-lg-2 control-label">Position</label>
-                                      <div class="col-lg-10">
-                                          <input type="text" name="position" class="form-control" placeholder="Position" value="<?php echo $detail[0] -> cposition;?>">
-                                      </div>
-                                  </div>
-                                  <div class="form-group">
                                       <label class="col-lg-2 control-label">Name</label>
                                       <div class="col-lg-10">
                                           <input type="text" name="name" class="form-control" placeholder="Category Name" value="<?php echo $detail[0] -> cname;?>">

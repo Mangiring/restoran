@@ -6,7 +6,7 @@
 			$(document).ready(function(){
 
 		
-				$("#iframe").colorbox({iframe:true, width:"80%", height:"80%"});
+				$("#iframe").colorbox({iframe:true, width:"90%", height:"90%"});
 				$(".inline").colorbox({inline:true, width:"50%"});
 				$(".callbacks").colorbox({
 					onOpen:function(){ alert('onOpen: colorbox is about to open'); },
@@ -74,7 +74,8 @@
 							}
 						?>
                                 <tr>
-          <th>Meja</th><th><?php echo $tname; ?></th></tr>
+          <th>Meja</th><th><select name="tableid" class="form-control"><?php echo $get_tables; ?></select></th></tr>
+          <input type="hidden" name="tableidold" value="<?php echo (isset($v -> wtid) ? $v -> wtid : 0); ?>">
 		  <tr><th>Nama</th><th>
 		  <input type=text name="wname" class="form-control" value="<?php echo ($wname ? $wname : ($tname ? $tname : 'Table')); ?>" ></th></tr>
           <tr><th>Person</th><th>
@@ -158,7 +159,9 @@
                               </tbody>
 		<tr><td></td><td>
                                         <button type="submit" class="btn btn-primary" id="simpan"> <i class="fa fa-save"></i> Submit</button>
-										<a href="<?php echo site_url('wishlist/home/wishlist_cancel/'.$id.'/'.$wtid); ?>" class="btn btn-danger" onclick="return confirm('Anda yakin ingin batalkan pemesanan ?');">Cancel</a>
+		<?php if (__get_roles('WishlistCancel')) : ?>
+		<a href="<?php echo site_url('wishlist/home/wishlist_cancel/'.$id.'/'.$wtid); ?>" class="btn btn-danger" onclick="return confirm('Anda yakin ingin batalkan pemesanan ?');">Cancel</a>
+		<?php endif; ?>
 										<?php if ($ckprint == true) : ?>
 										<a href="javascript:void(0);" rel="<?php echo site_url('wishlist/home/wishlist_print/'.$id.'/'.$wtid); ?>" class="btn btn-primary adprint">Print</a>
 										<?php endif; ?>

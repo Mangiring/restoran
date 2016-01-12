@@ -4,6 +4,7 @@
 <script src="<?php echo site_url('application/views/js/jquery.js'); ?>"></script>
 <script src="<?php echo site_url('application/views/assets/icheck/icheck.min.js?v=1.0.2'); ?>"></script>
 <style>
+#container{height:97%!important;}
 .btn{
 	display: inline-block;
     padding: 6px 12px;
@@ -97,14 +98,8 @@ $(document).ready(function(){
 							  </div>
 							  <div class="blabla">
                             <table class="gridtable" border="0" width="100%">
-                              <thead>
-                                <tr>
-								<th style="">&nbsp;</th>
-                                </tr>
-                              </thead>
-                              <tbody>
                                         <tr>
-		  <td style="text-align:center;">
+		  <td style="text-align:center;padding-top:10px">
 		  <?php
 		  foreach($v1 as $k2 => $v2) :
 		  ?>
@@ -113,7 +108,6 @@ $(document).ready(function(){
         <?php endforeach; ?>
 		  </td>
 										</tr>
-                              </tbody>
                             </table>
                             </div>
                             </div>

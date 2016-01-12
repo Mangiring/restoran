@@ -26,20 +26,6 @@ class Wishlist_model extends CI_Model {
 		return $this -> db -> get() -> result();
 	}
 	
-	function __get_wishlist_search($keyword) {
-		return "SELECT * FROM wishlist_tab WHERE ctype=1 AND (cstatus=1 OR cstatus=0) AND (cname LIKE '%".$keyword."%' OR cdesc LIKE '%".$keyword."%') ORDER BY cid DESC";
-	}
-    
-    function __get_suggestion() {
-		$this -> db -> select('cid,cname as name FROM wishlist_tab WHERE ctype=1 AND (cstatus=1 OR cstatus=0) ORDER BY cid DESC');
-		return $this -> db -> get() -> result();
-	}
-	
-	function __get_wishlist_select() {
-		$this -> db -> select('cid,cname FROM wishlist_tab WHERE ctype=1 AND (cstatus=1 OR cstatus=0) ORDER BY cname ASC');
-		return $this -> db -> get() -> result();
-	}
-	
 	function __get_wishlist_detail($id) {
 		return "SELECT * FROM wishlist_tab WHERE (wstatus='1' OR wstatus='0' ) AND wid='".$id."' ORDER BY wid DESC'";
 	}
@@ -81,10 +67,10 @@ class Wishlist_model extends CI_Model {
 	
 	function ___get_wishlist_menus() {
 		$res = array();
-		$this -> db -> select('cid,cname FROM categories_tab WHERE ctype=1 AND cstatus=1');
+		$this -> db -> select('cid,cname FROM categories_tab WHERE ctype=1 AND cstatus=1 ORDER BY cposition ASC');
 		$cat = $this -> db -> get() -> result();
 		foreach($cat as $k => $v) {
-			$this -> db -> select('mid,mname,mdesc,mdisc,mharga FROM menus_tab WHERE mstatus=1 AND mcid=' . $v -> cid);
+			$this -> db -> select('mid,mname,mdesc,mdisc,mharga FROM menus_tab WHERE mstatus=1 AND mcid=' . $v -> cid . ' ORDER BY mposition ASC');
 			$menus = $this -> db -> get() -> result();
 			foreach($menus as $k1 => $v1) {
 				$res[$v -> cid][$v -> cname][] = $v1;

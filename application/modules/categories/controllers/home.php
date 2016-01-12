@@ -12,6 +12,7 @@ class Home extends MY_Controller {
 
 	function index() {
 		$view['categories'] = $this -> categories_model -> __get_categories();
+		$view['total'] = $this -> categories_model -> __get_total_categories();
 		$this->load->view('categories', $view);
 	}
 	
@@ -20,14 +21,14 @@ class Home extends MY_Controller {
 			$name = $this -> input -> post('name', TRUE);
 			$desc = $this -> input -> post('desc', TRUE);
 			$status = (int) $this -> input -> post('status');
-			$position = (int) $this -> input -> post('position');
 			
-			if (!$name || !$desc || !$position) {
+			if (!$name || !$desc) {
 				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 				redirect(site_url('categories' . '/' . __FUNCTION__));
 			}
 			else {
-				$arr = array('ctype' => 1,'cname' => $name, 'cdesc' => $desc, 'cstatus' => $status, 'cposition' => $position);
+				$total = $this -> categories_model -> __get_total_categories();
+				$arr = array('ctype' => 1,'cname' => $name, 'cdesc' => $desc, 'cstatus' => $status, 'cposition' => ($total + 1));
 				if ($this -> categories_model -> __insert_categories($arr)) {
 					$arr = $this -> categories_model -> __get_suggestion();
 					$this -> memcachedlib -> __regenerate_cache('__categories_suggestion', $arr, $_SERVER['REQUEST_TIME']+60*60*24*100);
@@ -50,16 +51,15 @@ class Home extends MY_Controller {
 			$name = $this -> input -> post('name', TRUE);
 			$desc = $this -> input -> post('desc', TRUE);
 			$status = (int) $this -> input -> post('status');
-			$position = (int) $this -> input -> post('position');
 			$id = (int) $this -> input -> post('id');
 			
 			if ($id) {
-				if (!$name || !$desc || !$position) {
+				if (!$name || !$desc) {
 					__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 					redirect(site_url('categories' . '/' . __FUNCTION__ . '/' . $id));
 				}
 				else {
-					$arr = array('cname' => $name, 'cdesc' => $desc, 'cstatus' => $status, 'cposition' => $position);
+					$arr = array('cname' => $name, 'cdesc' => $desc, 'cstatus' => $status);
 					if ($this -> categories_model -> __update_categories($id, $arr)) {	
 						$arr = $this -> categories_model -> __get_suggestion();
 						$this -> memcachedlib -> __regenerate_cache('__categories_suggestion', $arr, $_SERVER['REQUEST_TIME']+60*60*24*100);
@@ -147,6 +147,14 @@ class Home extends MY_Controller {
 	
 	function categories_delete($id) {
 		if ($this -> categories_model -> __delete_categories($id)) {
+			
+			$raw = $this -> categories_model -> __get_raw_categories();
+			$i = 1;
+			foreach($raw as $k => $v) {
+				$this -> categories_model -> __update_categories($v -> cid, array('cposition' => $i));
+				++$i;
+			}
+			
 			$arr = $this -> categories_model -> __get_suggestion();
 			$this -> memcachedlib -> __regenerate_cache('__categories_suggestion', $arr, $_SERVER['REQUEST_TIME']+60*60*24*100);
 			__set_error_msg(array('info' => 'Data berhasil dihapus.'));
@@ -155,6 +163,37 @@ class Home extends MY_Controller {
 		else {
 			__set_error_msg(array('error' => 'Gagal hapus data !!!'));
 			redirect(site_url('categories'));
+		}
+	}
+	
+	function setposition() {
+		$pos = $this -> input -> get('pos');
+		$cid = (int) $this -> input -> get('cid');
+		$cposition = (int) $this -> input -> get('cposition');
+		
+		if ($cid && $cposition) {
+			if ($pos == 'up') {
+				$ck = $this -> categories_model -> __get_categories_position($cposition - 1);
+				$arr = array('cposition' => $cposition - 1);
+				$this -> categories_model -> __update_categories($cid, $arr);
+				
+				$arr2 = array('cposition' => $cposition);
+				$this -> categories_model -> __update_categories($ck[0] -> cid, $arr2);
+				
+				__set_error_msg(array('info' => 'Posisi berhasil diubah.'));
+				redirect(site_url('categories'));
+			}
+			if ($pos == 'down') {
+				$ck = $this -> categories_model -> __get_categories_position($cposition + 1);
+				$arr = array('cposition' => $cposition + 1);
+				$this -> categories_model -> __update_categories($cid, $arr);
+				
+				$arr2 = array('cposition' => $cposition);
+				$this -> categories_model -> __update_categories($ck[0] -> cid, $arr2);
+				
+				__set_error_msg(array('info' => 'Posisi berhasil diubah.'));
+				redirect(site_url('categories'));
+			}
 		}
 	}
 }

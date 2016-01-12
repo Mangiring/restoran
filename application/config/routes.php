@@ -59,6 +59,7 @@ $route['users/users_group_update/?(:num)?'] = 'users/home/users_group_update/$1'
 $route['users/users_group_delete/(:num)'] = 'users/home/users_group_delete/$1';
 
 $route['categories/?(:num)?'] = 'categories/home/index/$1';
+$route['categories/setposition'] = 'categories/home/setposition/';
 $route['categories/categories_add'] = 'categories/home/categories_add';
 $route['categories/categories_update/?(:num)?'] = 'categories/home/categories_update/$1';
 $route['categories/categories_delete/(:num)'] = 'categories/home/categories_delete/$1';
@@ -113,6 +114,7 @@ $route['menus/menus_delete/(:num)'] = 'menus/home/menus_delete/$1';
 $route['menus/get_suggestion'] = 'menus/home/get_suggestion';
 $route['menus/menus_search'] = 'menus/home/menus_search';
 $route['menus/menus_search_result/(:any)'] = 'menus/home/menus_search_result/$1';
+$route['menus/setposition'] = 'menus/home/setposition/';
 
 $route['raw_material/?(:num)?'] = 'raw_material/home/index/$1';
 $route['raw_material/raw_material_add'] = 'raw_material/home/raw_material_add';

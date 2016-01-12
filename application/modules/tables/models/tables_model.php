@@ -5,12 +5,12 @@ class Tables_model extends CI_Model {
     }
 	
 	function __get_tables($id) {
-		$this -> db -> select('* FROM tables_tab WHERE (tstatus=1 OR tstatus=0) AND tcid='.$id.' ORDER BY tid DESC');
+		$this -> db -> select('* FROM tables_tab WHERE (tstatus=1 OR tstatus=0 OR tstatus=3) AND tcid='.$id.' ORDER BY tid DESC');
 		return $this -> db -> get() -> result();
 	}
 
 	function __get_tables_list() {
-		$this -> db -> select(' * FROM tables_tab,categories_tab WHERE (tstatus=1 OR tstatus=0 OR tstatus=3 ) AND cid=tcid ORDER BY tid DESC');
+		$this -> db -> select(' * FROM tables_tab,categories_tab WHERE (tstatus=1 OR tstatus=0 OR tstatus=3) AND cid=tcid ORDER BY tid DESC');
 		return $this -> db -> get() -> result();
 	}
 	
@@ -20,11 +20,6 @@ class Tables_model extends CI_Model {
     
     function __get_suggestion() {
 		$this -> db -> select('tid,tname as name FROM tables_tab WHERE (tstatus=1 OR tstatus=0) ORDER BY tid DESC');
-		return $this -> db -> get() -> result();
-	}
-	
-	function __get_tables_select() {
-		$this -> db -> select('tid,tname FROM tables_tab WHERE (tstatus=1 OR tstatus=0) ORDER BY tname ASC');
 		return $this -> db -> get() -> result();
 	}
 	

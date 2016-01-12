@@ -37,6 +37,8 @@
                           </header>
                           <div class="table-responsive">
 		  <?php
+		  $max = count($category);
+		  $p = 1;
 		  foreach($category as $k1 => $v1) :
 		  ?>
 		  <h3 style="padding-left:8px;border-bottom:1px solid #ccc"><?php echo $v1 -> cname; ?></h3>
@@ -54,6 +56,8 @@
 		  <?php
 		  $rtotal = 0;
 		  $htotal = 0;
+		  $htotal2 = 0;
+		  $rtotal2 = 0;
 		  $dsc = 0;
 		  $menus = $this -> reportmenu_model -> __get_menu($v1 -> cid);
 		  foreach($menus as $k => $v) :
@@ -74,13 +78,18 @@
 		$rtotal += $total[0] -> totalmenu;
         endforeach;
         $menus = array();
+        $htotal2 += $htotal;
+        $rtotal2 += $rtotal;
         ?>
                               </tbody>
                               <tfoot>
                               <tr><td>Total</td><td><?php echo __get_rupiah($htotal,1); ?></td><td></td><td></td><td><?php echo $rtotal; ?></td></tr>
+                              <?php if ($p == $max) : ?>
+                              <tr><td><strong>Grand Total</strong></td><td><strong><?php echo __get_rupiah($htotal2,1); ?></strong></td><td></td><td></td><td><strong><?php echo $rtotal2; ?></strong></td></tr>
+                              <?php endif; ?>
                               </tfoot>
                             </table>
-        <?php endforeach; ?>
+        <?php ++$p; endforeach; ?>
                           </div>
                       </section>
                   </div>

@@ -20,12 +20,7 @@
                           <div class="panel-body">
 	<?php echo __get_error_msg(); ?>
                               <form class="form-horizontal " method="post" action="<?php echo site_url('categories/categories_add');?>">
-                                  <div class="form-group">
-                                      <label class="col-lg-2 control-label">Position</label>
-                                      <div class="col-lg-10">
-                                          <input type="text" name="position" class="form-control" placeholder="Category Position">
-                                      </div>
-                                  </div>
+
                                   <div class="form-group">
                                       <label class="col-lg-2 control-label">Name</label>
                                       <div class="col-lg-10">

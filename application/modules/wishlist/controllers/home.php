@@ -7,6 +7,7 @@ class Home extends MY_Controller {
 	function __construct() {
 		parent::__construct();
 		$this -> load -> library('pagination_lib');
+		$this -> load -> library('tables/tables_lib');
 		$this -> load -> model('wishlist_model');
 		$this -> load -> model('tables/tables_model');
 		$this -> load -> model('menus/menus_model');
@@ -96,7 +97,7 @@ class Home extends MY_Controller {
 	function billing2($id) {
 		$view['wishlist'] = $this -> wishlist_model -> __get_wishlistx($id);
 		$view['id']=$id;
-		$wtid=$view['wishlist'][0]->wtid;		
+		$wtid=$view['wishlist'][0]->wtid;
 		$this->load->view('billing2', $view,FALSE);
 	}	
 
@@ -105,10 +106,13 @@ class Home extends MY_Controller {
 		$view['wishlist'] = $this -> wishlist_model -> __get_wishlistx($id);
 		$view['id'] = $id;
 		$wtid = $view['wishlist'][0]->wtid;
+		
 		$arr = array('tstatus'=>1);
 		$this -> tables_model -> __update_tables($wtid, $arr);
+		
 		$dta = array('wstatus'=>3,'bcreateby'=>$uid,'bcdate'=>date('Y-m-d h:i:s'),'bupdateby'=>$uid,'budate'=>date('Y-m-d h:i:s'));
 		$this -> wishlist_model -> __update_wishlist($id,$dta);
+		
 		__set_error_msg(array('info' => 'Billing sudah di bayar'));
 		redirect(site_url('wishlist/home/billing'));
 	}
@@ -121,20 +125,31 @@ class Home extends MY_Controller {
 			$jwdid = count($this -> input -> post('wdid', TRUE));	
 			$hargax = 0;
 			$wnotes = $this -> input -> post('notes', TRUE);
+			$tableid = (int) $this -> input -> post('tableid');
+			$tableidold = (int) $this -> input -> post('tableidold');
 			
-			if (!$wname || !$person) {
+			if (!$wname || !$person || !$tableid || !$tableidold) {
 				__set_error_msg(array('error' => 'Data yang anda masukkan tidak lengkap !!!'));
 				redirect(site_url('wishlist' . '/home/' . __FUNCTION__.'/'.$id.'/'.$wtid));
 			}
 			
 			if($jwdid > 0) {
+				if ($tableid <> $tableidold) {
+					$arr = array('tstatus'=>1);
+					$this -> tables_model -> __update_tables($tableidold, $arr);
+					
+					$arr = array('tstatus'=>3);
+					$this -> tables_model -> __update_tables($tableid, $arr);
+				}
+				
+				$dta = array('wname'=>$wname, 'wtid' => $tableid,'person'=>$person,'wnotes'=>$wnotes);
+				$this -> wishlist_model -> __update_wishlist($id,$dta);
+				
 				for($j=0;$j<$jwdid;$j++) {
 					$wdid = $_POST['wdid'][$j];
 					$wqty = $_POST['qty'][$j];
 					$wharga = $_POST['harga'][$j];
 					$wnote = $_POST['note'][$j];
-					$dta = array('wname'=>$wname,'person'=>$person,'wnotes'=>$wnotes);
-					$this -> wishlist_model -> __update_wishlist($id,$dta);
 					$dtx = array('wharga'=>$wharga,'wqty'=>$wqty,'wstatus'=>1,'wnote'=>$wnote,'wupdateby'=>$uid,'wudate'=>date('Y-m-d h:i:s'));	
 					$this -> wishlist_model -> __update_wishlist_detail($wdid,$dtx);
 				}
@@ -144,6 +159,7 @@ class Home extends MY_Controller {
 		}	
 		
 		$view['wishlist'] = $this -> wishlist_model -> __get_wishlistx($id);
+		$view['get_tables'] = $this -> tables_lib -> __get_tables((isset($view['wishlist'][0] -> wtid) ? $view['wishlist'][0] -> wtid : $wtid));
 		$view['id'] = $id;
 		$view['wtid'] = $wtid;
 		

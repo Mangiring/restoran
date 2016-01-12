@@ -1,3 +1,20 @@
+<script>
+$(function(){
+	var hs = window.location.hash;
+	if (hs) {
+	var ahs = hs.replace(/\#/g,'');
+		if ($('div.'+ahs).hasClass('active')) return false;
+		$('div.active').addClass('inactive');
+		$('div.active').removeClass('active');
+		$('h3.active').addClass('inactive');
+		$('h3.active').removeClass('active');
+		$('div.'+ahs).addClass('active');
+		$('h3.'+ahs).addClass('active');
+		$('ul.tabList > li').removeClass('on');
+		$('ul.tabList > li > a[rel="'+ahs+'"]').parent().addClass('on');
+	}
+});
+</script>
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
@@ -41,6 +58,7 @@
                             <table class="table">
                               <thead>
                                 <tr>
+          <th>Position</th>
           <th>Name</th>
           <th>Harga</th>
           <th>Discount</th>
@@ -49,12 +67,13 @@
                                 </tr>
                               </thead>
                               <tbody>
-								  
 		  <?php
 		  $menus = $this -> menus_model -> __get_menus($vv -> cid);
+		  $total = count($menus);
 		  foreach($menus as $k => $v) :
 		  ?>
                                         <tr>
+          <td><a href="<?php echo ($v -> mposition == 1 ? 'javascript:void(0);' : site_url('menus/setposition/?pos=up&cid='.$vv -> cid.'&mid='.$v -> mid.'&mposition=' . $v -> mposition)); ?>"><i class="fa fa-toggle-up"></i></a> <a href="<?php echo ($v -> mposition == $total ? 'javascript:void(0);' : site_url('menus/setposition/?pos=down&cid='.$vv -> cid.'&mid='.$v -> mid.'&mposition=' . $v -> mposition)); ?>"><i class="fa fa-toggle-down"></i></a></td>
           <td><?php echo $v -> mname; ?></td>
           <td><?php echo __get_rupiah($v -> mharga,1); ?></td>
           <td><?php echo $v -> mdisc; ?>%</td>

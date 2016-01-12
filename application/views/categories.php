@@ -31,12 +31,11 @@
                                 </tr>
                               </thead>
                               <tbody>
-								  
 		  <?php
 		  foreach($categories as $k => $v) :
 		  ?>
                                         <tr>
-          <td><?php echo $v -> cposition; ?></td>
+          <td><a href="<?php echo ($v -> cposition == 1 ? 'javascript:void(0);' : site_url('categories/setposition/?pos=up&cid='.$v -> cid.'&cposition=' . $v -> cposition)); ?>"><i class="fa fa-toggle-up"></i></a> <a href="<?php echo ($v -> cposition == $total ? 'javascript:void(0);' : site_url('categories/setposition/?pos=down&cid='.$v -> cid.'&cposition=' . $v -> cposition)); ?>"><i class="fa fa-toggle-down"></i></a></td>
           <td><?php echo $v -> cname; ?></td>
           <td><?php echo substr($v -> cdesc,0,150); ?></td>
           <td><?php echo __get_status($v -> cstatus,1); ?></td>
