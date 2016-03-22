@@ -151,7 +151,9 @@
               <textarea class="form-control" name="note[]"><?php echo $v->wnote; ?></textarea >
           </td>
 		  <td>
+		<?php if (__get_roles('WishlistCancel')) : ?>
               <a class="btn btn-danger" href="<?php echo site_url('wishlist/home/wishlist_menu_delete/' . $v -> wdid); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-times"></i></a>
+         <?php endif; ?>
           </td>
 										</tr>
         <?php endforeach; ?>
