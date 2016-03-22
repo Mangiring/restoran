@@ -29,7 +29,7 @@ class Home extends MY_Controller {
 	}
 
 	function wishlist_listx($wtid) {
-		$uid=$this->memcachedlib->sesresult['uid'];
+		$uid=$this -> memcachedlib -> sesresult['uid'];
 		$jtid=$this -> tables_model -> __cek_tables($wtid);
 		if($jtid == 1){
 			$arr = array('tstatus'=>3);
@@ -54,7 +54,7 @@ class Home extends MY_Controller {
 	}
 
 	function wishlist_list2($id) {
-		$uid=$this->memcachedlib->sesresult['uid'];
+		$uid=$this -> memcachedlib -> sesresult['uid'];
 		if($_POST) {
 			$discc = $this -> input -> post('discc');
 			$wppn = $this -> input -> post('ppn');
@@ -102,7 +102,7 @@ class Home extends MY_Controller {
 	}	
 
 	function billing_approve($id) {
-		$uid = $this->memcachedlib->sesresult['uid'];
+		$uid = $this -> memcachedlib -> sesresult['uid'];
 		$view['wishlist'] = $this -> wishlist_model -> __get_wishlistx($id);
 		$view['id'] = $id;
 		$wtid = $view['wishlist'][0]->wtid;
@@ -118,7 +118,7 @@ class Home extends MY_Controller {
 	}
 
 	function wishlist_list($id,$wtid) {
-		$uid=$this->memcachedlib->sesresult['uid'];
+		$uid=$this -> memcachedlib -> sesresult['uid'];
 		if($_POST) {
 			$wname = $this -> input -> post('wname', TRUE);
 			$person = $this -> input -> post('person', TRUE);
@@ -156,7 +156,7 @@ class Home extends MY_Controller {
 				__set_error_msg(array('info' => 'Data berhasil di simpan'));
 				redirect(site_url('wishlist' . '/home/' . __FUNCTION__.'/'.$id.'/'.$wtid));
 			}
-		}	
+		}
 		
 		$view['wishlist'] = $this -> wishlist_model -> __get_wishlistx($id);
 		$view['get_tables'] = $this -> tables_lib -> __get_tables((isset($view['wishlist'][0] -> wtid) ? $view['wishlist'][0] -> wtid : $wtid));
@@ -164,9 +164,9 @@ class Home extends MY_Controller {
 		$view['wtid'] = $wtid;
 		
 		$this->load->view('wishlist', $view);
-	}	
+	}
 	
-	function wishlist_print($id, $wtid){
+	function wishlist_print($id, $wtid) {
 		$view['wishlist'] = $this -> wishlist_model -> __get_wishlistx($id);
 		$view['id'] = $id;
 		$view['wtid'] = $wtid;
@@ -189,13 +189,13 @@ class Home extends MY_Controller {
 
 	
 	function wishlist_add($id) {
-		$uid=$this->memcachedlib->sesresult['uid'];
+		$uid=$this -> memcachedlib -> sesresult['uid'];
 		if ($_POST) {
 			$wname = $this -> input -> post('wname', TRUE);
 			
 			$jumt = count($_POST['mid']);	
 			$hargax = 0;
-			$uid = $this->memcachedlib->sesresult['uid'];
+			$uid = $this -> memcachedlib -> sesresult['uid'];
 			$wcdate = date('Y-m-d h:i:s');
 			if($jumt>0){
 				for($j=0;$j<$jumt;$j++){	
@@ -228,7 +228,7 @@ class Home extends MY_Controller {
 	}
 
 	function billing_add($id) {
-		$uid = $this->memcachedlib->sesresult['uid'];
+		$uid = $this -> memcachedlib -> sesresult['uid'];
 		if ($_POST) {
 			$wname = $this -> input -> post('wname', TRUE);
 			$wdt = $this -> input -> post('wdate', TRUE);
